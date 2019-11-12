@@ -15,9 +15,9 @@ echo '<!DOCTYPE html>
   <ul id="cropMenu">
   	<li><a href="#">placeholder</a></li>
   	</ul>
-  <span style="font-size:30px; position: absolute; left: 10px; cursor:pointer" onclick="openNav()">&#9776; </span>
  
 </div>
+<span style="font-size:30px; position: absolute; left: 10px; cursor:pointer" onclick="openNav()">&#9776; </span>
 
 <!-- notification -->
 <div class="dropdown" style= "position: absolute; right:100px; top: 10px;">
