@@ -16,6 +16,7 @@
 	<h1>placeholder thread title</h1>
 	<h6>by : placeholder user</h6>
 	<p> paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph.paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </p>
+	<a href="threadview.php">Read more...</a>
 </div>
 
 
