@@ -15,19 +15,23 @@ echo '<!DOCTYPE html>
   <ul id="cropMenu">
   	<li><a href="#">placeholder</a></li>
   	</ul>
+  <span style="font-size:30px; position: absolute; left: 10px; cursor:pointer" onclick="openNav()">&#9776; </span>
  
 </div>
+
+<!-- notification -->
 <div class="dropdown" style= "position: absolute; right:100px; top: 10px;">
 		<button onclick="drop()" class="dropbtn"><i class="fa fa-bell"></i></button>
 		<div id="notifs" class="dropdown-content">
 			<a href="notif-placeholder">placeholder notification</a>
 		</div>
-	</div>
+</div>
 
+<!-- account link -->
 	<div style = "position: absolute; right :20px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
 	<a href="user.php">Account</a> 
 	</div>
-<span style="font-size:30px; position: absolute; left: 10px; cursor:pointer" onclick="openNav()">&#9776; </span>
+
 
 
 
