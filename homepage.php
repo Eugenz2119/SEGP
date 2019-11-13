@@ -12,7 +12,7 @@
 	
 <?php include 'header.php';?>
 
-<div class ="w3-panel w3-border w3-round-small w3-padding-large">
+<div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large">
 	<h1>placeholder thread title</h1>
 	<h6>by : placeholder user</h6>
 	<p> paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph.paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </p>
