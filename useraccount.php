@@ -6,18 +6,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AgriTalk</title>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 </head>
 <body>
-	<?php include "header.php"; ?>
+	
+<?php include 'header.php';?>
+		<div>
+			<ul>
+	  			<li><a href="threadcreate.php">Create thread</a></li>
+	  			<li><a href="threadview.php">Threads Created</a></li>
+			</ul>
+		</div>
 
-	<div id = "threadpreview" class ="w3-panel w3-border w3-round-small w3-padding-large"style ="width:65%">
-	<h1>placeholder thread title</h1>
-	<h6>by : placeholder user</h6>
-	<p> paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph.paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </p>
-	<a href="threadview.php">Read more...</a>
-</div>
-
-	<!--account management -->
+		<div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large">
+<!-- table for displaying recent threads -->			
+			<table>
+				<thead>
+					<th>Created Threads/Recent Comments</th>
+						
+				</thead>
+				<tbody>
+					<tr>
+					<td>paragraph</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+<!--account management -->
 	<div id="accountmanagement"class="w3-container w3-padding-small w3-round-small" style="position: absolute; top: 90px; right:-10px; width: 250px; height: 100px ; border-style: solid;">
 		<a href="login.php">logout</a><br>
 		<a href="#">change password</a><br>
@@ -26,6 +41,9 @@
 
 	<!-- user's profile avatar -->
 	<img src = "resources/placeholderimage.jpg" alt= "user avatar" style="position: absolute; width: 250px; height:250px; right:-10px;top: 190px; border-style: solid;">
+
+
+
 
 
 </body>
