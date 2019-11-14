@@ -19,7 +19,7 @@
 
 	<!--account management -->
 	<div id="accountmanagement"class="w3-container w3-padding-small w3-round-small" style="position: absolute; top: 90px; right:-10px; width: 250px; height: 100px ; border-style: solid;">
-		<a href="#">logout</a><br>
+		<a href="login.php">logout</a><br>
 		<a href="#">change password</a><br>
 		<a href="#">change avatar</a>
 	</div>
