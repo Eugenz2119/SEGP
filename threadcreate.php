@@ -27,7 +27,7 @@
 		  	<label>CONTENT:</label>
 		  </div>
 		  <div>
-		  	<input style="height:200px;font-size:14pt;" type="text" name="CONTENT">
+		  	<textarea> id = "myTextArea" rows = "3" cols = "80">Your text here</textarea>
 		  </div>
 		  <div>
 		  	<input type="file" name="fileToUpload" id="fileToUpload">
