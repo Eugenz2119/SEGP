@@ -32,7 +32,7 @@
       
 			<a href="#">Lost your password?</a><br>
       
-			<a href="#">Don't have an account?</a>
+			<a href="accountcreation.php">Don't have an account?</a>
       
 		</form>
     
