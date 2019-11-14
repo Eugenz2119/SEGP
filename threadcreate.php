@@ -27,7 +27,7 @@
 		  	<label>CONTENT:</label>
 		  </div>
 		  <div>
-		  	<textarea> id = "myTextArea" rows = "3" cols = "80">Your text here</textarea>
+		  <textarea id = "myTextArea" rows = "3" cols = "80">Your text here</textarea>
 		  </div>
 		  <div>
 		  	<input type="file" name="fileToUpload" id="fileToUpload">
