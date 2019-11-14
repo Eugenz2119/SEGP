@@ -1,5 +1,4 @@
-<?php 
-echo '<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <link href="./resources/css/index.css" type="text/css" rel ="stylesheet">
@@ -68,4 +67,4 @@ window.onclick = function(event) {
 </script>
 
 </body>
-</html>';?>
+</html>
