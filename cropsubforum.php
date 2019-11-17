@@ -13,6 +13,10 @@
 <?php include 'header.php';?>
 <?php include 'cropinfo.php';?>
 
+<div style = "position: absolute; left :100px; top: 10px; font-size: 20px; color: #008000;" id="createthread">
+<a href="threadcreate.php">Create Thread</a>
+</div>
+
 <div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large" style="width:65%" >
 	<h1>placeholder thread title</h1>
 	<h6>by : placeholder user</h6>

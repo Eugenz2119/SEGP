@@ -9,7 +9,10 @@
 </head>
 
 <body>
+	
 	<?php include 'header.php';?>
+	<?php include 'cropinfo.php';?>
+
 	
 	<header>
 	<h1>Create Thread</h1>

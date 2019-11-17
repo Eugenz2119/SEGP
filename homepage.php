@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<?php 
+ include 'header.php'
+?>
 <head>
 	<link href="./resources/css/index.css" type="text/css" rel ="stylesheet">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -10,7 +13,6 @@
 </head>
 <body>
 	
-<?php include 'header.php';?>
 
 <div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%" >
 	<h1>placeholder thread title</h1>
