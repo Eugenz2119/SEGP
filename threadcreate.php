@@ -9,10 +9,8 @@
 </head>
 
 <body>
-	
 	<?php include 'header.php';?>
 	<?php include 'cropinfo.php';?>
-
 	
 	<header id="threadcreaterheader">
 	<h1>Create Thread</h1>
@@ -43,7 +41,6 @@
 
 <?php
 	if(isset($_GET['submit'])){
-
 	$title = $_GET['TITLE'];
 	$content = $_GET['CONTENT'];
 	// image uploading
