@@ -23,7 +23,7 @@
 <div class="dropdown" style= "position: absolute; right:150px; top: 10px;">
 		<button onclick="drop()" class="dropbtn"><i class="fa fa-bell"></i></button>
 		<div id="notifs" class="dropdown-content">
-			<a href="notif-placeholder">placeholder notification</a>
+			<a href="threadview.php">placeholder notification</a>
 		</div>
 </div>
 
