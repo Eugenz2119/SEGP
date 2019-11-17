@@ -136,3 +136,19 @@ li a:hover {
 .active {
   background-color: #4CAF50;
 }
+
+#threadcreate {
+	position: absolute;
+	top: 150px;
+	left: 20px;
+	width: 1250px;
+
+}
+
+#threadcreaterheader{
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	width: 1250px;
+
+}

@@ -11,11 +11,11 @@
 <body>
 	<?php include 'header.php';?>
 	
-	<header>
+	<header id="threadcreaterheader">
 	<h1>Create Thread</h1>
 	</header>
 	
-	<div>
+	<div id = "threadcreate">
 		<form method="GET">
 		  <div>
 		  	<label>TITLE:</label>
@@ -27,7 +27,7 @@
 		  	<label>CONTENT:</label>
 		  </div>
 		  <div>
-		  <textarea id = "myTextArea" rows = "3" cols = "80">Your text here</textarea>
+		  <textarea  name="CONTENT" id = " CONTENT" rows = "3" cols = "80" placeholder="Your Thread Here"></textarea>
 		  </div>
 		  <div>
 		  	<input type="file" name="fileToUpload" id="fileToUpload">
@@ -41,15 +41,15 @@
 <?php
 	if(isset($_GET['submit'])){
 
-	$code = $_GET['TITLE'];
-	$language = $_GET['CONTENT'];
+	$title = $_GET['TITLE'];
+	$content = $_GET['CONTENT'];
 	// image uploading
 	$target_dir = "uploads/";
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	// Check if image file is a actual image or fake image
-	if(isset($_POST["submit"])) {
+	if(isset($_GET["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
