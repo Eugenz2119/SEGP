@@ -18,8 +18,9 @@
 	
 	<div id="threadcontents" style="width:70%">
 		<p style="padding-left: 40px;">Contents</p>
+		<button id="sharebutton">Share</button>
 	</div>
-	<button id="sharebutton">Share</button>
+	
 	
 
 	<section id="threadcomments" style="width:70%">
