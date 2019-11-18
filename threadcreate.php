@@ -21,18 +21,14 @@
 		  <div>
 		  	<label>TITLE:</label>
 		  </div>
-		  <div>
 		  	<input type="text" name="TITLE" >
-		  </div>
 		  <div> 
 		  	<label>CONTENT:</label>
 		  </div>
-		  <div>
 		  <textarea  name="CONTENT" id = " CONTENT" rows = "3" cols = "80" placeholder="Your Thread Here"></textarea>
-		  </div>
 		  <div>
 		  	<input type="file" name="fileToUpload" id="fileToUpload">
-    	  	<input type="submit" value="Submit" name="submit">
+    	  	<input type="submit" value="Submit" name="SUBMIT">
     	  </div>
 		</form>
 
@@ -40,7 +36,7 @@
 	</div>
 
 <?php
-	if(isset($_GET['submit'])){
+	if(isset($_GET['SUBMIT'])){
 	$title = $_GET['TITLE'];
 	$content = $_GET['CONTENT'];
 	// image uploading
