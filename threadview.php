@@ -7,13 +7,30 @@
 	<title>AgriTalk</title>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
+
 <body>
-	<?php include "header.php";?>
-	<?php include "cropinfo.php";?>
+	<?php include 'header.php';?>
+	<?php include 'cropinfo.php';?>
 
+	<header id="threadtitle">
+	<h1>Title</h1>
+	</header>
+	
+	<div id="threadcontents">
+		<p style="padding-left: 40px;">Contents</p>
+	</div>
+	<button id="sharebutton">Share</button>
+	
 
-
-
+	<section id="threadcomments">
+		<div class="comments">
+			<p>New Comment Inputs</p>
+		</div>
+		<div class="comments" id="existing">
+			<p>Existing Comments</p>
+		</div>
+	</section>
+	
 
 
 
