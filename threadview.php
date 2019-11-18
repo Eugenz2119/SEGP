@@ -16,13 +16,13 @@
 	<h1>Title</h1>
 	</header>
 	
-	<div id="threadcontents">
+	<div id="threadcontents" style="width:70%">
 		<p style="padding-left: 40px;">Contents</p>
 	</div>
 	<button id="sharebutton">Share</button>
 	
 
-	<section id="threadcomments">
+	<section id="threadcomments" style="width:70%">
 		<div class="comments">
 			<p>New Comment Inputs</p>
 		</div>
