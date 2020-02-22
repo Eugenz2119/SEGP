@@ -19,6 +19,11 @@
 </div>
 <span style="font-size:30px; position: absolute; left: 10px; cursor:pointer" onclick="openNav()">&#9776; </span>
 
+<!-- create thread button -->
+<div style = "position: absolute; left :100px; top: 10px; font-size: 20px; color: #008000;" id="createthread">
+<a href="threadcreate.php">Create Thread</a>
+</div>
+
 <!-- notification -->
 <div class="dropdown" style= "position: absolute; right:150px; top: 10px;">
 		<button onclick="drop()" class="dropbtn"><i class="fa fa-bell"></i></button>
