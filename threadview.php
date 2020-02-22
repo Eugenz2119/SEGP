@@ -29,7 +29,7 @@
 
 	session_start();
 	
-	$postID = $_SESSION["postID"];
+	$postID = $_GET["postID"];
 	
 	$sql = "SELECT title, text FROM post WHERE postID='$postID'";
 	$result = mysqli_query($conn, $sql);

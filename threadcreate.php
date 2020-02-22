@@ -96,8 +96,8 @@ if(isset($_POST['SUBMIT'])){
 			$sql = "SELECT postID FROM post WHERE userID='$userID' AND postTime='$time'";
 			$result = mysqli_query($conn, $sql);
 
-			$_SESSION["postID"] = mysqli_fetch_assoc($result)['postID'];
-			echo '<meta http-equiv="Refresh" content="0; url=threadview.php" />';
+			$postID = mysqli_fetch_assoc($result)['postID'];
+			echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
 		} else {
 			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
 		}
