@@ -58,7 +58,7 @@
 	
 
 	<section id="threadcomments" style="width:70%">
-		<div 
+		<div>
 			<form action = "/threadview.php">
 			<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
 			<!--image uploading-->
@@ -66,14 +66,63 @@
   			<input type="file" id="img" name="img" accept="image/*">
 
   			<!--submit button-->
-			<input type="submit" value="Submit">
+  			<div style = "right : 30px;">
+			<input type="submit" value="Comment">
+			</div>
 			</form>
 		</div>
 
 
+
 		<div class="comments" id="existing">
-			<p>Existing Comments</p>
+			<a>by : <a href ="otherusers.php">placeholder user A</a>
+			<p>Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments</p>
 		</div>
+		<div class ="commenttocomment" >
+			<form action = "/threadview.php">
+			<input type = "text" id="comment" name ="comment" placeholder ="New Comment..." size = "50"><br>
+			<!--image uploading-->
+			<label for="img">Select image:</label>
+  			<input type="file" id="img" name="img" accept="image/*">
+
+  			<!--submit button-->
+			<input type="submit" value="Comment">
+			</form>
+		</div>
+
+		<div class="comments" id="existing">
+			<a>by : <a href ="otherusers.php">placeholder user B</a>
+			<p>Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments</p>
+		</div>
+		<div class ="commenttocomment" >
+			<form action = "/threadview.php">
+			<input type = "text" id="comment" name ="comment" placeholder ="New Comment..." size = "50"><br>
+			<!--image uploading-->
+			<label for="img">Select image:</label>
+  			<input type="file" id="img" name="img" accept="image/*">
+
+  			<!--submit button-->
+			<input type="submit" value="Comment">
+			</form>
+		</div>
+
+		<div class="comments" id="existing">
+			<a>by : <a href ="otherusers.php">placeholder user C</a>
+			<p>Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments Comments</p>
+		</div>
+		<div class ="commenttocomment" >
+			<form action = "/threadview.php">
+			<input type = "text" id="comment" name ="comment" placeholder ="New Comment..." size = "50"><br>
+			<!--image uploading-->
+			<label for="img">Select image:</label>
+  			<input type="file" id="img" name="img" accept="image/*">
+
+  			<!--submit button-->
+			<input type="submit" value="Comment">
+			</form>
+		</div>
+
+
 	</section>
 	
 
