@@ -8,16 +8,50 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
+<?php
+	
+	//Connection details
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "agritalk-wip";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	//debug
+	else{
+		echo "DB CONNECTED";
+	}
+
+	session_start();
+	
+	$postID = $_SESSION["postID"];
+	
+	$sql = "SELECT title, text FROM post WHERE postID='$postID'";
+	$result = mysqli_query($conn, $sql);
+	
+	$post = mysqli_fetch_assoc($result);
+	$title = $post['title'];
+	$content = $post['text'];
+	
+	mysqli_close($conn);
+	
+?>
+
 <body>
 	<?php include 'header.php';?>
 	<?php include 'cropinfo.php';?>
 
 	<header id="threadtitle">
-	<h1>Title</h1>
+	<h1><?php echo $title;?></h1>
 	</header>
 	
 	<div id="threadcontents" style="width:70%">
-		<p style="padding-left: 40px;">Contents</p>
+		<p style="padding-left: 40px;"><?php echo $content;?></p>
 		<button id="sharebutton">Share</button>
 	</div>
 	

@@ -17,7 +17,7 @@
 	</header>
 	
 	<div id = "threadcreate">
-		<form method="GET">
+		<form method="post">
 		  <div>
 		  	<label>TITLE:</label>
 		  </div>
@@ -36,9 +36,33 @@
 	</div>
 
 <?php
-	if(isset($_GET['SUBMIT'])){
-	$title = $_GET['TITLE'];
-	$content = $_GET['CONTENT'];
+if(isset($_POST['SUBMIT'])){
+	
+	//Connection details
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "agritalk-wip";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	//debug
+	else{
+		echo "DB CONNECTED";
+	}
+
+	session_start();
+	
+	$userID = $_SESSION["userID"];
+	$title = $_POST['TITLE'];
+	$content = $_POST['CONTENT'];
+	
+	//Deal with images later
+	/*
 	// image uploading
 	$target_dir = "uploads/";
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -46,15 +70,42 @@
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	// Check if image file is a actual image or fake image
 	if(isset($_GET["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}
+		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+		if($check !== false) {
+			echo "File is an image - " . $check["mime"] . ".";
+			$uploadOk = 1;
+		} else {
+			echo "File is not an image.";
+			$uploadOk = 0;
+		}
+	}
+	*/
+	
+	if(strlen($title) > 0 && strlen($content) > 0){
+		
+		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+		$AddQuery = "INSERT INTO post (userID, title, text, postTime)
+					 VALUES ('$userID', '$title', '$content', '$time')";
+		
+		if (mysqli_query($conn, $AddQuery)) {
+			$sql = "SELECT postID FROM post WHERE userID='$userID' AND postTime='$time'";
+			$result = mysqli_query($conn, $sql);
+
+			$_SESSION["postID"] = mysqli_fetch_assoc($result)['postID'];
+			echo '<meta http-equiv="Refresh" content="0; url=threadview.php" />';
+		} else {
+			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+		}
+	}
+	else{
+		echo '
+		<script language="javascript">
+			alert("One or more field empty")
+		</script>
+		';
+	}
+	mysqli_close($conn);
 }	
 ?>
 </body>
