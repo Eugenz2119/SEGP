@@ -13,16 +13,54 @@
 </head>
 <body>
 	
+<?php
+	$threadLim = 10;
+	
+	//Connection details
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "agritalk-wip";
 
-<div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%" >
-	<h1>placeholder thread title</h1>
-	<h6>by : placeholder user</h6>
-	<p> paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph.paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </p>
-	<a href="threadview.php">Read more...</a>
-</div>
+	// Create connection
+	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	//debug
+	else{
+		echo "DB CONNECTED";
+	}
+	
+	session_start();
+	
+	$sql="SELECT * FROM post ORDER BY postTime DESC LIMIT " . $threadLim;
+	$result = mysqli_query($conn, $sql);
+	
+	while($row = mysqli_fetch_assoc($result)) {
+		
+		$postID = $row['postID'];
+		$title = $row['title'];
+		$query = "SELECT username FROM user WHERE userID=" . $row['userID'];
+		$query_result = mysqli_query($conn, $query);
+		$postUsername = mysqli_fetch_assoc($query_result)['username'];
+		$content = $row['text'];
+		
+		echo '
+			<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%" >
+			
+				<h1>' . $title . '</h1>
+				<h6>by : ' . $postUsername . '</h6>
+				<p>' . $content . '</p>
+				<a href="threadview.php?postID=' . $postID . '">Read more...</a>
+			</div>
+		';
+	}
+?>	
 
 <!-- debug -->
-userID: <?php session_start(); echo $_SESSION["userID"];?> <br>
+userID: <?php echo $_SESSION["userID"];?> <br>
 
 </body>
 </html>
