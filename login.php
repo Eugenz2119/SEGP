@@ -16,7 +16,7 @@
   
 		<h1>Login</h1>
     
-		<form action="??.php" method="post">
+		<form method="post">
     
 			<p>Username</p>
       
@@ -87,7 +87,11 @@ if(isset($_POST['Username']) && isset($_POST['Password'])){
 		echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
 	}
 	else{ //invalid login
-		
+		echo '
+		<script language="javascript">
+			alert("Invalid login")
+		</script>
+		';
 	}
 }
 
