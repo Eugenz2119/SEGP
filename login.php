@@ -40,27 +40,26 @@
 </html>
 <!- php ->
 <?php
-
-//Connection details
-$servername = "localhost";
-$dbUsername 	= "hcyko1";
-$dbPassword 	= "3QXBfTmKAccZ0BNO";
-$dbname 	= "agritalk-wip";
-
-// Create connection
-$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-//debug
-else{
-	echo "DB CONNECTED";
-}
-
-session_start();
-
 if(isset($_POST['Username']) && isset($_POST['Password'])){
+	//Connection details
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "agritalk-wip";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	//debug
+	else{
+		echo "DB CONNECTED";
+	}
+
+	session_start();
+
 	$username = $_POST['Username'];
 	$password = $_POST['Password'];
 	
@@ -93,7 +92,6 @@ if(isset($_POST['Username']) && isset($_POST['Password'])){
 		</script>
 		';
 	}
+	mysqli_close($conn);
 }
-
-mysqli_close($conn);
 ?>
