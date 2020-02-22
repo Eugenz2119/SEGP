@@ -58,6 +58,10 @@ if(isset($_POST['SUBMIT'])){
 	session_start();
 	
 	$userID = $_SESSION["userID"];
+	if($userID == ''){
+		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+	}
+	
 	$title = $_POST['TITLE'];
 	$content = $_POST['CONTENT'];
 	
