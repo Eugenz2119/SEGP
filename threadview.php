@@ -58,9 +58,19 @@
 	
 
 	<section id="threadcomments" style="width:70%">
-		<div class="comments">
-			<p>New Comment Inputs</p>
+		<div 
+			<form action = "/threadview.php">
+			<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
+			<!--image uploading-->
+			<label for="img">Select image:</label>
+  			<input type="file" id="img" name="img" accept="image/*">
+
+  			<!--submit button-->
+			<input type="submit" value="Submit">
+			</form>
 		</div>
+
+
 		<div class="comments" id="existing">
 			<p>Existing Comments</p>
 		</div>
