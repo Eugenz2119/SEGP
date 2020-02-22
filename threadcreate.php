@@ -87,8 +87,10 @@ if(isset($_POST['SUBMIT'])){
 	
 	if(strlen($title) > 0 && strlen($content) > 0){
 		
+		//generate current time
 		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
 		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+		
 		$AddQuery = "INSERT INTO post (userID, title, text, postTime)
 					 VALUES ('$userID', '$title', '$content', '$time')";
 		
