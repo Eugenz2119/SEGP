@@ -8,6 +8,8 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
+<?php session_start(); ?>
+
 <body>
 	<?php include 'header.php';?>
 	<?php include 'cropinfo.php';?>
@@ -54,8 +56,6 @@ if(isset($_POST['SUBMIT'])){
 	else{
 		echo "DB CONNECTED";
 	}
-
-	session_start();
 	
 	$userID = $_SESSION["userID"];
 	if($userID == ''){
@@ -112,5 +112,8 @@ if(isset($_POST['SUBMIT'])){
 	mysqli_close($conn);
 }	
 ?>
+
+<!-- debug -->
+userID: <?php echo $_SESSION["userID"];?> <br>
 </body>
 </html>
