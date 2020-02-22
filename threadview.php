@@ -59,8 +59,9 @@
 
 	<section id="threadcomments" style="width:70%">
 		<div>
-			<form action = "/threadview.php">
+			<form method="post">
 			<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
+			
 			<!--image uploading-->
 			<label for="img">Select image:</label>
   			<input type="file" id="img" name="img" accept="image/*">
@@ -121,12 +122,63 @@
 			<input type="submit" value="Comment">
 			</form>
 		</div>
-
-
 	</section>
 	
+<?php
 
+if(isset($_POST["threadcomment"])){
+	//Connection details
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "agritalk-wip";
 
+	// Create connection
+	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	//debug
+	else{
+		echo "DB CONNECTED";
+	}
 
+	session_start();
+	
+	$postID = $_GET["postID"];
+	$userID = $_SESSION["userID"];
+	$content = $_POST["threadcomment"];
+	
+	//generate current time
+	$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+	$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+	
+	//add to comment table
+	$AddQuery = "INSERT INTO comment (postID, userID, text, commentTime)
+				 VALUES ('$postID', '$userID', '$content', '$time')";
+	
+	if (mysqli_query($conn, $AddQuery)) {
+		$sql = "SELECT commentID FROM comment WHERE userID='$userID' AND commentTime='$time'";
+		$result = mysqli_query($conn, $sql);
+		$commentID = mysqli_fetch_assoc($result)['commentID'];
+		
+		//add to post_comment table
+		$AddQuery = "INSERT INTO post_comment (postID, commentID)
+					 VALUES ('$postID', '$commentID')";
+		if (mysqli_query($conn, $AddQuery)) {
+			echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
+		} else {
+			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+		}
+		
+	} else {
+		echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+	}
+	
+	mysqli_close($conn);
+}
+?>
+	
 </body>
 </html>
