@@ -21,8 +21,9 @@
 	<a href="threadview.php">Read more...</a>
 </div>
 
-
-
+<!-- debug -->
+userID: <?php session_start(); echo $_SESSION["userID"];?> <br>
 
 </body>
 </html>
+

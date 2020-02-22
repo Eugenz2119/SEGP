@@ -12,13 +12,11 @@
 
 	<div class="loginbox">
   
-	<img src="placeholder.png" class="avatar">
+	<img src="./resources/placeholderimage.jpg" class="avatar" style="width: 30px; height:30px;">
   
 		<h1>Login</h1>
     
-		<!- change php file name ->
-    
-		<form action="??.php" method:"post">
+		<form action="??.php" method="post">
     
 			<p>Username</p>
       
@@ -42,6 +40,56 @@
 </html>
 <!- php ->
 <?php
-	$Username = $_POST['Username'];
-	$Password = $_POST['Password'];
+
+//Connection details
+$servername = "localhost";
+$dbUsername 	= "hcyko1";
+$dbPassword 	= "3QXBfTmKAccZ0BNO";
+$dbname 	= "agritalk-wip";
+
+// Create connection
+$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+//debug
+else{
+	echo "DB CONNECTED";
+}
+
+session_start();
+
+if(isset($_POST['Username']) && isset($_POST['Password'])){
+	$username = $_POST['Username'];
+	$password = $_POST['Password'];
+	
+	//debug
+	echo "<br>";
+	echo $username;
+	echo "<br>";
+	echo $password;
+	echo "<br>";
+
+	$sql = "SELECT userID FROM user WHERE username='$username' AND password='$password'";
+	$result = mysqli_query($conn, $sql);
+
+	$_SESSION["userID"] = mysqli_fetch_assoc($result)['userID'];
+
+	if($_SESSION["userID"] != ''){ //valid login
+		//debug
+		echo "ACCOUNT FOUND";
+		echo "<br>";
+		echo "userID:" . $_SESSION["userID"];
+		echo "<br>";
+		
+		//go to homepage
+		echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
+	}
+	else{ //invalid login
+		
+	}
+}
+
+mysqli_close($conn);
 ?>
