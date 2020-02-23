@@ -8,8 +8,6 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
-<?php session_start(); ?>
-
 <body>
 	<?php include 'header.php';?>
 	<?php include 'cropinfo.php';?>
@@ -56,9 +54,12 @@ if(isset($_POST['SUBMIT'])){
 		//echo "DB CONNECTED";
 	}
 	
-	$userID = $_SESSION["userID"];
-	if($userID == ''){
+	//login check
+	if(!isset($_SESSION["userID"])){
 		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+	}
+	else{
+		$userID = $_SESSION["userID"];
 	}
 	
 	$title = $_POST['TITLE'];

@@ -1,3 +1,9 @@
+<?php
+session_start();
+session_unset();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +63,6 @@ if(isset($_POST['Username']) && isset($_POST['Password'])){
 	else{
 		//echo "DB CONNECTED";
 	}
-
-	session_start();
 
 	$username = $_POST['Username'];
 	$password = $_POST['Password'];

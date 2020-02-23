@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +27,6 @@ if (!$conn) {
 else{
 	//echo "DB CONNECTED";
 }
-
-session_start();
 
 $userID = $_SESSION['userID'];
 

@@ -140,7 +140,14 @@ else{
 }
 
 if(isset($_POST["threadcomment"])){
-	$userID = $_SESSION["userID"];
+	
+	//login check
+	if(!isset($_SESSION["userID"])){
+		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+	}
+	else{
+		$userID = $_SESSION["userID"];
+	}
 	$content = $_POST["threadcomment"];
 	
 	//generate current time
