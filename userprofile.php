@@ -28,10 +28,8 @@
 	}
 	//debug
 	else{
-		echo "DB CONNECTED";
+		//echo "DB CONNECTED";
 	}
-
-	session_start();
 	
 	$userID = $_GET['userID'];
 	

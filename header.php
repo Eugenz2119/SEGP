@@ -4,6 +4,33 @@
 <link href="./resources/css/index.css" type="text/css" rel ="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
+<?php
+	
+//Connection details
+$servername = "localhost";
+$dbUsername 	= "hcyko1";
+$dbPassword 	= "3QXBfTmKAccZ0BNO";
+$dbname 	= "agritalk-wip";
+
+// Create connection
+$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+// Check connection
+if (!$conn) {
+	die("Connection failed: " . mysqli_connect_error());
+}
+//debug
+else{
+	//echo "DB CONNECTED";
+}
+
+session_start();
+
+$userID = $_SESSION['userID'];
+
+mysqli_close($conn);
+?>
+
 <body>
 <!-- sidebar -->	
 <div id="mySidenav" class="sidenav">
@@ -43,7 +70,7 @@
 
 <!-- profile link -->
 	<div style = "position: absolute; right :40px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
-	<a href="userprofile.php">Profile</a> 
+	<a href=<?php echo "userprofile.php?userID=" . $userID;?>>Profile</a> 
 	</div>
 
 <!--account link-->

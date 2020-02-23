@@ -8,8 +8,13 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
+
+
+<body>
+
 <?php
-	
+include 'header.php';
+include 'cropinfo.php';
 //Connection details
 $servername = "localhost";
 $dbUsername 	= "hcyko1";
@@ -24,10 +29,8 @@ if (!$conn) {
 }
 //debug
 else{
-	echo "DB CONNECTED";
+	//echo "DB CONNECTED";
 }
-
-session_start();
 
 $postID = $_GET["postID"];
 
@@ -43,13 +46,7 @@ $sql = "SELECT format from image WHERE imageID='$imageID'";
 $imageFormat = mysqli_fetch_assoc(mysqli_query($conn, $sql))['format'];
 $imagePath = "uploads/$imageID.$imageFormat";
 
-mysqli_close($conn);
-
 ?>
-
-<body>
-	<?php include 'header.php';?>
-	<?php include 'cropinfo.php';?>
 
 	<header id="threadtitle">
 	<h1><?php echo $title;?></h1>
@@ -82,23 +79,6 @@ mysqli_close($conn);
 		</div>		
 	
 	<?php
-	//Connection details
-	$servername = "localhost";
-	$dbUsername 	= "hcyko1";
-	$dbPassword 	= "3QXBfTmKAccZ0BNO";
-	$dbname 	= "agritalk-wip";
-
-	// Create connection
-	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
-	// Check connection
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-	}
-	//debug
-	else{
-		echo "DB CONNECTED";
-	}
-
 	$postID = $_GET["postID"];
 
 	//displaying existing comments
@@ -136,11 +116,29 @@ mysqli_close($conn);
 			</div>
 			*/
 	}
+	mysqli_close($conn);
 	?>
 	</section>
 
 <?php
 //creating new comment
+//Connection details
+$servername = "localhost";
+$dbUsername 	= "hcyko1";
+$dbPassword 	= "3QXBfTmKAccZ0BNO";
+$dbname 	= "agritalk-wip";
+
+// Create connection
+$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+// Check connection
+if (!$conn) {
+	die("Connection failed: " . mysqli_connect_error());
+}
+//debug
+else{
+	//echo "DB CONNECTED";
+}
+
 if(isset($_POST["threadcomment"])){
 	$userID = $_SESSION["userID"];
 	$content = $_POST["threadcomment"];

@@ -30,10 +30,8 @@ if (!$conn) {
 }
 //debug
 else{
-	echo "DB CONNECTED";
+	//echo "DB CONNECTED";
 }
-
-session_start();
 
 $sql="SELECT * FROM post ORDER BY postTime DESC LIMIT " . $threadLim;
 $result = mysqli_query($conn, $sql);

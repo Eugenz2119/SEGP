@@ -53,7 +53,7 @@ if(isset($_POST['SUBMIT'])){
 	}
 	//debug
 	else{
-		echo "DB CONNECTED";
+		//echo "DB CONNECTED";
 	}
 	
 	$userID = $_SESSION["userID"];

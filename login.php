@@ -55,7 +55,7 @@ if(isset($_POST['Username']) && isset($_POST['Password'])){
 	}
 	//debug
 	else{
-		echo "DB CONNECTED";
+		//echo "DB CONNECTED";
 	}
 
 	session_start();

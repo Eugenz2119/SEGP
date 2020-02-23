@@ -55,8 +55,7 @@ if(isset($_POST['submit_pressed'])){
 	}
 	//debug
 	else{
-		echo "DB CONNECTED";
-		echo '<br>';
+		//echo "DB CONNECTED";
 	}
 
 	session_start();
