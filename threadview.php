@@ -31,12 +31,17 @@ session_start();
 
 $postID = $_GET["postID"];
 
-$sql = "SELECT title, text FROM post WHERE postID='$postID'";
+$sql = "SELECT title, text, imageID FROM post WHERE postID='$postID'";
 $result = mysqli_query($conn, $sql);
 
 $post = mysqli_fetch_assoc($result);
 $title = $post['title'];
 $content = $post['text'];
+
+$imageID = $post['imageID'];
+$sql = "SELECT format from image WHERE imageID='$imageID'";
+$imageFormat = mysqli_fetch_assoc(mysqli_query($conn, $sql))['format'];
+$imagePath = "uploads/$imageID.$imageFormat";
 
 mysqli_close($conn);
 
@@ -50,7 +55,10 @@ mysqli_close($conn);
 	<h1><?php echo $title;?></h1>
 	</header>
 	
-	<div id="threadcontents" style="width:70%">
+	<!-- image display -->
+	<img src=<?php echo $imagePath; ?> alt="image" style="width:20%; height:20%;">
+	
+	<div id="threadcontents" style="width:70%;">
 		<p style="padding-left: 40px;"><?php echo $content;?></p>
 		<button id="sharebutton">Share</button>
 	</div>
