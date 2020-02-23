@@ -24,6 +24,12 @@
 <a href="threadcreate.php">Create Thread</a>
 </div>
 
+<!-- homepage shortcut -->
+
+<div style= "text-align: center; font-size: 30px; text-decoration: none; color: #008000;">
+<a href="homepage.php">AgriTalk</a>
+</div>
+
 <!-- notification -->
 <div class="dropdown" style= "position: absolute; right:150px; top: 10px;">
 		<button onclick="drop()" class="dropbtn"><i class="fa fa-bell"></i></button>
@@ -33,12 +39,17 @@
 </div>
 
 <!-- avatar preview-->
-<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="position: absolute; width: 30px; height:30px; right:100px;top: 30px;">
+<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="position: absolute; width: 30px; height:30px; right:110px;top: 30px;">
 
-<!-- account link -->
-	<div style = "position: absolute; right :20px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
-	<a href="useraccount.php">Account</a> 
+<!-- profile link -->
+	<div style = "position: absolute; right :40px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
+	<a href="userprofile.php">Profile</a> 
 	</div>
+
+<!--account link-->
+  <div style = "position:absolute; top: 20px; right:0px; font-size: 30px;color: #4CAF50;">
+    <a href="useraccount.php" class="fa fa-cogs"></a>
+  </div>
 
 
 
