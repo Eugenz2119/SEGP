@@ -36,6 +36,14 @@
 	</div>
 
 <?php
+//login check
+if(!isset($_SESSION["userID"])){
+	echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+}
+else{
+	$userID = $_SESSION["userID"];
+}
+
 if(isset($_POST['SUBMIT'])){
 	//Connection details
 	$servername = "localhost";
@@ -52,14 +60,6 @@ if(isset($_POST['SUBMIT'])){
 	//debug
 	else{
 		//echo "DB CONNECTED";
-	}
-	
-	//login check
-	if(!isset($_SESSION["userID"])){
-		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
-	}
-	else{
-		$userID = $_SESSION["userID"];
 	}
 	
 	$title = $_POST['TITLE'];
