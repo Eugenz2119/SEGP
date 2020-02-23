@@ -150,30 +150,39 @@ if(isset($_POST["threadcomment"])){
 	}
 	$content = $_POST["threadcomment"];
 	
-	//generate current time
-	$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
-	$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
-	
-	//add to comment table
-	$AddQuery = "INSERT INTO comment (postID, userID, text, commentTime)
-				 VALUES ('$postID', '$userID', '$content', '$time')";
-	
-	if (mysqli_query($conn, $AddQuery)) {
-		$sql = "SELECT commentID FROM comment WHERE userID='$userID' AND commentTime='$time'";
-		$result = mysqli_query($conn, $sql);
-		$commentID = mysqli_fetch_assoc($result)['commentID'];
+	if(strlen($content) > 0){
+		//generate current time
+		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
 		
-		//add to post_comment table
-		$AddQuery = "INSERT INTO post_comment (postID, commentID)
-					 VALUES ('$postID', '$commentID')";
+		//add to comment table
+		$AddQuery = "INSERT INTO comment (postID, userID, text, commentTime)
+					 VALUES ('$postID', '$userID', '$content', '$time')";
+		
 		if (mysqli_query($conn, $AddQuery)) {
-			echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
+			$sql = "SELECT commentID FROM comment WHERE userID='$userID' AND commentTime='$time'";
+			$result = mysqli_query($conn, $sql);
+			$commentID = mysqli_fetch_assoc($result)['commentID'];
+			
+			//add to post_comment table
+			$AddQuery = "INSERT INTO post_comment (postID, commentID)
+						 VALUES ('$postID', '$commentID')";
+			if (mysqli_query($conn, $AddQuery)) {
+				echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
+			} else {
+				echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+			}
+			
 		} else {
 			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
 		}
-		
-	} else {
-		echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+	}
+	else{
+		echo '
+		<script language="javascript">
+			alert("Comment is empty")
+		</script>
+		';
 	}
 }
 
