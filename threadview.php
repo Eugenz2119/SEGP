@@ -142,11 +142,11 @@ else{
 if(isset($_POST["threadcomment"])){
 	
 	//login check
-	if(!isset($_SESSION["userID"])){
-		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+	if(isset($_SESSION["userID"])){
+		$userID = $_SESSION["userID"];
 	}
 	else{
-		$userID = $_SESSION["userID"];
+		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
 	}
 	$content = $_POST["threadcomment"];
 	

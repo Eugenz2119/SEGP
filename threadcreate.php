@@ -37,11 +37,11 @@
 
 <?php
 //login check
-if(!isset($_SESSION["userID"])){
-	echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+if(isset($_SESSION["userID"])){
+	$userID = $_SESSION["userID"];
 }
 else{
-	$userID = $_SESSION["userID"];
+	echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
 }
 
 if(isset($_POST['SUBMIT'])){
@@ -177,8 +177,5 @@ if(isset($_POST['SUBMIT'])){
 	mysqli_close($conn);
 }	
 ?>
-
-<!-- debug -->
-userID: <?php echo $_SESSION["userID"];?> <br>
 </body>
 </html>

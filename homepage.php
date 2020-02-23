@@ -57,9 +57,6 @@ while($row = mysqli_fetch_assoc($result)) {
 }
 ?>	
 
-<!-- debug -->
-userID: <?php echo $_SESSION["userID"];?> <br>
-
 </body>
 </html>
 
