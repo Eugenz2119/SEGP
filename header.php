@@ -27,8 +27,10 @@ if (!$conn) {
 else{
 	//echo "DB CONNECTED";
 }
-
-$userID = $_SESSION['userID'];
+//login check
+if(isset($_SESSION["userID"])){
+	$userID = $_SESSION["userID"];
+}
 
 mysqli_close($conn);
 ?>
@@ -70,18 +72,29 @@ mysqli_close($conn);
 <!-- avatar preview-->
 <img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="position: absolute; width: 30px; height:30px; right:110px;top: 30px;">
 
-<!-- profile link -->
-	<div style = "position: absolute; right :40px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
-	<a href=<?php echo "userprofile.php?userID=" . $userID;?>>Profile</a> 
-	</div>
+<?php
+if(isset($_SESSION["userID"])){
+	echo '
+		<!-- profile link -->
+			<div style = "position: absolute; right :40px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
+			<a href="userprofile.php?userID=' . $userID . '">Profile</a> 
+			</div>
 
-<!--account link-->
-  <div style = "position:absolute; top: 20px; right:0px; font-size: 30px;color: #4CAF50;">
-    <a href="useraccount.php" class="fa fa-cogs"></a>
-  </div>
-
-
-
+		<!--account link-->
+		  <div style = "position:absolute; top: 20px; right:0px; font-size: 30px;color: #4CAF50;">
+			<a href="useraccount.php" class="fa fa-cogs"></a>
+		  </div>
+	';
+}
+else{
+	echo '
+		<!--login-->
+		  <div style = "position:absolute; top: 20px; right:0px; font-size: 30px;color: #4CAF50;">
+			<a href="login.php">Login</a>
+		  </div>
+	';
+}
+?>
 
 <script>
 function openNav() {
