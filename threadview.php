@@ -107,7 +107,7 @@ mysqli_close($conn);
 		
 		echo '
 			<div class="comments">
-				<a>by : <a href ="otherusers.php">' . $commenterName . '</a>
+				<a>by : <a href ="userprofile.php">' . $commenterName . '</a>
 				<p>' . $content . '</p>
 			</div>
 			
