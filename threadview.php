@@ -76,7 +76,15 @@ if($imageID != NULL){
 	<div id="threadcontents" style="width:70%;">
 		<p style="padding-left: 40px;"><?php echo $content;?></p>
 		<button id="sharebutton">Share</button>
+
+		<!--up/downvote buttons-->
+		<!--<form method="get"> (?) -->
+		<button class="upvote"><i class="fa fa-thumbs-up"></i></button>
+		<!--up/downvote buttons-->
+		<!--<form method="get">  (?) -->
+		<button class="downvote"><i class="fa fa-thumbs-down"></i></button>
 	</div>
+
 	
 	
 
@@ -98,6 +106,8 @@ if($imageID != NULL){
 		<input type = "text" id="threadedit" name ="threadedit" placeholder ="Edited Comment..." size = "50">	
 	</div>
 	-->
+
+
 	
 	<?php
 	$postID = $_GET["postID"];
