@@ -34,12 +34,16 @@ else{
 
 $postID = $_GET["postID"];
 
-$sql = "SELECT title, text, imageID FROM post WHERE postID='$postID'";
+$sql = "SELECT title, text, userID, imageID FROM post WHERE postID='$postID'";
 $result = mysqli_query($conn, $sql);
 
 $post = mysqli_fetch_assoc($result);
 $title = $post['title'];
 $content = $post['text'];
+
+$authorID = $post['userID'];
+$sql = "SELECT username FROM user WHERE userID=" . $authorID;
+$authorName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['username'];
 
 $imageID = $post['imageID'];
 $sql = "SELECT format from image WHERE imageID='$imageID'";
@@ -50,7 +54,7 @@ $imagePath = "uploads/$imageID.$imageFormat";
 
 	<header id="threadtitle">
 	<h1><?php echo $title;?></h1>
-	<h6>by : <a href="userprofile.php">Placeholder user</a></h6>
+	<h6>by : <a href="userprofile.php?userID=<?php echo $authorID; ?>"><?php echo $authorName; ?></a></h6>
 	</header>
 	
 <?php
