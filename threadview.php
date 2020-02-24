@@ -50,6 +50,7 @@ $imagePath = "uploads/$imageID.$imageFormat";
 
 	<header id="threadtitle">
 	<h1><?php echo $title;?></h1>
+	<h6>by : <a href="userprofile.php">Placeholder user</a></h6>
 	</header>
 	
 <?php
