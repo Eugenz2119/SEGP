@@ -111,8 +111,8 @@ if($imageID != NULL){
 			<div class="comments">
 				<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
 				<p>' . $content . '</p>
-				<button id="editbutton">Edit</button>
-				<button id="deletebutton">Delete</button>
+				<button id="editbutton" type="submit" value="editcomments">Edit</button>
+				<button id="deletebutton" type="submit" value="deletecomments">Delete</button>
 			</div>
 			
 		';
