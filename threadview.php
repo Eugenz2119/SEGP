@@ -84,6 +84,18 @@ if($imageID != NULL){
 			<button class="downvote" name="postDownvote"><i class="fa fa-thumbs-down"></i></button>
 		</form>
 		
+		<!--edit/delete-->
+			<?php
+			if($userID != NULL && $authorID == $userID){
+				echo '
+				<form method="post">
+					<input name="postModifyID" type="hidden" value="' . $postID . '">
+					<button name="editbutton" type="submit">Edit</button>
+				</form>
+				';
+			}
+			?>
+		
 	</div>
 
 	
@@ -140,6 +152,7 @@ if($imageID != NULL){
 			</form>
 			';
 			
+			//edit/delete
 			if($userID != NULL && $commenterID == $userID){
 				echo '
 				<form method="post">
