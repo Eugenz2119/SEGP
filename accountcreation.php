@@ -10,7 +10,7 @@
 	<img src="somethinglogo.png" class="avatar" alt="put agritalk logo">
 		<h1>Create Account</h1><br>
 		<!- change php file name ->
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<p>Username</p>
 			<input type="text" name="Username" placeholder="Enter Username">
 			<p>Password</p>
@@ -28,19 +28,15 @@
 					<option value="other">Other</option>
 				</select>
 			<p>Select Profile Picture</p><br>
-				<input type="file" name="picture" accept="image/*">
-			<input type="hidden" name="submit_pressed" value="True">
-			<input type="submit" value="Create Account">
+				<input type="file" name="profilepic" id="profilepic">
+				<input type="submit" value="Create Account" name = "submit">
 		</form>
 	</div>
-	 
-</body>
-</html>
 
 <!- php ->
 <?php
 
-if(isset($_POST['submit_pressed'])){
+if(isset($_POST['submit'])){
 	//Connection details
 	$servername = "localhost";
 	$dbUsername 	= "hcyko1";
@@ -155,8 +151,76 @@ if(isset($_POST['submit_pressed'])){
 	//all fields complete
 	if($completeField == 6){
 		
-		$AddQuery = "INSERT INTO user (username, password, email, age, gender)
-					 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender')";
+		//generate current time
+		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+		
+		//picture upload
+		if($_FILES["profilepic"]["name"] == ''){ //no file uploaded
+			$fileSelected = 0;
+		}
+		else{
+			$imageDone = 0;
+			$fileSelected = 1;
+			$uploadOk = 1;;
+			$imageFileType = strtolower(pathinfo($_FILES["profilepic"]["name"],PATHINFO_EXTENSION));
+			
+			// Check if image file is a actual image or fake image
+			$check = getimagesize($_FILES["profilepic"]["tmp_name"]);
+			if($check !== false) {
+				echo "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+			// Check file size
+			if ($_FILES["profilepic"]["size"] > 500000) {
+				echo "Sorry, your file is too large.";
+				$uploadOk = 0;
+			}
+			// Allow certain file formats
+			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif" ) {
+				echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				$uploadOk = 0;
+			}
+			// Check if $uploadOk is set to 0 by an error
+			if ($uploadOk == 0) {
+				echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
+			} else {
+				//create record in image table
+				$AddQuery = "INSERT INTO image (format, userID, uploadTime)
+							 VALUES ('$imageFileType', 0, '$time')"; //userID is temporarily 0 as userID not yet generated
+				if(!mysqli_query($conn, $AddQuery)){
+					$imageDone = 0;
+				}
+				$sql = "SELECT imageID FROM image WHERE userID='$userID' AND uploadTime='$time'";
+				$result = mysqli_query($conn, $sql);
+				$imageID = mysqli_fetch_assoc($result)['imageID'];
+				
+				//image storage location
+				$target_dir = "uploads/";
+				$target_file = $target_dir . $imageID . '.' . $imageFileType;
+				
+				if (move_uploaded_file($_FILES["profilepic"]["tmp_name"], $target_file)) {
+					$imageDone = 1;
+					echo "The file ". basename($_FILES["profilepic"]["name"]). " has been uploaded.";
+				} else {
+					echo "Sorry, there was an error uploading your file.";
+				}
+			}
+		}
+		
+		if($imageDone == 0){
+			$AddQuery = "INSERT INTO user (username, password, email, age, gender)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender')";
+		}
+		else{
+			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender', '$imageID')";
+		}
 		
 		if (mysqli_query($conn, $AddQuery)) {
 			echo '
@@ -167,8 +231,15 @@ if(isset($_POST['submit_pressed'])){
 			
 			$sql = "SELECT userID FROM user WHERE username='$Username' AND password='$Password'";
 			$result = mysqli_query($conn, $sql);
-
-			$_SESSION["userID"] = mysqli_fetch_assoc($result)['userID'];
+			$userID = mysqli_fetch_assoc($result)['userID'];
+			
+			if($imageDone == 1){
+				//update image record with userID
+				$UpdateQuery = "UPDATE image SET userID=" . $userID . ' WHERE imageID=' . $imageID;
+				mysqli_query($conn, $UpdateQuery);
+			}			
+			
+			$_SESSION["userID"] = $userID;
 			echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
 		} else {
 			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
@@ -186,3 +257,6 @@ if(isset($_POST['submit_pressed'])){
 
 }
 ?>
+
+</body>
+</html>
