@@ -52,8 +52,14 @@ $imagePath = "uploads/$imageID.$imageFormat";
 	<h1><?php echo $title;?></h1>
 	</header>
 	
-	<!-- image display -->
-	<img src=<?php echo $imagePath; ?> alt="image" style="width:20%; height:20%;">
+<?php
+if($imageID != NULL){
+	echo '
+		<!-- image display -->
+		<img src=' . $imagePath . ' alt="image" style="width:20%; height:20%;">
+	';
+}
+?>
 	
 	<div id="threadcontents" style="width:70%;">
 		<p style="padding-left: 40px;"><?php echo $content;?></p>
