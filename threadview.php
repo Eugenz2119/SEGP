@@ -78,11 +78,12 @@ if($imageID != NULL){
 		<button id="sharebutton">Share</button>
 
 		<!--up/downvote buttons-->
-		<!--<form method="get"> (?) -->
-		<button class="upvote"><i class="fa fa-thumbs-up"></i></button>
-		<!--up/downvote buttons-->
-		<!--<form method="get">  (?) -->
-		<button class="downvote"><i class="fa fa-thumbs-down"></i></button>
+		<form method="post">
+			<!--<input name="postVoteID" type="hidden" value="' . $postID . '">-->
+			<button class="upvote" name="postUpvote"><i class="fa fa-thumbs-up"></i></button>
+			<button class="downvote" name="postDownvote"><i class="fa fa-thumbs-down"></i></button>
+		</form>
+		
 	</div>
 
 	
@@ -129,6 +130,15 @@ if($imageID != NULL){
 		<div class="comments">
 			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
 			<p>' . $content . '</p>';
+			
+			//up/downvote buttons
+			echo '
+			<form method="post">
+				<--<input name="commentVoteID" type="hidden" value="' . $commentID . '">-->
+				<button class="upvote" name="commentUpvote"><i class="fa fa-thumbs-up"></i></button>
+				<button class="downvote" name="commentDownvote"><i class="fa fa-thumbs-down"></i></button>
+			</form>
+			';
 			
 			if($userID != NULL && $commenterID == $userID){
 				echo '
