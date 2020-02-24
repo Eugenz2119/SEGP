@@ -40,7 +40,7 @@
 	
 	echo '
 	<div id="username"class="w3-container w3-round-small" style="position: absolute; top: 90px; right:-10px; width: 250px; height: 100px ; border-style: solid;">
-		<h3>placeholder user</h3>
+		<h3>' . $username .'</h3>
 	</div>
 	';
 
