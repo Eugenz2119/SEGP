@@ -10,9 +10,46 @@
 <body>
 	<?php include "header.php"; ?>
 
-	<!-- user's profile avatar -->
-	<img src = "resources/placeholderimage.jpg" alt= "user avatar" class="center" style="width: 250px; height:250px; border-style: solid;">
+	<?php
+	//Connection details
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "agritalk-wip";
 
+	// Create connection
+	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	//debug
+	else{
+		//echo "DB CONNECTED";
+	}
+
+	$userID = $_SESSION["userID"];
+	
+	//profile picture
+	$sql="SELECT imageID FROM user WHERE userID =" . $userID;
+	$result = mysqli_query($conn, $sql);
+	$imageID = mysqli_fetch_assoc($result)['imageID'];
+	if($imageID != NULL){
+		$sql="SELECT format FROM image WHERE imageID =" . $imageID;
+		$result = mysqli_query($conn, $sql);
+		$imageFormat = mysqli_fetch_assoc($result)['format'];
+		$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
+	
+		echo '
+		<img src = "' . $image_dir . '" alt="user avatar" class="center" style="width: 250px; height:250px; border-style: solid;">
+		';
+	}
+	else{
+		echo '
+		<img src = "resources/placeholderimage.jpg" alt="user avatar" class="center" style="width: 250px; height:250px; border-style: solid;">
+		';
+	}
+	?>
 
 	<!--account management -->
 	<div id="accountmanagement"class="w3-container w3-padding-small w3-round-small" style="width: 250px;border-style: solid; text-align: center;">

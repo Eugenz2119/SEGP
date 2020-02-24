@@ -44,10 +44,25 @@
 	</div>
 	';
 
-	//user's avatar
-	echo '
-	<img src = "resources/placeholderimage.jpg" alt="avatar" style="position: absolute; width: 250px; height:250px; right:-10px;top: 190px; border-style: solid;">
-	';
+	//profile picture
+	$sql="SELECT imageID FROM user WHERE userID =" . $userID;
+	$result = mysqli_query($conn, $sql);
+	$imageID = mysqli_fetch_assoc($result)['imageID'];
+	if($imageID != NULL){
+		$sql="SELECT format FROM image WHERE imageID =" . $imageID;
+		$result = mysqli_query($conn, $sql);
+		$imageFormat = mysqli_fetch_assoc($result)['format'];
+		$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
+	
+		echo '
+		<img src = "' . $image_dir . '" alt="avatar" style="position: absolute; width: 250px; height:250px; right:-10px;top: 190px; border-style: solid;">
+		';
+	}
+	else{
+		echo '
+		<img src = "resources/placeholderimage.jpg" alt="avatar" style="position: absolute; width: 250px; height:250px; right:-10px;top: 190px; border-style: solid;">
+		';
+	}
 	
 	//user's posts
 	$threadLim = 10;
