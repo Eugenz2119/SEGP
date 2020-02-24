@@ -66,10 +66,6 @@ $imagePath = "uploads/$imageID.$imageFormat";
 		<div>
 			<form method="post">
 			<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
-			
-			<!--image uploading-->
-			<label for="img">Select image:</label>
-  			<input type="file" id="img" name="img" accept="image/*">
 
   			<!--submit button-->
   			<div style = "right : 30px;">
