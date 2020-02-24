@@ -32,6 +32,13 @@ else{
 	//echo "DB CONNECTED";
 }
 
+if(isset($_SESSION['userID'])){
+	$userID = $_SESSION['userID'];
+}
+else{
+	$userID = NULL;
+}
+
 $postID = $_GET["postID"];
 
 $sql = "SELECT title, text, userID, imageID FROM post WHERE postID='$postID'";
@@ -101,6 +108,7 @@ if($imageID != NULL){
 
 	while($row = mysqli_fetch_assoc($result)) {
 		
+		$commentID = $row['commentID'];
 		$commenterID = $row['userID'];
 		$content = $row['text'];
 		
@@ -108,13 +116,21 @@ if($imageID != NULL){
 		$commenterName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['username'];
 		
 		echo '
-			<div class="comments">
-				<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
-				<p>' . $content . '</p>
-				<button id="editbutton" type="submit" value="editcomments">Edit</button>
-				<button id="deletebutton" type="submit" value="deletecomments">Delete</button>
-			</div>
+		<div class="comments">
+			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
+			<p>' . $content . '</p>';
 			
+			if($userID != NULL && $commenterID == $userID){
+				echo '
+				<form method="post">
+					<input name="commentModifyID" type="hidden" value="' . $commentID . '">
+					<button name="editbutton" type="submit">Edit</button>
+					<button name="deletebutton" type="submit">Delete</button>
+				</form>
+				';
+			}
+		echo '
+		</div>
 		';
 		
 			//nested comments, ignore for now
@@ -137,6 +153,8 @@ if($imageID != NULL){
 	</section>
 
 <?php
+
+
 //creating new comment
 //Connection details
 $servername = "localhost";
@@ -199,6 +217,27 @@ if(isset($_POST["threadcomment"])){
 			alert("Comment is empty")
 		</script>
 		';
+	}
+}
+
+/*
+//edit comment
+if(isset($_POST["editbutton"])){
+	echo "commentID=" . $_POST["commentModifyID"];
+	echo "edit pressed";
+}
+*/
+
+//delete comment
+if(isset($_POST["deletebutton"])){
+	$DeleteQuery = "DELETE FROM post_comment WHERE commentID=" . $_POST["commentModifyID"];
+	if (mysqli_query($conn, $DeleteQuery)) {
+		$DeleteQuery = "DELETE FROM comment WHERE commentID=" . $_POST["commentModifyID"];
+		if (mysqli_query($conn, $DeleteQuery)) {
+			echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
+		} else {
+			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+		}
 	}
 }
 
