@@ -36,22 +36,12 @@ mysqli_close($conn);
 ?>
 
 <body>
-<!-- sidebar -->	
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="homepage.php">AgriTalk</a>
 
-  <!-- search menu -->
-  <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..." title="type in the crop">
-  <ul id="cropMenu">
-  	<li><a href="cropsubforum.php">placeholder</a></li>
-  	</ul>
- 
-</div>
-<span style="font-size:30px; position: absolute; left: 10px; cursor:pointer" onclick="openNav()">&#9776; </span>
+  <!-- search bar -->
+  <input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
 
 <!-- create thread button -->
-<div style = "position: absolute; left :100px; top: 10px; font-size: 20px; color: #008000;" id="createthread">
+<div style = "position: absolute; left: 10px; top: 10px; font-size: 20px; color: #008000;" id="createthread">
 <a href="threadcreate.php">Create Thread</a>
 </div>
 
@@ -97,17 +87,6 @@ else{
 ?>
 
 <script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-
-function search(){
-
-}
 
 function drop() {
   document.getElementById("notifs").classList.toggle("show");
