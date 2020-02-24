@@ -79,7 +79,14 @@ if($imageID != NULL){
 			<input type="submit" value="Comment">
 			</div>
 			</form>
-		</div>		
+		</div>	
+
+	<!-- text field for editing comments
+	<div id = "editcontents">
+		<form method="post">
+		<input type = "text" id="threadedit" name ="threadedit" placeholder ="Edited Comment..." size = "50">	
+	</div>
+	-->
 	
 	<?php
 	$postID = $_GET["postID"];
@@ -100,6 +107,8 @@ if($imageID != NULL){
 			<div class="comments">
 				<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
 				<p>' . $content . '</p>
+				<button id="editbutton">Edit</button>
+				<button id="deletebutton">Delete</button>
 			</div>
 			
 		';

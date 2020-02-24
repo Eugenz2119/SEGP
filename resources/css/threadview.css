@@ -25,7 +25,40 @@
 	background-color: #006400;
 }
 
+#editbutton{
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	border-radius: 12px;
+  	color: white;
+  	padding: 5px 10px;
+  	text-align: center;
+  	text-decoration: none;
+  	font-size: 16px;
+    position : absolute;
+    right :0;
+    bottom : -50px;
+ }
 
+#editbutton:hover{
+	background-color: #006400;
+}
+#deletebutton{
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	border-radius: 12px;
+  	color: white;
+  	padding: 5px 10px;
+  	text-align: center;
+  	text-decoration: none;
+  	font-size: 16px;
+    position : absolute;
+    right :0;
+    bottom : -50px;
+ }
+
+#deletebutton:hover{
+	background-color: #006400;
+}
 #threadtitle{
 	position: absolute;
 	top: 50px;
