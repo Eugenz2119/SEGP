@@ -135,7 +135,7 @@ if($imageID != NULL){
 				<form method="post">
 					<input name="commentModifyID" type="hidden" value="' . $commentID . '">
 					<button name="editbutton" type="submit">Edit</button>
-					<button name="deletebutton" type="submit">Delete</button>
+					<button name="deletebutton" type="submit" onclick="return confirm(\'Confirm delete?\')">Delete</button>
 				</form>
 				';
 			}
