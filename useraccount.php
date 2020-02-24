@@ -28,7 +28,13 @@
 		//echo "DB CONNECTED";
 	}
 
-	$userID = $_SESSION["userID"];
+	//login check
+	if(isset($_SESSION["userID"])){
+		$userID = $_SESSION["userID"];
+	}
+	else{
+		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
+	}
 	
 	//profile picture
 	$sql="SELECT imageID FROM user WHERE userID =" . $userID;
