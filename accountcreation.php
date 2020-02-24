@@ -214,8 +214,8 @@ if(isset($_POST['submit'])){
 		}
 		
 		if($imageDone == 0){
-			$AddQuery = "INSERT INTO user (username, password, email, age, gender)
-						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender')";
+			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender', NULL)";
 		}
 		else{
 			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
