@@ -77,10 +77,10 @@ $currentPage = $page;
 
 //First and Previous buttons
 if($currentPage>=3){
-	echo '<a href="homepage.php?page=' . '1' . '">' ."<button>First Page</button>" .'</a>';
+	echo '<a href="homepage.php?page=' . '1' . '">' ."<button><<</button>" .'</a>';
 }
 if($currentPage > 1){
-	echo '<a href="homepage.php?page=' . $prev . '">' ."<button>Previous</button>" .'</a>';
+	echo '<a href="homepage.php?page=' . $prev . '">' ."<button><</button>" .'</a>';
 }
 
 //Page number buttons	
@@ -127,10 +127,10 @@ else{
 
 //Next and Last buttons
 if($currentPage < $number_of_pages){
-	echo '<a href="homepage.php?page=' . $next . '">' .'<button>Next</button></a>';
+	echo '<a href="homepage.php?page=' . $next . '">' .'<button>></button></a>';
 }
 if($currentPage <= $number_of_pages - 2){
-	echo '<a href="homepage.php?page=' . $number_of_pages . '">' .'<button>Last Page</button></a>';
+	echo '<a href="homepage.php?page=' . $number_of_pages . '">' .'<button>>></button></a>';
 }
 
 ?>
