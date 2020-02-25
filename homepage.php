@@ -14,7 +14,7 @@
 <body>
 	
 <?php
-$threadLim = 10;
+$threadLim = 2;
 
 //Connection details
 $servername = "localhost";
@@ -33,10 +33,11 @@ else{
 	//echo "DB CONNECTED";
 }
 
-$sql="SELECT * FROM post ORDER BY postTime DESC LIMIT " . $threadLim;
+$sql="SELECT * FROM post ORDER BY postTime DESC LIMIT 0,5";
 $result = mysqli_query($conn, $sql);
+$number_of_results = mysqli_num_rows($result);
 
-while($row = mysqli_fetch_assoc($result)) {
+while($row = mysqli_fetch_array($result)) {
 	
 	$postID = $row['postID'];
 	$title = $row['title'];
@@ -55,8 +56,13 @@ while($row = mysqli_fetch_assoc($result)) {
 		</div>
 	';
 }
-?>	
+$number_of_pages = ceil($number_of_results/$threadLim);
 
+
+for($page = 1 ;$page<=$number_of_pages;$page++){
+	echo '<a href="homepage.php?page=' . $page . '">' . $page . '</a>';
+}
+?>
 </body>
 </html>
 
