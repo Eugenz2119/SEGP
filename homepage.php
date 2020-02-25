@@ -70,8 +70,67 @@ $sql = "SELECT COUNT(postID) FROM post";//total number of threads
 $number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(postID)'];
 $number_of_pages = ceil($number_of_results/$threadLim);
 
-for($page = 1 ;$page<=$number_of_pages;$page++){
-	echo '<a href="homepage.php?page=' . $page . '"><button>' . $page . '</button></a>';
+// Pagination
+$prev = $page - 1;
+$next = $page + 1;
+$currentPage = $page;
+
+//First and Previous buttons
+if($currentPage>=3){
+	echo '<a href="homepage.php?page=' . '1' . '">' ."<button>First Page</button>" .'</a>';
+}
+if($currentPage > 1){
+	echo '<a href="homepage.php?page=' . $prev . '">' ."<button>Previous</button>" .'</a>';
+}
+
+//Page number buttons	
+if($currentPage<=3){
+	for ($page=1;$page<=7;$page++) {
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}				
+		}
+	}	
+}
+else if($currentPage > $number_of_pages - 3){
+	for($page = $number_of_pages - 6; $page <= $number_of_pages; $page++){
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}				
+		}
+	}
+}
+else{	
+	for ($page=$currentPage-3;$page<=$currentPage+3;$page++) {
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}
+		
+		}
+	}
+}
+
+//Next and Last buttons
+if($currentPage < $number_of_pages){
+	echo '<a href="homepage.php?page=' . $next . '">' .'<button>Next</button></a>';
+}
+if($currentPage <= $number_of_pages - 2){
+	echo '<a href="homepage.php?page=' . $number_of_pages . '">' .'<button>Last Page</button></a>';
 }
 
 ?>
