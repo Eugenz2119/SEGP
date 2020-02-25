@@ -32,10 +32,23 @@ if (!$conn) {
 else{
 	//echo "DB CONNECTED";
 }
-
-$sql="SELECT * FROM post ORDER BY postTime DESC LIMIT 0,5";
+$sql = "SELECT * FROM post ORDER BY postTime DESC LIMIT 0,5";
 $result = mysqli_query($conn, $sql);
 $number_of_results = mysqli_num_rows($result);
+
+$number_of_pages = ceil($number_of_results/$threadLim);
+
+if(!isset($_GET['page'])){
+	$page=1;
+}
+else{
+	$page = $_GET['page'];
+}
+
+$this_page_first_result = ($page-1)*$threadLim;
+
+$sql ='SELECT * FROM post ORDER BY postTime DESC LIMIT ' . $this_page_first_result . ',' . $threadLim;
+$result=mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
 	
@@ -56,8 +69,6 @@ while($row = mysqli_fetch_array($result)) {
 		</div>
 	';
 }
-$number_of_pages = ceil($number_of_results/$threadLim);
-
 
 for($page = 1 ;$page<=$number_of_pages;$page++){
 	echo '<a href="homepage.php?page=' . $page . '">' . $page . '</a>';
@@ -65,4 +76,3 @@ for($page = 1 ;$page<=$number_of_pages;$page++){
 ?>
 </body>
 </html>
-
