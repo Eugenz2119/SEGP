@@ -32,16 +32,14 @@ if (!$conn) {
 else{
 	//echo "DB CONNECTED";
 }
-$sql = "SELECT * FROM post ORDER BY postTime DESC LIMIT 0,5";
-$result = mysqli_query($conn, $sql);
 
+//find first result thread number for current page
 if(!isset($_GET['page'])){
 	$page=1;
 }
 else{
 	$page = $_GET['page'];
 }
-
 $this_page_first_result = ($page-1)*$threadLim;
 
 $sql ='SELECT * FROM post ORDER BY postTime DESC LIMIT ' . $this_page_first_result . ',' . $threadLim;

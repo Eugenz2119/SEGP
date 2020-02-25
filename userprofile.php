@@ -65,9 +65,18 @@
 	}
 	
 	//user's posts
-	$threadLim = 10;
+	$threadLim = 5;
 	
-	$sql="SELECT * FROM post WHERE userID=" . $userID . " ORDER BY postTime DESC LIMIT " . $threadLim;
+	//find first result thread number for current page
+	if(!isset($_GET['page'])){
+		$page=1;
+	}
+	else{
+		$page = $_GET['page'];
+	}
+	$this_page_first_result = ($page-1)*$threadLim;
+	
+	$sql="SELECT * FROM post WHERE userID=" . $userID . " ORDER BY postTime DESC LIMIT " . $this_page_first_result . ',' . $threadLim;
 	$result = mysqli_query($conn, $sql);
 
 	while($row = mysqli_fetch_assoc($result)) {
@@ -88,6 +97,15 @@
 				<a href="threadview.php?postID=' . $postID . '">Read more...</a>
 			</div>
 		';
+	}
+	
+	//page number buttons
+	$sql = "SELECT COUNT(postID) FROM post WHERE userID=" . $userID;//total number of threads
+	$number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(postID)'];
+	$number_of_pages = ceil($number_of_results/$threadLim);
+
+	for($page = 1 ;$page<=$number_of_pages;$page++){
+		echo '<a href="homepage.php?page=' . $page . '"><button>' . $page . '</a>';
 	}
 	?>	
 
