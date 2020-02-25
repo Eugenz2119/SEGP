@@ -71,7 +71,7 @@ $number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(postID
 $number_of_pages = ceil($number_of_results/$threadLim);
 
 for($page = 1 ;$page<=$number_of_pages;$page++){
-	echo '<a href="homepage.php?page=' . $page . '"><button>' . $page . '</a>';
+	echo '<a href="homepage.php?page=' . $page . '"><button>' . $page . '</button></a>';
 }
 
 ?>
