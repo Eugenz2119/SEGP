@@ -14,7 +14,7 @@
 <body>
 	
 <?php
-$threadLim = 2;
+$threadLim = 5;
 
 //Connection details
 $servername = "localhost";
@@ -34,9 +34,6 @@ else{
 }
 $sql = "SELECT * FROM post ORDER BY postTime DESC LIMIT 0,5";
 $result = mysqli_query($conn, $sql);
-$number_of_results = mysqli_num_rows($result);
-
-$number_of_pages = ceil($number_of_results/$threadLim);
 
 if(!isset($_GET['page'])){
 	$page=1;
@@ -70,9 +67,15 @@ while($row = mysqli_fetch_array($result)) {
 	';
 }
 
+//page number buttons
+$sql = "SELECT COUNT(postID) FROM post";//total number of threads
+$number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(postID)'];
+$number_of_pages = ceil($number_of_results/$threadLim);
+
 for($page = 1 ;$page<=$number_of_pages;$page++){
-	echo '<a href="homepage.php?page=' . $page . '">' . $page . '</a>';
+	echo '<a href="homepage.php?page=' . $page . '"><button>' . $page . '</a>';
 }
+
 ?>
 </body>
 </html>
