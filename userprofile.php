@@ -91,10 +91,9 @@
 		echo '
 			<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%" >
 			
-				<h1>' . $title . '</h1>
+				<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 				<h6>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></h6>
 				<p>' . $content . '</p>
-				<a href="threadview.php?postID=' . $postID . '">Read more...</a>
 			</div>
 		';
 	}
