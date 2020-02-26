@@ -64,17 +64,16 @@ $imagePath = "uploads/$imageID.$imageFormat";
 	<h6>by : <a href="userprofile.php?userID=<?php echo $authorID; ?>"><?php echo $authorName; ?></a></h6>
 	</header>
 	
-	<!--comment creation code-->
-	<div>
-		<form method="post">
-		<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
-
-		<!--submit button-->
-		<div style = "right : 30px;">
-		<input type="submit" value="Comment">
-		</div>
-		</form>
-	</div>	
+	<!--reply-->
+	<?php
+	echo '
+	<form action="createcomment.php" method="get">
+		<input name="postID" type="hidden" value="' . $postID . '">
+		<input name="postReplyID" type="hidden" value="' . $postID . '">
+		<button type="submit">Reply</button>
+	</form>
+	';
+	?>
 	
 	<!--first post of the thread-->
 	<div name="firstPost" class="comments" style="background-color: white; width: 80%;">
@@ -132,20 +131,30 @@ $imagePath = "uploads/$imageID.$imageFormat";
 		
 		$commentID = $row['commentID'];
 		$commenterID = $row['userID'];
-		$content = $row['text'];
+		
+		//text processing for html format output
+		$txt = nl2br($row['text']);
+		$txt2 = str_replace("[QUOTE]",
+			'<!--div for quoted comment-->
+			<div class="quote" style = "width: 60%; height: 20%; background-color: #E1E1E1;">
+				<a>',
+			$txt);
+		$txt3 = str_replace("[/QUOTE]",
+			'	</a>
+			</div>
+			<p>',
+			$txt2);
+		$content = $txt3 . '</p>';
+		
 		
 		$sql = "SELECT username FROM user WHERE userID=" . $commenterID;
 		$commenterName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['username'];
 		
 		echo '
 		<div class="comments" style = "width: 80%; background-color: white;">
-			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
+			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a><br>';
 
-			<!--div for quoted comment-->
-			<div class="quote" style = "width: 60%; height: 20%; background-color: #E1E1E1;">
-				<a>placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment </a>
-			</div>
-			<p>' . $content . '</p>';
+			echo $content;
 			
 			/*
 			//up/downvote buttons
@@ -171,9 +180,10 @@ $imagePath = "uploads/$imageID.$imageFormat";
 			
 			//reply(quote)
 			echo '
-			<form method="post">
+			<form action="createcomment.php" method="get">
+				<input name="postID" type="hidden" value="' . $postID . '">
 				<input name="commentReplyID" type="hidden" value="' . $commentID . '">
-				<button name="replybutton" type="submit">Reply</button>
+				<button type="submit">Reply</button>
 			</form>
 			';
 			
@@ -181,20 +191,6 @@ $imagePath = "uploads/$imageID.$imageFormat";
 		</div>
 		';
 		
-			//nested comments, ignore for now
-			/*
-			<div class ="commenttocomment" >
-				<form action = "/threadview.php">
-				<input type = "text" id="comment" name ="comment" placeholder ="New Comment..." size = "50"><br>
-				<!--image uploading-->
-				<label for="img">Select image:</label>
-				<input type="file" id="img" name="img" accept="image/*">
-
-				<!--submit button-->
-				<input type="submit" value="Comment">
-				</form>
-			</div>
-			*/
 	}
 	mysqli_close($conn);
 	?>
@@ -202,7 +198,6 @@ $imagePath = "uploads/$imageID.$imageFormat";
 
 
 <?php
-//creating new comment
 //Connection details
 $servername = "localhost";
 $dbUsername 	= "hcyko1";
@@ -219,54 +214,6 @@ if (!$conn) {
 else{
 	//echo "DB CONNECTED";
 }
-
-if(isset($_POST["threadcomment"])){
-	
-	//login check
-	if(isset($_SESSION["userID"])){
-		$userID = $_SESSION["userID"];
-	}
-	else{
-		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
-	}
-	$content = $_POST["threadcomment"];
-	
-	if(strlen($content) > 0){
-		//generate current time
-		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
-		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
-		
-		//add to comment table
-		$AddQuery = "INSERT INTO comment (postID, userID, text, commentTime)
-					 VALUES ('$postID', '$userID', '$content', '$time')";
-		
-		if (mysqli_query($conn, $AddQuery)) {
-			$sql = "SELECT commentID FROM comment WHERE userID='$userID' AND commentTime='$time'";
-			$result = mysqli_query($conn, $sql);
-			$commentID = mysqli_fetch_assoc($result)['commentID'];
-			
-			//add to post_comment table
-			$AddQuery = "INSERT INTO post_comment (postID, commentID)
-						 VALUES ('$postID', '$commentID')";
-			if (mysqli_query($conn, $AddQuery)) {
-				echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
-			} else {
-				echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
-			}
-			
-		} else {
-			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
-		}
-	}
-	else{
-		echo '
-		<script language="javascript">
-			alert("Comment is empty")
-		</script>
-		';
-	}
-}
-
 /*
 //edit comment
 if(isset($_POST["editbutton"])){
