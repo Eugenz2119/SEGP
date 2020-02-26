@@ -34,27 +34,20 @@ if(isset($_SESSION["userID"])){
 ?>
 
 <body>
+<div id="topbar" style = "background-color:	#73E600;">
 
   <!-- search bar -->
   <input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
 
 <!-- create thread button -->
-<div style = "position: absolute; left: 10px; top: 10px; font-size: 20px; color: #008000;" id="createthread">
+<div style = "position: absolute; left: 10px; top: 10px; font-size: 20px; color: white;" id="createthread">
 <a href="threadcreate.php">Create Thread</a>
 </div>
 
 <!-- homepage shortcut -->
 
-<div style= "text-align: center; font-size: 30px; text-decoration: none; color: #008000;">
+<div style= "text-align: center; font-size: 30px; text-decoration: none; color: white;">
 <a href="homepage.php">AgriTalk</a>
-</div>
-
-<!-- notification -->
-<div class="dropdown" style= "position: absolute; right:150px; top: 10px;">
-		<button onclick="drop()" class="dropbtn"><i class="fa fa-bell"></i></button>
-		<div id="notifs" class="dropdown-content">
-			<a href="threadview.php">placeholder notification</a>
-		</div>
 </div>
 
 <?php
@@ -63,6 +56,28 @@ if(isset($_SESSION["userID"])){
 	$sql = "SELECT imageID FROM user WHERE userID=" . $userID;
 	$result = mysqli_query($conn, $sql);
 	$imageID = mysqli_fetch_assoc($result)['imageID'];
+	
+	//profile and account settings buttons
+	echo '
+
+		<div style = "float: right; font-size: 30px;color: white;">
+			<a href="useraccount.php" class="fa fa-cogs"></a>
+		 </div>
+
+			<div style = "float: right; font-size: 20px; color: white;" id="useracc">
+			<a href="userprofile.php?userID=' . $userID . '">username</a> 
+			</div>
+	';
+}
+else{
+	echo '
+		<!--login-->
+		  <div style = "float: right; font-size: 30px;color: white;">
+			<a href="login.php">Login</a>
+		  </div>
+	';
+}
+
 	if($imageID != NULL){
 		$sql="SELECT format FROM image WHERE imageID =" . $imageID;
 		$result = mysqli_query($conn, $sql);
@@ -70,37 +85,28 @@ if(isset($_SESSION["userID"])){
 		$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 		
 		echo '
-			<img src = "'. $image_dir .'" alt= "avatarpreview" style="position: absolute; width: 30px; height:30px; right:110px;top: 30px;">
+			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 30px; height:30px; float: right;">
 		';
 	}
 	else{
 		echo '
-			<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="position: absolute; width: 30px; height:30px; right:110px;top: 30px;">
+			<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="width: 30px; height:30px; float: right;">
 		';
 	}
-	
-	//profile and account settings buttons
-	echo '
-			<div style = "position: absolute; right :40px; top: 30px; font-size: 20px; color: #4CAF50;" id="useracc">
-			<a href="userprofile.php?userID=' . $userID . '">Profile</a> 
-			</div>
-
-		  <div style = "position:absolute; top: 20px; right:0px; font-size: 30px;color: #4CAF50;">
-			<a href="useraccount.php" class="fa fa-cogs"></a>
-		  </div>
-	';
-}
-else{
-	echo '
-		<!--login-->
-		  <div style = "position:absolute; top: 20px; right:0px; font-size: 30px;color: #4CAF50;">
-			<a href="login.php">Login</a>
-		  </div>
-	';
-}
 
 mysqli_close($conn);
-?>
+?> 
+
+		<!-- notification -->
+		<div class="dropdown">
+		<button onclick="drop()" class="dropbtn" style= "background-color: #73E600;"><i class="fa fa-bell"></i></button>
+		<div id="notifs" class="dropdown-content">
+			<a href="threadview.php">placeholder notification</a>
+		</div>
+
+</div>
+
+</div>
 
 <script>
 
