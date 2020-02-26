@@ -152,7 +152,6 @@ if(isset($_POST['submit'])){
 	if(isset($_POST['Institution'])){
 		$Institution = $_POST['Institution'];
 		if(strlen($Institution) != 0){
-			$completeField += 1;
 			echo 'Institution complete';
 			echo '<br>';
 		}
@@ -162,7 +161,6 @@ if(isset($_POST['submit'])){
 	if(isset($_POST['Occupation'])){
 		$Occupation = $_POST['Occupation'];
 		if(strlen($Occupation) != 0){
-			$completeField += 1;
 			echo 'Occupation complete';
 			echo '<br>';
 		}
@@ -172,7 +170,6 @@ if(isset($_POST['submit'])){
 	if(isset($_POST['Country'])){
 		$Country = $_POST['Country'];
 		if(strlen($Country) != 0){
-			$completeField += 1;
 			echo 'age complete';
 			echo '<br>';
 		}
@@ -182,7 +179,6 @@ if(isset($_POST['submit'])){
 	if(isset($_POST['PhoneNumber'])){
 		$PhoneNumber = $_POST['PhoneNumber'];
 		if(strlen($PhoneNumber) != 0){
-			$completeField += 1;
 			echo 'Phone Number complete';
 			echo '<br>';
 		}
@@ -191,13 +187,12 @@ if(isset($_POST['submit'])){
 	//Gender
 	if(isset($_POST['Gender'])){
 		$Gender = $_POST['Gender'];
-		$completeField += 1;
 		echo 'gender complete';
 		echo '<br>';
 	}
 
 	//all fields complete
-	if($completeField == 10){
+	if($completeField == 5){
 		
 		//generate current time
 		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
@@ -262,12 +257,12 @@ if(isset($_POST['submit'])){
 		}
 		
 		if($imageDone == 0){
-			$AddQuery = "INSERT INTO user (username, password, email, age, institution, occupation, country, phonenumber, gender, imageID)
-						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Institution', '$Occupation','$Country','$PhoneNumber', '$Gender', NULL)";
+			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender', NULL)";
 		}
 		else{
-			$AddQuery = "INSERT INTO user (username, password, email, age, institution, occupation, country, phonenumber, gender, imageID)
-						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Institution', '$Occupation','$Country','$PhoneNumber', '$Gender', '$imageID')";
+			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender', '$imageID')";
 		}
 		
 		if (mysqli_query($conn, $AddQuery)) {
