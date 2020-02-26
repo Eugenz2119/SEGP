@@ -7,7 +7,7 @@
 	<title>AgriTalk</title>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
-<body>
+<body style="background-color: #E1E1E1";>
 	<?php include "header.php"; ?>
 
 	<?php
