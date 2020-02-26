@@ -21,6 +21,14 @@
 			<input type="text" name="Email" placeholder="Enter Email">
 			<p>Age</p>
 			<input type="integer" name="Age" placeholder="Enter Age">
+			<p>Institution</p>
+			<input type="text" name="Institution" placeholder="Enter Institution">
+			<p>Occupation</p>
+			<input type="text" name="Occupation" placeholder="Enter Occupation">
+			<p>Country</p>
+			<input type="text" name="Country" placeholder="Enter Country">
+			<p>Phone Number</p>
+			<input type="integer" name="PhoneNumber" placeholder="Enter Phone Number">
 			<p>Gender</p>
 				<select name="Gender">
 					<option value="male" selected>Male</option>
@@ -139,6 +147,46 @@ if(isset($_POST['submit'])){
 			echo '<br>';
 		}
 	}
+	
+	//Institution
+	if(isset($_POST['Institution'])){
+		$Institution = $_POST['Institution'];
+		if(strlen($Institution) != 0){
+			$completeField += 1;
+			echo 'Institution complete';
+			echo '<br>';
+		}
+	}
+	
+	//Occupation
+	if(isset($_POST['Occupation'])){
+		$Occupation = $_POST['Occupation'];
+		if(strlen($Occupation) != 0){
+			$completeField += 1;
+			echo 'Occupation complete';
+			echo '<br>';
+		}
+	}
+	
+	//Country
+	if(isset($_POST['Country'])){
+		$Country = $_POST['Country'];
+		if(strlen($Country) != 0){
+			$completeField += 1;
+			echo 'age complete';
+			echo '<br>';
+		}
+	}
+	
+	//Phone Number
+	if(isset($_POST['PhoneNumber'])){
+		$PhoneNumber = $_POST['PhoneNumber'];
+		if(strlen($PhoneNumber) != 0){
+			$completeField += 1;
+			echo 'Phone Number complete';
+			echo '<br>';
+		}
+	}
 
 	//Gender
 	if(isset($_POST['Gender'])){
@@ -149,7 +197,7 @@ if(isset($_POST['submit'])){
 	}
 
 	//all fields complete
-	if($completeField == 6){
+	if($completeField == 10){
 		
 		//generate current time
 		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
@@ -214,12 +262,12 @@ if(isset($_POST['submit'])){
 		}
 		
 		if($imageDone == 0){
-			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
-						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender', NULL)";
+			$AddQuery = "INSERT INTO user (username, password, email, age, institution, occupation, country, phonenumber, gender, imageID)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Institution', '$Occupation','$Country','$PhoneNumber', '$Gender', NULL)";
 		}
 		else{
-			$AddQuery = "INSERT INTO user (username, password, email, age, gender, imageID)
-						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Gender', '$imageID')";
+			$AddQuery = "INSERT INTO user (username, password, email, age, institution, occupation, country, phonenumber, gender, imageID)
+						 VALUES ('$Username', '$Password', '$Email', '$Age', '$Institution', '$Occupation','$Country','$PhoneNumber', '$Gender', '$imageID')";
 		}
 		
 		if (mysqli_query($conn, $AddQuery)) {
