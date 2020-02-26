@@ -10,7 +10,7 @@
 
 
 
-<body>
+<body style="background-color: #E1E1E1";>
 
 <?php
 include 'header.php';
@@ -77,7 +77,7 @@ $imagePath = "uploads/$imageID.$imageFormat";
 	</div>	
 	
 	<!--first post of the thread-->
-	<div name="firstPost" class="comments">
+	<div name="firstPost" class="comments" style="background-color: white; width: 80%;">
 		<p><?php echo $content; ?></p>
 		
 		<?php
@@ -137,8 +137,13 @@ $imagePath = "uploads/$imageID.$imageFormat";
 		$commenterName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['username'];
 		
 		echo '
-		<div class="comments">
+		<div class="comments" style = "width: 80%; background-color: white;">
 			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
+
+			<!--div for quoted comment-->
+			<div class="quote" style = "width: 60%; height: 20%; background-color: #E1E1E1;">
+				<a>placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment placeholder quoted comment </a>
+			</div>
 			<p>' . $content . '</p>';
 			
 			/*
