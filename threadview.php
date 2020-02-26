@@ -100,16 +100,17 @@ $imagePath = "uploads/$imageID.$imageFormat";
 		-->
 		
 		<!--edit/delete-->
-			<?php
-			if($userID != NULL && $authorID == $userID){
-				echo '
-				<form method="post">
-					<input name="postModifyID" type="hidden" value="' . $postID . '">
-					<button name="editbutton" type="submit">Edit</button>
-				</form>
-				';
-			}
-			?>
+		<?php
+		if($userID != NULL && $authorID == $userID){
+			echo '
+			<form method="post">
+				<input name="postModifyID" type="hidden" value="' . $postID . '">
+				<button name="editbutton" type="submit">Edit</button>
+			</form>
+			';
+		}
+		?>
+		
 	</div>
 
 
@@ -167,6 +168,15 @@ $imagePath = "uploads/$imageID.$imageFormat";
 				</form>
 				';
 			}
+			
+			//reply(quote)
+			echo '
+			<form method="post">
+				<input name="commentReplyID" type="hidden" value="' . $commentID . '">
+				<button name="replybutton" type="submit">Reply</button>
+			</form>
+			';
+			
 		echo '
 		</div>
 		';
