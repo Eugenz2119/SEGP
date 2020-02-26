@@ -64,25 +64,40 @@ $imagePath = "uploads/$imageID.$imageFormat";
 	<h6>by : <a href="userprofile.php?userID=<?php echo $authorID; ?>"><?php echo $authorName; ?></a></h6>
 	</header>
 	
-<?php
-if($imageID != NULL){
-	echo '
-		<!-- image display -->
-		<img src=' . $imagePath . ' alt="image" style="width:20%; height:20%;">
-	';
-}
-?>
+	<!--comment creation code-->
+	<div>
+		<form method="post">
+		<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
+
+		<!--submit button-->
+		<div style = "right : 30px;">
+		<input type="submit" value="Comment">
+		</div>
+		</form>
+	</div>	
 	
-	<div id="threadcontents" style="width:70%;">
-		<p style="padding-left: 40px;"><?php echo $content;?></p>
+	<!--first post of the thread-->
+	<div name="firstPost" class="comments">
+		<p><?php echo $content; ?></p>
+		
+		<?php
+		if($imageID != NULL){
+			echo '
+				<!-- image display -->
+				<img src=' . $imagePath . ' alt="image" style="width:20%; height:20%;">
+			';
+		}
+		?>
+		
 		<button id="sharebutton">Share</button>
 
-		<!--up/downvote buttons-->
+		<!--up/downvote buttons
 		<form method="post">
-			<!--<input name="postVoteID" type="hidden" value="' . $postID . '">-->
+			<input name="postVoteID" type="hidden" value="' . $postID . '">
 			<button class="upvote" name="postUpvote"><i class="fa fa-thumbs-up"></i></button>
 			<button class="downvote" name="postDownvote"><i class="fa fa-thumbs-down"></i></button>
 		</form>
+		-->
 		
 		<!--edit/delete-->
 			<?php
@@ -95,23 +110,8 @@ if($imageID != NULL){
 				';
 			}
 			?>
-		
 	</div>
 
-	
-	
-
-	<section id="threadcomments" style="width:70%">
-		<div>
-			<form method="post">
-			<input type = "text" id="threadcomment" name ="threadcomment" placeholder ="New Comment..." size = "50"><br>
-
-  			<!--submit button-->
-  			<div style = "right : 30px;">
-			<input type="submit" value="Comment">
-			</div>
-			</form>
-		</div>	
 
 	<!-- text field for editing comments
 	<div id = "editcontents">
@@ -123,9 +123,7 @@ if($imageID != NULL){
 
 	
 	<?php
-	$postID = $_GET["postID"];
-
-	//displaying existing comments
+	//display existing comments
 	$sql="SELECT * FROM comment WHERE commentID IN (SELECT commentID FROM post_comment where postID=" . $postID . ")";
 	$result = mysqli_query($conn, $sql);
 
@@ -143,14 +141,16 @@ if($imageID != NULL){
 			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a>
 			<p>' . $content . '</p>';
 			
+			/*
 			//up/downvote buttons
 			echo '
 			<form method="post">
-				<--<input name="commentVoteID" type="hidden" value="' . $commentID . '">-->
+				<input name="commentVoteID" type="hidden" value="' . $commentID . '">
 				<button class="upvote" name="commentUpvote"><i class="fa fa-thumbs-up"></i></button>
 				<button class="downvote" name="commentDownvote"><i class="fa fa-thumbs-down"></i></button>
 			</form>
 			';
+			*/
 			
 			//edit/delete
 			if($userID != NULL && $commenterID == $userID){
@@ -183,11 +183,10 @@ if($imageID != NULL){
 	}
 	mysqli_close($conn);
 	?>
-	</section>
+
+
 
 <?php
-
-
 //creating new comment
 //Connection details
 $servername = "localhost";
