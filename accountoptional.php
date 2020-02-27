@@ -8,8 +8,7 @@
 	<div class="Accbox">
 	<img src="somethinglogo.png" class="avatar" alt="put agritalk logo">
 		<h1>Create Account</h1><br>
-		<!- change php file name ->
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<p>Institution</p>
 			<input type="text" name="Institution" placeholder="Enter Institution">
 			<p>Occupation</p>
@@ -18,26 +17,16 @@
 			<input type="text" name="Country" placeholder="Enter Country">
 			<p>Phone Number</p>
 			<input type="integer" name="PhoneNumber" placeholder="Enter Phone Number">
-			<p>Gender</p>
-				<select name="Gender">
-					<option value="male" selected>Male</option>
-					<option value="female">Female</option>
-					<option value="other">Other</option>
-				</select>
 			<p>Select Profile Picture</p><br>
-				<input type="file" name="picture" accept="image/*">
-			<input type="hidden" name="submit_pressed" value="True">
-			<input type="submit" value="Create Account">
+				<input type="file" name="profilepic" id="profilepic">
+			<input type="submit" value="Skip" name="skip">
+			<input type="submit" value="Submit" name="submit">
 		</form>
 	</div>
-	 
-</body>
-</html>
 
-<!- php ->
 <?php
 
-if(isset($_POST['submit_pressed'])){
+if(isset($_POST['submit'])){
 	//Connection details
 	$servername = "localhost";
 	$dbUsername 	= "hcyko1";
@@ -56,89 +45,137 @@ if(isset($_POST['submit_pressed'])){
 	}
 
 	session_start();
+	$userID = $_SESSION['userID'];
 	
-	//details completion check
-	$completeField = 0;
-
+	//create addquery
+	$commaBefore = FALSE;
+	$AddQuery = "UPDATE user SET ";
 	//Institution
 	if(isset($_POST['Institution'])){
+		$commaBefore = TRUE;
 		$Institution = $_POST['Institution'];
-		if(strlen($Age) != 0){
-			$completeField += 1;
-			echo 'Institution complete';
-			echo '<br>';
-		}
+		$AddQuery = $AddQuery . "institution='$Institution'";
 	}
-	
 	//Occupation
 	if(isset($_POST['Occupation'])){
-		$Occupation = $_POST['Occupation'];
-		if(strlen($Occupation) != 0){
-			$completeField += 1;
-			echo 'Occupation complete';
-			echo '<br>';
+		if($commaBefore){
+			$AddQuery = $AddQuery . ", ";
 		}
+		$commaBefore = TRUE;
+		$Occupation = $_POST['Occupation'];
+		$AddQuery = $AddQuery . "occupation='$Occupation'";
 	}
-	
 	//Country
 	if(isset($_POST['Country'])){
-		$Country = $_POST['Country'];
-		if(strlen($Country) != 0){
-			$completeField += 1;
-			echo 'age complete';
-			echo '<br>';
+		if($commaBefore){
+			$AddQuery = $AddQuery . ", ";
 		}
+		$commaBefore = TRUE;
+		$Country = $_POST['Country'];
+		$AddQuery = $AddQuery . "country='$Country'";
 	}
-	
 	//Phone Number
 	if(isset($_POST['PhoneNumber'])){
+		if($commaBefore){
+			$AddQuery = $AddQuery . ", ";
+		}
+		$commaBefore = TRUE;
 		$PhoneNumber = $_POST['PhoneNumber'];
-		if(strlen($PhoneNumber) != 0){
-			$completeField += 1;
-			echo 'Phone Number complete';
-			echo '<br>';
-		}
+		$AddQuery = $AddQuery . "phonenum='$PhoneNumber'";
 	}
-
-	//Gender
-	if(isset($_POST['Gender'])){
-		$Gender = $_POST['Gender'];
-		$completeField += 1;
-		echo 'gender complete';
-		echo '<br>';
-	}
-	
-	//all fields complete
-	if($completeField == 5){
-		
-		$AddQuery = "INSERT INTO user (institution, occupation, country, phonenumber, gender)
-					 VALUES ('$Institution', '$Occupation', '$Country', '$PhoneNumber',  '$Gender')";
-		
-		if (mysqli_query($conn, $AddQuery)) {
-			echo '
-			<script language="javascript">
-				alert("Account created successfully")
-			</script>
-			';
-			
-			$sql = "SELECT userID FROM user WHERE username='$Username' AND password='$Password'";
-			$result = mysqli_query($conn, $sql);
-
-			$_SESSION["userID"] = mysqli_fetch_assoc($result)['userID'];
-			echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
-		} else {
-			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
-		}
+	//Profile Picture
+	if($_FILES["profilepic"]["name"] == ''){ //no file uploaded
+		$fileSelected = 0;
+		echo "notselected";
 	}
 	else{
+		//generate current time
+		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+		
+		$imageDone = 0;
+		$fileSelected = 1;
+		$uploadOk = 1;;
+		$imageFileType = strtolower(pathinfo($_FILES["profilepic"]["name"],PATHINFO_EXTENSION));
+		
+		// Check if image file is a actual image or fake image
+		$check = getimagesize($_FILES["profilepic"]["tmp_name"]);
+		if($check !== false) {
+			echo "File is an image - " . $check["mime"] . ".";
+			$uploadOk = 1;
+		} else {
+			echo "File is not an image.";
+			$uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["profilepic"]["size"] > 500000) {
+			echo "Sorry, your file is too large.";
+			$uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			$uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+		} else {
+			//create record in image table
+			$ImageQuery = "INSERT INTO image (format, userID, uploadTime)
+						 VALUES ('$imageFileType', '$userID' , '$time')";
+			if(!mysqli_query($conn, $ImageQuery)){
+				$imageDone = 0;
+			}
+			$sql = "SELECT imageID FROM image WHERE userID='$userID' AND uploadTime='$time'";
+			$result = mysqli_query($conn, $sql);
+			$imageID = mysqli_fetch_assoc($result)['imageID'];
+			
+			//image storage location
+			$target_dir = "uploads/";
+			$target_file = $target_dir . $imageID . '.' . $imageFileType;
+			
+			if (move_uploaded_file($_FILES["profilepic"]["tmp_name"], $target_file)) {
+				$imageDone = 1;
+				echo "The file ". basename($_FILES["profilepic"]["name"]). " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+		}
+	}
+	if($fileSelected == 1 && $imageDone == 1){
+		if($commaBefore){
+			$AddQuery = $AddQuery . ", ";
+		}
+		$commaBefore = TRUE;
+		$AddQuery = $AddQuery . "imageID='$imageID'";
+	}
+		
+	$AddQuery = $AddQuery . " WHERE userID=" . $userID;
+	
+	//record to database
+	if (mysqli_query($conn, $AddQuery)) {
 		echo '
 		<script language="javascript">
-			alert("Details incomplete")
+			alert("Details saved")
 		</script>
 		';
+		
+		echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
+	} else {
+		echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
 	}
 
 	mysqli_close($conn);
-
 }
+
+if(isset($_POST['skip'])){
+	echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
+}
+
 ?>
+
+</body>
+</html>
