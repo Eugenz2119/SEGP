@@ -10,7 +10,7 @@
 	<img src="somethinglogo.png" class="avatar" alt="put agritalk logo">
 		<h1>Create Account</h1><br>
 		<!- change php file name ->
-		<form method="post" enctype="multipart/form-data">
+		<form method="post">
 			<p>Username</p>
 			<input type="text" name="Username" placeholder="Enter Username">
 			<p>Password</p>
@@ -21,23 +21,10 @@
 			<input type="text" name="Email" placeholder="Enter Email">
 			<p>Age</p>
 			<input type="integer" name="Age" placeholder="Enter Age">
-			<p>Institution</p>
-			<input type="text" name="Institution" placeholder="Enter Institution">
-			<p>Occupation</p>
-			<input type="text" name="Occupation" placeholder="Enter Occupation">
-			<p>Country</p>
-			<input type="text" name="Country" placeholder="Enter Country">
-			<p>Phone Number</p>
-			<input type="integer" name="PhoneNumber" placeholder="Enter Phone Number">
-			<p>Gender</p>
-				<select name="Gender">
-					<option value="male" selected>Male</option>
-					<option value="female">Female</option>
-					<option value="other">Other</option>
-				</select>
 			<p>Select Profile Picture</p><br>
-				<input type="file" name="profilepic" id="profilepic">
-				<input type="submit" value="Create Account" name = "submit">
+				<input type="file" name="picture" accept="image/*">
+			<input type="hidden" name="submit_pressed" value="True">
+			<input type="submit" value="Create Account">
 		</form>
 	</div>
 
@@ -148,49 +135,6 @@ if(isset($_POST['submit'])){
 		}
 	}
 	
-	//Institution
-	if(isset($_POST['Institution'])){
-		$Institution = $_POST['Institution'];
-		if(strlen($Institution) != 0){
-			echo 'Institution complete';
-			echo '<br>';
-		}
-	}
-	
-	//Occupation
-	if(isset($_POST['Occupation'])){
-		$Occupation = $_POST['Occupation'];
-		if(strlen($Occupation) != 0){
-			echo 'Occupation complete';
-			echo '<br>';
-		}
-	}
-	
-	//Country
-	if(isset($_POST['Country'])){
-		$Country = $_POST['Country'];
-		if(strlen($Country) != 0){
-			echo 'age complete';
-			echo '<br>';
-		}
-	}
-	
-	//Phone Number
-	if(isset($_POST['PhoneNumber'])){
-		$PhoneNumber = $_POST['PhoneNumber'];
-		if(strlen($PhoneNumber) != 0){
-			echo 'Phone Number complete';
-			echo '<br>';
-		}
-	}
-
-	//Gender
-	if(isset($_POST['Gender'])){
-		$Gender = $_POST['Gender'];
-		echo 'gender complete';
-		echo '<br>';
-	}
-
 	//all fields complete
 	if($completeField == 5){
 		
