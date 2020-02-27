@@ -10,7 +10,7 @@
 	<img src="somethinglogo.png" class="avatar" alt="put agritalk logo">
 		<h1>Create Account</h1><br>
 		<!- change php file name ->
-		<form method="post">
+		<form method="post"  enctype="multipart/form-data">
 			<p>Username</p>
 			<input type="text" name="Username" placeholder="Enter Username">
 			<p>Password</p>
@@ -23,8 +23,7 @@
 			<input type="integer" name="Age" placeholder="Enter Age">
 			<p>Select Profile Picture</p><br>
 				<input type="file" name="picture" accept="image/*">
-			<input type="hidden" name="submit_pressed" value="True">
-			<input type="submit" value="Create Account">
+			<input type="submit" value="Create Account" name="submit">
 		</form>
 	</div>
 
@@ -227,7 +226,7 @@ if(isset($_POST['submit'])){
 			}			
 			
 			$_SESSION["userID"] = $userID;
-			echo '<meta http-equiv="Refresh" content="0; url=homepage.php" />';
+			echo '<meta http-equiv="Refresh" content="0; url=accountoptional.php" />';
 		} else {
 			echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
 		}
