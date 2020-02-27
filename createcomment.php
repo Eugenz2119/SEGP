@@ -58,7 +58,15 @@
 	else{//replyType == "comment"	
 		$sql = "SELECT text FROM comment WHERE commentID=" . $commentID;
 		$result = mysqli_query($conn, $sql);
-		$quotedText = mysqli_fetch_assoc($result)['text'];
+		$txt = mysqli_fetch_assoc($result)['text'];
+		
+		//remove quoted text from the comment being replied to
+		if(strrpos($txt, "[/QUOTE]") != FALSE){
+			$quotedText = substr($txt, strrpos($txt, "[/QUOTE]") + strlen("[/QUOTE]") +2); //+2 for \n
+		}
+		else{
+			$quotedText = $txt;
+		}
 		
 		$defaultText = "[QUOTE]" . $quotedText . "[/QUOTE]\n";
 	}
@@ -72,7 +80,7 @@
 			<?php
 			echo '
 			<!--text field-->
-			<textarea name="threadcomment" placeholder="New Comment...">' . $defaultText . '</textarea>
+			<textarea name="threadcomment" placeholder="New Comment..." rows=6 cols=200>' . $defaultText . '</textarea>
 			';
 			?>
 			
@@ -105,7 +113,7 @@ if(isset($_POST["threadcomment"])){
 	}
 	
 	$content = $_POST["threadcomment"];
-	
+
 	if(strlen($content) > 0){
 		//generate current time
 		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
