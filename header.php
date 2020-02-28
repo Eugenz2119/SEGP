@@ -34,39 +34,25 @@ if(isset($_SESSION["userID"])){
 ?>
 
 <body>
-<div id="topbar" style = "background-color:	#73E600;">
+<div id="topbar" style="background-color: #73E600; height: 20%">
 
 	<!-- search bar -->
 	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
 
 	<!-- all subforums button -->
-	<div style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">
-		<a href= "subforumlist.php">All Subforums</a>
-	</div>
-
-	<!-- create thread button 
-	<div style = "position: absolute; left: 10px; top: 10px; font-size: 20px; color: white;" id="createthread">
-	<a href="threadcreate.php">Create Thread</a>
-	</div>-->
+		<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
 
 	<!-- homepage shortcut -->
-
-	<div style= "float: left; font-size: 30px; text-decoration: none; color: white;">
-	<a href="homepage.php">AgriTalk</a>
-	</div>
+		<a href="homepage.php" style= "font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
 
 	<?php
 	if(isset($_SESSION["userID"])){
 		//profile and account settings buttons
 		echo '
 
-		<div style = "float: right; font-size: 30px;color: white;">
-			<a href="useraccount.php" class="fa fa-cogs"></a>
-		 </div>
+			<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 30px;color: white;"></a>
 
-		<div style = "float: right; font-size: 20px; color: white;" id="useracc">
-			<a href="userprofile.php?userID=' . $userID . '">username</a> 
-		</div>
+			<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 20px; color: white;">username</a> 
 		';
 		
 		//profile picture preview
@@ -109,8 +95,8 @@ if(isset($_SESSION["userID"])){
 		<div id="notifs" class="dropdown-content">
 			<a href="threadview.php">placeholder notification</a>
 		</div>
-
 	</div>
+	
 </div>
 
 <script>
