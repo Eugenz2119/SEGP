@@ -57,24 +57,50 @@ $sql = "SELECT format from image WHERE imageID='$imageID'";
 $imageFormat = mysqli_fetch_assoc(mysqli_query($conn, $sql))['format'];
 $imagePath = "uploads/$imageID.$imageFormat";
 
+//profilepic
+$sql = "SELECT imageID FROM user WHERE userID=" . $authorID;
+$result = mysqli_query($conn, $sql);
+$profileimageID = mysqli_fetch_assoc($result)['imageID'];
+
 ?>
 
 	<header id="threadtitle">
-	<h1><?php echo $title;?></h1>
-	<h6>by : <a href="userprofile.php?userID=<?php echo $authorID; ?>"><?php echo $authorName; ?></a></h6>
+	<?php 
+	if($profileimageID != NULL){
+		$sql="SELECT format FROM image WHERE imageID =" . $profileimageID;
+		$result = mysqli_query($conn, $sql);
+		$imageFormat = mysqli_fetch_assoc($result)['format'];
+		$image_dir = "uploads/" . $profileimageID . '.' . $imageFormat;
+		
+		echo '
+			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 80px; height:80px; float: left;">
+		';
+	}
+	else{
+		echo '
+			<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="width: 80px; height:80px; float: left;margin-left:10px;margin-top:10px;">
+		';
+	}
+	?>
+	<h1 id = "title"><?php echo $title;?></h1>
+	<h6 id = "authorname">by : <a  href="userprofile.php?userID=<?php echo $authorID; ?>"><?php echo $authorName; ?></a></h6>
 	</header>
 	
+	<div class= "topbuttons">
 	<!--reply-->
 	<?php
 	echo '
 	<form action="createcomment.php" method="get">
 		<input name="postID" type="hidden" value="' . $postID . '">
 		<input name="postReplyID" type="hidden" value="' . $postID . '">
-		<button type="submit">Reply</button>
+		<button id = "replybutton" type="submit">Reply</button>
 	</form>
 	';
 	?>
+	<button id="sharebutton">Share</button>
+	</div>
 	
+
 	<!--first post of the thread-->
 	<div name="firstPost" class="comments" style="background-color: white; width: 80%;">
 		<p><?php echo $content; ?></p>
@@ -88,7 +114,6 @@ $imagePath = "uploads/$imageID.$imageFormat";
 		}
 		?>
 		
-		<button id="sharebutton">Share</button>
 
 		<!--up/downvote buttons
 		<form method="post">

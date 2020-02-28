@@ -1,46 +1,87 @@
-#threadcontents{
-	position: absolute;
-	top: 150px;
-	left: 20px;
-	width: 1250px;
-	border: solid black 2px; 
-	border-radius: 15px;
+#threadtitle {
+  background-color: white;
+  margin: 20px 50px;
+  width: 80%;
+  height: 100px;
+  position: relative;
+  top: -50px;
+  margin-left: 30px;
+  border-style: solid;
+  border-color: #C0C0C0; /*grey*/
+}
 
-} 
+#title {
+  position: relative;
+  top: -10px;
+  padding-left: 100px;
+}
+
+#authorname {
+  position: relative;
+  top: -15px;
+  padding-left: 100px;
+  color: #CD853F; /*brown*/
+}
+
+.topbuttons{
+  position: relative;
+  top: -50px;
+}
 #sharebutton{
-	background-color: #4CAF50; /* Green */
-  	border: none;
-  	border-radius: 12px;
-  	color: white;
-  	padding: 5px 10px;
-  	text-align: center;
-  	text-decoration: none;
-  	font-size: 16px;
-    position : absolute;
-    right :0;
-    bottom : -50px;
+  background-color: #73E600; /* Green */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    float:right;
+    position: absolute;
+    top: 4px;
+    left: 200px;
+    padding:10px;
  }
 
 #sharebutton:hover{
-	background-color: #006400;
+  background-color: #32CD32;
+}
+#replybutton{
+  background-color: #73E600; /* Green */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    float:left;
+    position: absolute;
+    top: 4px;
+    left : 35px;
+    padding: :10px;
+ }
+
+#replybutton:hover{
+  background-color:#32CD32;
 }
 
 #editbutton{
-	background-color: #4CAF50; /* Green */
-  	border: none;
-  	border-radius: 12px;
-  	color: white;
-  	padding: 5px 10px;
-  	text-align: center;
-  	text-decoration: none;
-  	font-size: 16px;
+  background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
     position : absolute;
     right :0;
     bottom : -50px;
  }
 
 #editbutton:hover{
-	background-color: #006400;
+  background-color: #006400;
 }
 
 .upvote{
@@ -70,49 +111,42 @@
 }
 
 #deletebutton{
-	background-color: #4CAF50; /* Green */
-  	border: none;
-  	border-radius: 12px;
-  	color: white;
-  	padding: 5px 10px;
-  	text-align: center;
-  	text-decoration: none;
-  	font-size: 16px;
+  background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
     position : absolute;
     right :0;
     bottom : -50px;
  }
 
 #deletebutton:hover{
-	background-color: #006400;
-}
-
-
-}
-
-#threadtitle{
-	position: absolute;
-	top: 50px;
-	left: 20px;
-	width: 1250px;
-
+  background-color: #006400;
 }
 
 #threadcomments{
-	position: absolute;
-	top: 300px;
-	left: 20px;
-	width: 1250px;
+  position: absolute;
+  top: 300px;
+  left: 20px;
+  width: 1250px;
 
 }
 
 .comments{
-	margin-top: 100px;
-	padding : 5px 10px;
+  margin-top: 50px;
+  margin-left: 30px;
+  padding : 5px 10px;
+  border-style: solid;
+  border-color: #C0C0C0;
 }
 
 
 .commenttocomment{
-	position: absolute;
-	left : 857px;
+  position: absolute;
+  left : 857px;
 }
+
