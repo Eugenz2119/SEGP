@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <?php 
- include 'header.php'
+ include 'header.php';
+ include 'popularpost.php';
 ?>
 <head>
 	<link href="./resources/css/index.css" type="text/css" rel ="stylesheet">
@@ -55,9 +56,10 @@ while($row = mysqli_fetch_array($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white; position:absolute;" >
+			<a>in : <a href ="cropsumforum.php">PLACEHOLDER CROP NAME</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
-			<div style = "font-size : 15px;">
+			<div style = "font-size : 13px;">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a>
 			</div>
 			<p>' . $content . '</p>
@@ -77,10 +79,14 @@ $currentPage = $page;
 
 //First and Previous buttons
 if($currentPage>=3){
-	echo '<a href="homepage.php?page=' . '1' . '">' ."<button><<</button>" .'</a>';
+	echo '<div class="page">
+			<a href="homepage.php?page=' . '1' . '">' ."<button><<</button>" .'</a>
+			</div>';
 }
 if($currentPage > 1){
-	echo '<a href="homepage.php?page=' . $prev . '">' ."<button><</button>" .'</a>';
+	echo '<div class="page">
+			<a href="homepage.php?page=' . $prev . '">' ."<button><</button>" .'</a>
+			</div>';
 }
 
 //Page number buttons	
@@ -89,10 +95,14 @@ if($currentPage<=3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<div class="page">
+						<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>
+						</div>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<div class="page">
+						<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>
+						</div>';
 			}				
 		}
 	}	
@@ -102,10 +112,14 @@ else if($currentPage > $number_of_pages - 3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<div class="page">
+						<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>
+						</div>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<div class="page">
+						<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>
+						</div>';
 			}				
 		}
 	}
@@ -118,7 +132,9 @@ else{
 				echo '<a href="homepage.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<div class="page">
+						<a href="homepage.php?page=' . $page . '">' . '<button>' . $page . '</button></a>
+						</div>';
 			}
 		
 		}
@@ -127,10 +143,15 @@ else{
 
 //Next and Last buttons
 if($currentPage < $number_of_pages){
-	echo '<a href="homepage.php?page=' . $next . '">' .'<button>></button></a>';
+	echo '<div class="page">
+			<a href="homepage.php?page=' . $next . '">' .'<button>></button></a>
+			</div>';
 }
 if($currentPage <= $number_of_pages - 2){
-	echo '<a href="homepage.php?page=' . $number_of_pages . '">' .'<button>>></button></a>';
+	echo '<div class="page">
+			<a href="homepage.php?page=' . $number_of_pages . '">' .'<button>>></button></a>
+			</div>';
+
 }
 
 ?>

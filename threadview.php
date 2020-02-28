@@ -14,7 +14,7 @@
 
 <?php
 include 'header.php';
-include 'cropinfo.php';
+include 'popularpost.php';
 //Connection details
 $servername = "localhost";
 $dbUsername 	= "hcyko1";
@@ -102,7 +102,7 @@ $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 	
 
 	<!--first post of the thread-->
-	<div name="firstPost" class="comments" style="background-color: white; width: 80%;">
+	<div name="firstPost" class="comments" style="background-color: white; width: 70%;">
 		<p><?php echo $content; ?></p>
 		
 		<?php
@@ -176,7 +176,7 @@ $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 		$commenterName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['username'];
 		
 		echo '
-		<div class="comments" style = "width: 80%; background-color: white;">
+		<div class="comments" style = "width: 70%; background-color: white;">
 			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a><br>';
 
 			echo $content;
