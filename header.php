@@ -40,19 +40,20 @@ if(isset($_SESSION["userID"])){
 	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
 
 	<!-- all subforums button -->
-		<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
+	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
+
+	<!-- create thread button for testing -->
+	<a href="threadcreate.php" style = "position: absolute; left: 600px; font-size: 20px; color: white;">Create Thread</a>
 
 	<!-- homepage shortcut -->
-		<a href="homepage.php" style= "font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
+	<a href="homepage.php" style= "font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
 
 	<?php
 	if(isset($_SESSION["userID"])){
 		//profile and account settings buttons
 		echo '
-
-			<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 30px;color: white;"></a>
-
-			<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 20px; color: white;">username</a> 
+		<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 30px;color: white;"></a>
+		<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 20px; color: white;">username</a> 
 		';
 		
 		//profile picture preview
@@ -80,9 +81,9 @@ if(isset($_SESSION["userID"])){
 	else{
 		echo '
 		<!--login-->
-		  <div style = "float: right; font-size: 30px;color: white;">
+		<div style = "float: right; font-size: 30px;color: white;">
 			<a href="login.php">Login</a>
-		  </div>
+		</div>
 		';
 	}
 
