@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AgriTalk</title>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
 
 <body style="background-color: #E1E1E1";>
 
@@ -19,5 +20,4 @@
 
 
 </body>
-</head>
 </html>

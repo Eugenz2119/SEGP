@@ -38,6 +38,12 @@
   display: block;
 }
 
+.page{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 .show{display:block ;}
 
 @media screen and (max-height: 450px) {
