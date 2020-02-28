@@ -38,15 +38,6 @@
   display: block;
 }
 
-#threadpreview {
-	position: absolute;
-	top: 50px;
-	left: 20px;
-	width: 1250px;
-
-}
-
-
 .show{display:block ;}
 
 @media screen and (max-height: 450px) {

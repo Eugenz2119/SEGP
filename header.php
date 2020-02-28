@@ -39,14 +39,19 @@ if(isset($_SESSION["userID"])){
   <!-- search bar -->
   <input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
 
-<!-- create thread button -->
+  <!-- all subforums button -->
+  	<div style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">
+  		<a href= "subforumlist.php">All Subforums</a>
+  	</div>
+
+<!-- create thread button 
 <div style = "position: absolute; left: 10px; top: 10px; font-size: 20px; color: white;" id="createthread">
 <a href="threadcreate.php">Create Thread</a>
-</div>
+</div>-->
 
 <!-- homepage shortcut -->
 
-<div style= "text-align: center; font-size: 30px; text-decoration: none; color: white;">
+<div style= "float: left; font-size: 30px; text-decoration: none; color: white;">
 <a href="homepage.php">AgriTalk</a>
 </div>
 
