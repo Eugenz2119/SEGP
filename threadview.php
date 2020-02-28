@@ -63,8 +63,22 @@ $result = mysqli_query($conn, $sql);
 $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 
 ?>
-
-	<header id="threadtitle">
+	
+	<div class= "topbuttons">
+	<!--reply-->
+	<?php
+	echo '
+	<form action="createcomment.php" method="get">
+		<input name="postID" type="hidden" value="' . $postID . '">
+		<input name="postReplyID" type="hidden" value="' . $postID . '">
+		<button id ="replybutton" type="submit">Reply</button>
+		<button id="sharebutton">Share</button>
+	</form>
+	';
+	?>
+	</div>
+	
+	<div id="threadtitle">
 	<?php 
 	if($profileimageID != NULL){
 		$sql="SELECT format FROM image WHERE imageID =" . $profileimageID;
@@ -84,20 +98,6 @@ $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 	?>
 	<h1 id = "title"><?php echo $title;?></h1>
 	<h6 id = "authorname">by : <a  href="userprofile.php?userID=<?php echo $authorID; ?>"><?php echo $authorName; ?></a></h6>
-	</header>
-	
-	<div class= "topbuttons">
-	<!--reply-->
-	<?php
-	echo '
-	<form action="createcomment.php" method="get">
-		<input name="postID" type="hidden" value="' . $postID . '">
-		<input name="postReplyID" type="hidden" value="' . $postID . '">
-		<button id = "replybutton" type="submit">Reply</button>
-	</form>
-	';
-	?>
-	<button id="sharebutton">Share</button>
 	</div>
 	
 
