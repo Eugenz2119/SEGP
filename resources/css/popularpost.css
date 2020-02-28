@@ -1,23 +1,17 @@
-.popposts
-{
-	position: fixed; 
-	right: 100px; 
-	top: 100px;
-}
-
 .post-wrapper
 {
 	height: 100%;
+	right: 20px; 
+	top: 100px;
+	position: fixed; 
+	width:20% ;
 }
 
 .poppreview
 {
-	right: 20px; 
 	background-color: white; 
 	padding: 5px;
-	width:20% ;
 	margin: 10px;
-	float: right;
 	clear: both;
 }
 
