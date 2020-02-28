@@ -73,16 +73,8 @@ if(isset($_SESSION["userID"])){
 			<a href="userprofile.php?userID=' . $userID . '">username</a> 
 			</div>
 	';
-}
-else{
-	echo '
-		<!--login-->
-		  <div style = "float: right; font-size: 30px;color: white;">
-			<a href="login.php">Login</a>
-		  </div>
-	';
-}
-
+	
+	//display profile image
 	if($imageID != NULL){
 		$sql="SELECT format FROM image WHERE imageID =" . $imageID;
 		$result = mysqli_query($conn, $sql);
@@ -98,6 +90,15 @@ else{
 			<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="width: 30px; height:30px; float: right;">
 		';
 	}
+}
+else{
+	echo '
+		<!--login-->
+		  <div style = "float: right; font-size: 30px;color: white;">
+			<a href="login.php">Login</a>
+		  </div>
+	';
+}
 
 mysqli_close($conn);
 ?> 
