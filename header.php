@@ -51,9 +51,12 @@ if(isset($_SESSION["userID"])){
 	<?php
 	if(isset($_SESSION["userID"])){
 		//profile and account settings buttons
+		$sql = "SELECT username FROM user WHERE userID=" . $userID;
+		$result = mysqli_query($conn, $sql);
+		$username = mysqli_fetch_assoc($result)['username'];
 		echo '
 		<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 35px;color: white;"></a>
-		<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 25px; color: white;">username</a> 
+		<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 25px; color: white;">' . $username . '</a> 
 		';
 		
 		//profile picture preview
