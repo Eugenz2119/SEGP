@@ -34,7 +34,7 @@ if(isset($_SESSION["userID"])){
 ?>
 
 <body>
-<div id="topbar" style="background-color: #73E600; height: 20%">
+<div id="topbar" style="background-color: #73E600; height:50px;">
 
 	<!-- search bar -->
 	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
@@ -96,8 +96,7 @@ if(isset($_SESSION["userID"])){
 		<div id="notifs" class="dropdown-content">
 			<a href="threadview.php">placeholder notification</a>
 		</div>
-	</div>
-	
+	</div>	
 </div>
 
 <script>
