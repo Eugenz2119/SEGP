@@ -1,13 +1,78 @@
-
-img {
- display: block;
- margin-left: auto;
- margin-right : auto;
-
+.settings{
+	background-color: white;
+	height: 700px; 
+	width : 1700px;
+	left : 100px; ; 
+	top: 150px; 
+	position: absolute;
 }
 
-#accountmanagement{
- display: block;
- margin-left: auto;
- margin-right : auto;
+.types{
+	width: 15%;
+	height:100% ; 
+	border:solid; 
+	border-right: none;
+	float: left;
+}
+
+.categories{
+	text-align: center; 
+	height: 8%; 
+}
+
+#general{
+	height: 5%; 
+	cursor: pointer;
+	background-color: #E1E1E1;
+}
+
+.gen{
+	text-align: center;
+}
+
+#privacy{
+	height: 5%; 
+	cursor: pointer;
+}
+.priv{
+	text-align: center;
+}
+
+
+.specifics{
+	left: 255px; 
+	position: absolute;
+	width:85%;
+	height:100%;
+	background-color: #E1E1E1;
+	border:solid;
+	border-left: none;
+}
+
+.cancelchanges{
+	position: absolute; 
+	bottom:3px; 
+	right: 115px; 
+	background-color: #73E600;
+	text-decoration: none;
+	color: white;
+}
+
+.savechanges{
+	position: absolute; 
+	bottom:3px; 
+	right: 3px; 
+	background-color: #73E600;
+	text-decoration: none;
+	color:white;
+}
+
+.logoutbtn{
+	position: absolute;
+	bottom:3px; 
+	font-size: 20px;
+	text-decoration: none;
+	background-color: #73E600;
+	color:white;
+	padding : 10px;
 }

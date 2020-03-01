@@ -36,7 +36,37 @@
 		echo '<meta http-equiv="Refresh" content="0; url=login.php" />';
 	}
 	
-	//profile picture
+	?>
+
+	<div class = "settings">
+		<div class = "types">
+			<h3 class="categories">setting categories</h3>
+
+			<div id="general" onclick="generalsetting()"style="background-color: #E1E1E1">
+				<h4 class="gen">General</h4>
+			</div>
+
+			<div id="privacy" onclick="privacysetting()">
+				<h4 class="priv">Privacy</h4>
+			</div>
+			<a class="logoutbtn" href="login.php">logout</a>
+		</div>
+
+		<div class = "specifics">
+			<div id = "generalsetting">
+				<p>EXAMPLE GENERAL SETTING</p>
+			</div>
+
+
+			<div id = "privacysetting" style="display: none;">
+				<p>EXAMPLE PRIVACY SETTING</p>
+			</div>
+		</div>
+
+		<a class="cancelchanges"href="#">Cancel</a>
+		<a class="savechanges"href="#">Save Changes</a>
+
+	<!--profile picture
 	$sql="SELECT imageID FROM user WHERE userID =" . $userID;
 	$result = mysqli_query($conn, $sql);
 	$imageID = mysqli_fetch_assoc($result)['imageID'];
@@ -55,16 +85,33 @@
 		<img src = "resources/placeholderimage.jpg" alt="user avatar" class="center" style="width: 250px; height:250px; border-style: solid;">
 		';
 	}
-	?>
+	?>-->
 
-	<!--account management -->
+	<!--account management 
 	<div id="accountmanagement"class="w3-container w3-padding-small w3-round-small" style="width: 250px;border-style: solid; text-align: center;">
 		<a href="login.php">logout</a><br>
 		<a href="#">change password</a><br>
 		<a href="#">change avatar</a>
-	</div>
+	</div>-->
+	
+</div>
+
+<script type="text/javascript">
+function generalsetting(){
+	document.getElementById("generalsetting").style.display = "block";
+	document.getElementById("privacysetting").style.display = "none";
+	document.getElementById("general").style.backgroundColor = "#E1E1E1";
+	document.getElementById("privacy").style.backgroundColor = "white";
+}	
+
+function privacysetting(){
+	document.getElementById("privacysetting").style.display = "block" ;
+	document.getElementById("generalsetting").style.display = "none"
+	document.getElementById("privacy").style.backgroundColor = "#E1E1E1";
+	document.getElementById("general").style.backgroundColor = "white";
+}
 
 
-
+</script>
 </body>
 </html>
