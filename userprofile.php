@@ -39,7 +39,7 @@ $result = mysqli_query($conn, $sql);
 $username = mysqli_fetch_assoc($result)['username'];
 
 echo '
-<div id="username"class="w3-container w3-round-small" style="position: absolute; top: 90px; right:-10px; width: 250px; height: 100px ; border-style: solid;">
+<div id="username"class="w3-container w3-round-small" style="background-color : white;position: absolute; top: 90px; right:-10px; width: 250px; height: 100px ; border-style: solid;">
 	<h3>' . $username .'</h3>
 </div>
 ';
@@ -89,7 +89,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white;" >
 		
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<h6>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></h6>

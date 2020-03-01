@@ -34,16 +34,16 @@ if(isset($_SESSION["userID"])){
 ?>
 
 <body>
-<div id="topbar" style="background-color: #73E600; height:50px;">
+<div id="topbar" style="background-color: #73E600; height:55px;">
 
 	<!-- search bar -->
-	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 0px; position: absolute;">
+	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 2px; position: absolute;">
 
 	<!-- all subforums button -->
 	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
 
 	<!-- create thread button for testing -->
-	<a href="threadcreate.php" style = "position: absolute; left: 600px; font-size: 20px; color: white;">Create Thread</a>
+	<a href="threadcreate.php" style = "position: absolute; left: 600px;top: 10px; font-size: 25px; color: white;">Create Thread</a>
 
 	<!-- homepage shortcut -->
 	<a href="homepage.php" style= "font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
@@ -52,8 +52,8 @@ if(isset($_SESSION["userID"])){
 	if(isset($_SESSION["userID"])){
 		//profile and account settings buttons
 		echo '
-		<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 30px;color: white;"></a>
-		<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 20px; color: white;">username</a> 
+		<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 35px;color: white;"></a>
+		<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 25px; color: white;">username</a> 
 		';
 		
 		//profile picture preview
@@ -69,12 +69,12 @@ if(isset($_SESSION["userID"])){
 			$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 			
 			echo '
-			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 30px; height:30px; float: right;">
+			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 55px; height:55px; float: right;">
 			';
 		}
 		else{
 			echo '
-			<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="width: 30px; height:30px; float: right;">
+			<img src = "resources/placeholderimage.jpg" alt= "avatarpreview" style="width: 55px; height:55px; float: right;">
 			';
 		}
 	}
@@ -91,12 +91,10 @@ if(isset($_SESSION["userID"])){
 	?> 
 
 	<!-- notification -->
-	<div class="dropdown">
-		<button onclick="drop()" class="dropbtn" style= "background-color: #73E600;"><i class="fa fa-bell"></i></button>
+	<button onclick="drop()" class="dropbtn" style= "background-color: #73E600;float:right;"><i class="fa fa-bell"></i></button>
 		<div id="notifs" class="dropdown-content">
 			<a href="threadview.php">placeholder notification</a>
 		</div>
-	</div>	
 </div>
 
 <script>
