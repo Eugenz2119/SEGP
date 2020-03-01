@@ -57,7 +57,7 @@ while($row = mysqli_fetch_array($result)) {
 	
 	echo '
 		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white;" >
-			<a>in : <a href ="cropsumforum.php">PLACEHOLDER CROP NAME</a>
+			<a>in : <a href ="cropsubforum.php">PLACEHOLDER CROP NAME</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<div style = "font-size : 13px;">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a>

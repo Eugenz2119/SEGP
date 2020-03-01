@@ -16,7 +16,7 @@
 
 </div>
 
-<div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large" style="width:65%" >
+<div id = "threadpreview"class ="w3-panel w3-border w3-round-small w3-padding-large" style="width:65%; background-color: white;" >
 	<h1>placeholder thread title</h1>
 	<h6>by : <a href ="otherusers.php">placeholder user</h6>
 	<p> paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph.paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </p>
