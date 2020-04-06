@@ -40,7 +40,7 @@
 
 	<div class = "settings">
 		<div class = "types">
-			<h3 class="categories">setting categories</h3>
+			<h3 class="categories">Settings Categories</h3>
 
 			<div id="general" onclick="generalsetting()"style="background-color: #E1E1E1">
 				<h4 class="gen">General</h4>
