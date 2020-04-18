@@ -42,9 +42,6 @@ if(isset($_SESSION["userID"])){
 	<!-- all subforums button -->
 	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
 
-	<!-- create thread button for testing -->
-	<a href="threadcreate.php" style = "position: absolute; left: 600px;top: 10px; font-size: 25px; color: white;">Create Thread</a>
-
 	<!-- homepage shortcut -->
 	<a href="homepage.php" style= "font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
 

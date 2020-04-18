@@ -132,12 +132,12 @@ if(isset($_POST['SUBMIT'])){
 	$textDone = 0;
 	if(strlen($title) > 0 && strlen($content) > 0){
 		if($imageDone == 0){
-			$AddQuery = "INSERT INTO post (userID, title, text, imageID, postTime)
-						 VALUES ('$userID', '$title', '$content', NULL, '$time')";
+			$AddQuery = "INSERT INTO post (userID, cropID, title, text, imageID, postTime)
+						 VALUES ('$userID', '$cropID', '$title', '$content', NULL, '$time')";
 		}
 		else{
-			$AddQuery = "INSERT INTO post (userID, title, text, imageID, postTime)
-						 VALUES ('$userID', '$title', '$content', '$imageID', '$time')";
+			$AddQuery = "INSERT INTO post (userID, cropID, title, text, imageID, postTime)
+						 VALUES ('$userID', '$cropID', '$title', '$content', '$imageID', '$time')";
 		}
 	}
 	else{
