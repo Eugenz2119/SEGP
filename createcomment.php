@@ -52,10 +52,7 @@
 		$commentID = $_GET['commentReplyID'];
 	}
 
-	if($replyType == "post"){
-		$defaultText = "";
-	}
-	else{//replyType == "comment"	
+	if($replyType == "comment"){
 		$sql = "SELECT userID, text FROM comment WHERE commentID=" . $commentID;
 		$result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($result);
@@ -68,13 +65,20 @@
 		
 		//remove quoted text from the comment being replied to
 		if(strrpos($txt, "[/QUOTE]") != FALSE){
-			$quotedText = substr($txt, strrpos($txt, "[/QUOTE]") + strlen("[/QUOTE]") +2); //+2 for \n
+			$quotedText = substr($txt, strrpos($txt, "[/QUOTE]") + strlen("[/QUOTE]") +1); //+2 for \n
 		}
 		else{
 			$quotedText = $txt;
 		}
 		
-		$defaultText = "[QUOTE]by : " . $quoteusername . "\n" . $quotedText . "[/QUOTE]\n";
+		$prefix = "[QUOTE]by : " . $quoteusername . "\n" . $quotedText . "[/QUOTE]\n";
+		
+		echo '
+		<!--div for quoted comment-->
+		<div class="quote" style = "width: 60%; height: 20%; background-color: white;">
+			<a>' . $quotedText . '</a>
+		</div>
+		';
 	}
 
 	mysqli_close($conn);
@@ -86,7 +90,7 @@
 			<?php
 			echo '
 			<!--text field-->
-			<textarea name="threadcomment" placeholder="New Comment..." rows=6 cols=200>' . $defaultText . '</textarea>
+			<textarea name="threadcomment" placeholder="New Comment..." rows=6 cols=200></textarea>
 			';
 			?>
 			
@@ -118,9 +122,10 @@ if(isset($_POST["threadcomment"])){
 		//echo "DB CONNECTED";
 	}
 	
-	$content = $_POST["threadcomment"];
+	$commText = $_POST["threadcomment"];
+	$content = $prefix . $commText;
 
-	if(strlen($content) > 0){
+	if(strlen($commText) > 0){
 		//generate current time
 		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
 		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
