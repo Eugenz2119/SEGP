@@ -122,8 +122,13 @@ if(isset($_POST["threadcomment"])){
 		//echo "DB CONNECTED";
 	}
 	
+	//new text entered by user
 	$commText = $_POST["threadcomment"];
+	
 	$content = $prefix . $commText;
+	
+	//remove errors from inverted comma(s)
+	$content = str_replace("'", "\'", $commText);
 
 	if(strlen($commText) > 0){
 		//generate current time
