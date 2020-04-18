@@ -40,10 +40,11 @@ else{
 
 $postID = $_GET["postID"];
 
-$sql = "SELECT title, text, userID, imageID FROM post WHERE postID='$postID'";
+$sql = "SELECT cropID, title, text, userID, imageID FROM post WHERE postID='$postID'";
 $result = mysqli_query($conn, $sql);
 
 $post = mysqli_fetch_assoc($result);
+$cropID = $post['cropID'];
 $title = $post['title'];
 $content = $post['text'];
 
@@ -61,7 +62,18 @@ $sql = "SELECT imageID FROM user WHERE userID=" . $authorID;
 $result = mysqli_query($conn, $sql);
 $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 
+//crop name
+$sql = "SELECT cropname FROM crop WHERE cropID=" . $cropID;
+$result = mysqli_query($conn, $sql);
+$cropname = mysqli_fetch_assoc($result)['cropname'];
+
 ?>
+	<div>
+	<?php
+	echo '
+		<a href = "cropsubforum.php?cropID='. $cropID . '">' . $cropname . '</a><br>
+	';
+	?>
 	
 	<div class= "topbuttons">
 	<!--reply-->
@@ -216,28 +228,11 @@ $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 		';
 		
 	}
-	mysqli_close($conn);
 	?>
 
 
 
 <?php
-//Connection details
-	$servername = "localhost";
-	$dbUsername 	= "hcyko1_admin";
-	$dbPassword 	= "3QXBfTmKAccZ0BNO";
-	$dbname 	= "hcyko1_agritalk";
-
-// Create connection
-$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
-// Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
-//debug
-else{
-	//echo "DB CONNECTED";
-}
 /*
 //edit comment
 if(isset($_POST["editbutton"])){
