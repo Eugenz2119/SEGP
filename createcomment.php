@@ -10,7 +10,7 @@
 
 <body style="background-color: #E1E1E1";>
 	<?php include 'header.php';?>
-	<?php include 'cropinfo.php';?>
+	<!--<?php include 'cropinfo.php';?>-->
 	
 	<?php
 	//login check
@@ -23,9 +23,9 @@
 
 	//Connection details
 	$servername = "localhost";
-	$dbUsername 	= "hcyko1";
+	$dbUsername 	= "hcyko1_admin";
 	$dbPassword 	= "3QXBfTmKAccZ0BNO";
-	$dbname 	= "agritalk-wip";
+	$dbname 	= "hcyko1_agritalk";
 
 	// Create connection
 	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
@@ -56,9 +56,15 @@
 		$defaultText = "";
 	}
 	else{//replyType == "comment"	
-		$sql = "SELECT text FROM comment WHERE commentID=" . $commentID;
+		$sql = "SELECT userID, text FROM comment WHERE commentID=" . $commentID;
 		$result = mysqli_query($conn, $sql);
-		$txt = mysqli_fetch_assoc($result)['text'];
+		$row = mysqli_fetch_assoc($result);
+		$quoteuserID = $row['userID'];
+		$txt = $row['text'];
+		$sql = "SELECT username FROM user WHERE userID=" . $quoteuserID;
+		$result = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_assoc($result);
+		$quoteusername = $row['username'];
 		
 		//remove quoted text from the comment being replied to
 		if(strrpos($txt, "[/QUOTE]") != FALSE){
@@ -68,7 +74,7 @@
 			$quotedText = $txt;
 		}
 		
-		$defaultText = "[QUOTE]" . $quotedText . "[/QUOTE]\n";
+		$defaultText = "[QUOTE]by : " . $quoteusername . "\n" . $quotedText . "[/QUOTE]\n";
 	}
 
 	mysqli_close($conn);
@@ -97,9 +103,9 @@ if(isset($_POST["threadcomment"])){
 	
 	//Connection details
 	$servername = "localhost";
-	$dbUsername 	= "hcyko1";
+	$dbUsername 	= "hcyko1_admin";
 	$dbPassword 	= "3QXBfTmKAccZ0BNO";
-	$dbname 	= "agritalk-wip";
+	$dbname 	= "hcyko1_agritalk";
 
 	// Create connection
 	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);

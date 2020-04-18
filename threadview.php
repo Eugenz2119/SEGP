@@ -16,11 +16,10 @@
 include 'header.php';
 include 'popularpost.php';
 //Connection details
-$servername = "localhost";
-$dbUsername 	= "hcyko1";
-$dbPassword 	= "3QXBfTmKAccZ0BNO";
-$dbname 	= "agritalk-wip";
-
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1_admin";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "hcyko1_agritalk";
 // Create connection
 $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
 // Check connection
@@ -224,10 +223,10 @@ $profileimageID = mysqli_fetch_assoc($result)['imageID'];
 
 <?php
 //Connection details
-$servername = "localhost";
-$dbUsername 	= "hcyko1";
-$dbPassword 	= "3QXBfTmKAccZ0BNO";
-$dbname 	= "agritalk-wip";
+	$servername = "localhost";
+	$dbUsername 	= "hcyko1_admin";
+	$dbPassword 	= "3QXBfTmKAccZ0BNO";
+	$dbname 	= "hcyko1_agritalk";
 
 // Create connection
 $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);

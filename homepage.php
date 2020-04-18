@@ -19,9 +19,9 @@ $threadLim = 1;
 
 //Connection details
 $servername = "localhost";
-$dbUsername 	= "hcyko1";
+$dbUsername 	= "hcyko1_admin";
 $dbPassword 	= "3QXBfTmKAccZ0BNO";
-$dbname 	= "agritalk-wip";
+$dbname 	= "hcyko1_agritalk";
 
 // Create connection
 $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
