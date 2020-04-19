@@ -87,6 +87,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$cropname = mysqli_fetch_assoc(mysqli_query($conn, $query))['cropname'];
 	$title = $row['title'];
 	$posterID = $row['userID'];
+	$commentCount = $row['commentCount'];
 	$query = "SELECT username FROM user WHERE userID=" . $posterID;
 	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
 	$content = $row['text'];
@@ -95,7 +96,10 @@ while($row = mysqli_fetch_assoc($result)) {
 		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white;" >
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
-			<h6>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></h6>
+			<div style = "font-size : 13px;">
+				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
+				<a>' . $commentCount . ' comment(s)</a>
+			</div>
 			<p>' . $content . '</p>
 		</div>
 	';

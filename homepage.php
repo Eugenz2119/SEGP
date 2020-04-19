@@ -15,7 +15,7 @@
 <body style="background-color: #E1E1E1";>
 	
 <?php
-$threadLim = 1;
+$threadLim = 5;
 
 //Connection details
 $servername = "localhost";
@@ -54,6 +54,7 @@ while($row = mysqli_fetch_array($result)) {
 	$cropname = mysqli_fetch_assoc(mysqli_query($conn, $query))['cropname'];
 	$title = $row['title'];
 	$posterID = $row['userID'];
+	$commentCount = $row['commentCount'];
 	$query = "SELECT username FROM user WHERE userID=" . $posterID;
 	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
 	$content = $row['text'];
@@ -63,7 +64,8 @@ while($row = mysqli_fetch_array($result)) {
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<div style = "font-size : 13px;">
-				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a>
+				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
+				<a>' . $commentCount . ' comment(s)</a>
 			</div>
 			<p>' . $content . '</p>
 		</div>
