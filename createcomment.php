@@ -150,6 +150,13 @@ if(isset($_POST["threadcomment"])){
 			$AddQuery = "INSERT INTO post_comment (postID, commentID)
 						 VALUES ('$postID', '$commentID')";
 			if (mysqli_query($conn, $AddQuery)) {
+				//increment comment count
+				$sql = 'SELECT commentCount FROM post WHERE postID=' . $postID;
+				$result = mysqli_query($conn, $sql);
+				$commentCount = mysqli_fetch_assoc($result)['commentCount'];
+				$sql = 'UPDATE post SET commentCount=' . ($commentCount + 1) . ' WHERE postID=' . $postID;
+				mysqli_query($conn, $sql);
+				
 				echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
 			} else {
 				echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
