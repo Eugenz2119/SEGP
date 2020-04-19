@@ -252,7 +252,9 @@ if(isset($_POST["deletebutton"])){
 			$result = mysqli_query($conn, $sql);
 			$commentCount = mysqli_fetch_assoc($result)['commentCount'];
 			$sql = 'UPDATE post SET commentCount=' . ($commentCount - 1) . ' WHERE postID=' . $postID;
-			mysqli_query($conn, $sql);
+			if(!mysqli_query($conn, $sql)){
+				echo "Error: " . $AddQuery . "<br>" . mysqli_error($conn);
+			}
 			
 			echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
 		} else {

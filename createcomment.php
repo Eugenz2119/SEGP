@@ -65,7 +65,7 @@
 		
 		//remove quoted text from the comment being replied to
 		if(strrpos($txt, "[/QUOTE]") != FALSE){
-			$quotedText = substr($txt, strrpos($txt, "[/QUOTE]") + strlen("[/QUOTE]") +1); //+2 for \n
+			$quotedText = substr($txt, strrpos($txt, "[/QUOTE]") + strlen("[/QUOTE]") +1); //+1 for \n
 		}
 		else{
 			$quotedText = $txt;
@@ -79,6 +79,9 @@
 			<a>' . $quotedText . '</a>
 		</div>
 		';
+	}
+	else{
+		$prefix = "";
 	}
 
 	mysqli_close($conn);
@@ -124,18 +127,16 @@ if(isset($_POST["threadcomment"])){
 	
 	//new text entered by user
 	$commText = $_POST["threadcomment"];
+
+	//remove errors from inverted comma(s)
+	$commText = str_replace("'", "\'", $commText);
 	
 	$content = $prefix . $commText;
 	
-	//remove errors from inverted comma(s)
-	$content = str_replace("'", "\'", $commText);
-
 	if(strlen($commText) > 0){
 		//generate current time
 		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
 		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
-		
-		
 		
 		//add to comment table
 		$AddQuery = "INSERT INTO comment (postID, userID, text, commentTime)
@@ -155,7 +156,15 @@ if(isset($_POST["threadcomment"])){
 				$result = mysqli_query($conn, $sql);
 				$commentCount = mysqli_fetch_assoc($result)['commentCount'];
 				$sql = 'UPDATE post SET commentCount=' . ($commentCount + 1) . ' WHERE postID=' . $postID;
-				mysqli_query($conn, $sql);
+				if(!mysqli_query($conn, $sql)){
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+				
+				//update lastCommentTime of post
+				$sql = "UPDATE post SET lastCommentTime='$time' WHERE postID=" . $postID;
+				if(!mysqli_query($conn, $sql)){
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
 				
 				echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
 			} else {

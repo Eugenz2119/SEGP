@@ -131,12 +131,12 @@ if(isset($_POST['SUBMIT'])){
 	$textDone = 0;
 	if(strlen($title) > 0 && strlen($content) > 0){
 		if($imageDone == 0){
-			$AddQuery = "INSERT INTO post (userID, cropID, title, text, imageID, postTime)
-						 VALUES ('$userID', '$cropID', '$title', '$content', NULL, '$time')";
+			$AddQuery = "INSERT INTO post (userID, cropID, title, text, imageID, postTime, lastCommentTime)
+						 VALUES ('$userID', '$cropID', '$title', '$content', NULL, '$time', '$time')";
 		}
 		else{
-			$AddQuery = "INSERT INTO post (userID, cropID, title, text, imageID, postTime)
-						 VALUES ('$userID', '$cropID', '$title', '$content', '$imageID', '$time')";
+			$AddQuery = "INSERT INTO post (userID, cropID, title, text, imageID, postTime, lastCommentTime)
+						 VALUES ('$userID', '$cropID', '$title', '$content', '$imageID', '$time', '$time')";
 		}
 	}
 	else{
@@ -158,7 +158,7 @@ if(isset($_POST['SUBMIT'])){
 	
 	
 	
-	if($textDone == 1 && ($fileSelected == 0 || $imageDone == 1)){ //go to thread created
+	if($textDone == 1 && ($fileSelected == 0 || $imageDone == 1)){ //go to thread created		
 		echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
 	}
 	else if($textDone == 0 && $imageDone == 1){ //text upload failed
