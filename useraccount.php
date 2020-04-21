@@ -74,7 +74,8 @@ echo '
 				<form method="post" enctype="multipart/form-data">
 					<p style="padding-left: 10px; font-size: 18px;">
 					Change Profile Picture <br/>
-					<input type="file" name="profilepic" id="profilepic"><br/><br/>
+					<input type="file" name="profilepic" id="profilepic"><br/>
+					<button name="deletepic" type="submit" onclick="return confirm(\'Confirm delete?\')">Delete Profile Picture</button><br/><br/>
 					
 					Change Age(?) : <input type="integer" name="Age" value="' . $Age . '"><br/>
 					Change Email : <input type="text" name="Email" value="' . $Email . '"><br/>
@@ -261,7 +262,7 @@ if(isset($_POST['gensavebtn'])){
 				$result = mysqli_query($conn, "SELECT * FROM image WHERE imageID=$currImageID");
 				$prevImg = mysqli_fetch_assoc($result);
 				$delete_dir = "uploads/";
-				$delete_file = $target_dir . ($prevImg['imageID']) . '.' . ($prevImg['format']);
+				$delete_file = $delete_dir . ($prevImg['imageID']) . '.' . ($prevImg['format']);
 				unlink($delete_file);
 				
 				$DeleteQuery = "DELETE FROM image WHERE imageID=$currImageID";
@@ -284,6 +285,25 @@ if(isset($_POST['gensavebtn'])){
 		}
 	}
 }
+if(isset($_POST['deletepic'])){
+	if($currImageID != NULL){
+		$sql = "UPDATE user SET imageID=NULL WHERE userID=$userID";
+		mysqli_query($conn, $sql);
+		
+		$result = mysqli_query($conn, "SELECT * FROM image WHERE imageID=$currImageID");
+		$prevImg = mysqli_fetch_assoc($result);
+		$delete_dir = "uploads/";
+		$delete_file = $delete_dir . ($prevImg['imageID']) . '.' . ($prevImg['format']);
+		unlink($delete_file);
+		
+		$DeleteQuery = "DELETE FROM image WHERE imageID=$currImageID";
+		if(!mysqli_query($conn, $DeleteQuery)){
+			echo "Error: " . $DeleteQuery . "<br>" . mysqli_error($conn);
+		}
+	}
+	echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
+}
+
 if(isset($_POST['cancelbtn'])){
 	echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
 }
