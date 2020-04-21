@@ -91,13 +91,17 @@ echo '
 				</form>
 			</div>
 			
-			<div id = "passwordsetting"  style="display: none;>
+';
+?>
+			
+			<div id = "passwordsetting"  style="display: none;">
 				<form method="post">
 					<p style="padding-left: 10px; font-size: 18px;">
 					
 					Change Password <br/>
 					Old Password 	: <input type="password" name="oldpw"><br/>
-					New Password 	: <input type="password" name="newpw"><br/><br/>
+					New Password 	: <input type="password" name="newpw"><br/>
+					Confirm New Password 	: <input type="password" name="cfmpw"><br/><br/>
 					</p>
 					
 					<input type="submit" class="savechanges" value="Save Changes" name="passsavebtn">
@@ -115,39 +119,8 @@ echo '
 					Show Phone Number <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
 				</p>
 			</div>
-		</div>
-
-';
-?>
-
-	<!--profile picture
-	$sql="SELECT imageID FROM user WHERE userID =" . $userID;
-	$result = mysqli_query($conn, $sql);
-	$imageID = mysqli_fetch_assoc($result)['imageID'];
-	if($imageID != NULL){
-		$sql="SELECT format FROM image WHERE imageID =" . $imageID;
-		$result = mysqli_query($conn, $sql);
-		$imageFormat = mysqli_fetch_assoc($result)['format'];
-		$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
-	
-		echo '
-		<img src = "' . $image_dir . '" alt="user avatar" class="center" style="width: 250px; height:250px; border-style: solid;">
-		';
-	}
-	else{
-		echo '
-		<img src = "resources/placeholderimage.jpg" alt="user avatar" class="center" style="width: 250px; height:250px; border-style: solid;">
-		';
-	}
-	?>-->
-
-	<!--account management 
-	<div id="accountmanagement"class="w3-container w3-padding-small w3-round-small" style="width: 250px;border-style: solid; text-align: center;">
-		<a href="login.php">logout</a><br>
-		<a href="#">change password</a><br>
-		<a href="#">change avatar</a>
-	</div>-->
-	
+			
+		</div>	
 	</div>
 	
 <?php
@@ -285,6 +258,7 @@ if(isset($_POST['gensavebtn'])){
 		}
 	}
 }
+
 if(isset($_POST['deletepic'])){
 	if($currImageID != NULL){
 		$sql = "UPDATE user SET imageID=NULL WHERE userID=$userID";
@@ -303,6 +277,49 @@ if(isset($_POST['deletepic'])){
 	}
 	echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
 }
+
+if(isset($_POST['passsavebtn'])){
+	$oldpw = $_POST['oldpw'];
+	$newpw = $_POST['newpw'];
+	$cfmpw = $_POST['cfmpw'];
+	
+	//fetch current password
+	$sql = "SELECT password FROM user WHERE userID=$userID";
+	$result = mysqli_query($conn, $sql);
+	$currpw = mysqli_fetch_assoc($result)['password'];
+	
+	//compare current password and oldpw entered
+	if($oldpw == $currpw){
+		//compare both new passwords
+		if($cfmpw == $newpw){
+			//update password
+			$sql = "UPDATE user SET password='$newpw' WHERE userID=$userID";
+			if(mysqli_query($conn, $sql)){
+				echo '
+				<script language="javascript">
+					alert("Password updated successfully")
+				</script>
+				';
+				echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
+			}
+		}
+		else{
+			echo '
+			<script language="javascript">
+				alert("New passwords do not match")
+			</script>
+			';
+		}
+	}
+	else{
+		echo '
+		<script language="javascript">
+			alert("Old password incorrect")
+		</script>
+		';
+	}
+}
+		
 
 if(isset($_POST['cancelbtn'])){
 	echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
