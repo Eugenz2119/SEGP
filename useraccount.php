@@ -57,11 +57,15 @@
 				<p style="padding-left: 10px; font-size: 18px;">
 				Change Password <br/>
 				Old Password 	: <input type="password" name="oldpw"><br/>
-				New Password 	: <input type="password" name="newpw">
-				</p>
-				<p style="padding-left:10px; font-size: 18px;">
+				New Password 	: <input type="password" name="newpw"><br/><br/>
 				Change Profile Picture <br/>
-				<input type="file" name="profilepic" id="profilepic">
+				<input type="file" name="profilepic" id="profilepic"><br/><br/>
+				Change Age(?) : <input type="integer" name="Age"><br/>
+				Change Email : <input type="text" name="Email"><br/>
+				Change Institution : <input type="text" name= "Institution"><br/>
+				Change Occupation : <input type="text" name= "Occupation"><br/>
+				Change Country : <input type="text" name= "Country"><br/>
+				Change Phone Number : <input type="integer" name= "PhoneNumber"><br/>
 				</p>
 			</div>
 
