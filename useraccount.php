@@ -110,14 +110,31 @@ echo '
 			</div>
 
 			<div id = "privacysetting" style="display: none;">
-				<p style ="font-size: 25px; padding-left:10px;">
-					Show Age <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
-					Show Email <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
-					Show Institution <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
-					Show Occupation <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
-					Show Country <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
-					Show Phone Number <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
-				</p>
+				<form method="post">
+					<p style ="font-size: 25px; padding-left:10px;">
+					
+					<input type="hidden" name="age" value="off">
+					Show Age <label class="switch"><input type="checkbox" name="age" checked><span class="slider round"></span></label> <br/><br/>
+					
+					<input type="hidden" name="email" value="off">
+					Show Email <label class="switch"><input type="checkbox" name="email" checked><span class="slider round"></span></label> <br/><br/>
+					
+					<input type="hidden" name="institution" value="off">
+					Show Institution <label class="switch"><input type="checkbox" name="institution" checked><span class="slider round"></span></label> <br/><br/>
+					
+					<input type="hidden" name="occupation" value="off">
+					Show Occupation <label class="switch"><input type="checkbox" name="occupation" checked><span class="slider round"></span></label> <br/><br/>
+					
+					<input type="hidden" name="country" value="off">
+					Show Country <label class="switch"><input type="checkbox" name="country" checked><span class="slider round"></span></label> <br/><br/>
+					
+					<input type="hidden" name="phonenum" value="off">
+					Show Phone Number <label class="switch"><input type="checkbox" name="phonenum" checked><span class="slider round"></span></label>
+					</p>
+					
+					<input type="submit" class="savechanges" value="Save Changes" name="privsavebtn">
+					<input type="submit" class="cancelchanges" value="Cancel" name="cancelbtn">
+				</form>
 			</div>
 			
 		</div>	
@@ -337,7 +354,70 @@ if(isset($_POST['passsavebtn'])){
 		';
 	}
 }
-		
+
+if(isset($_POST['privsavebtn'])){
+	$Age = $_POST['age'];
+	$Email = $_POST['email'];
+	$Institution = $_POST['institution'];
+	$Occupation = $_POST['occupation'];
+	$Country = $_POST['country'];
+	$PhoneNumber = $_POST['phonenum'];
+	
+	$permissions = "";
+	if($Age == "on"){
+		$permissions = $permissions . "1";
+	}
+	else{
+		$permissions = $permissions . "0";
+	}
+	
+	if($Email == "on"){
+		$permissions = $permissions . "1";
+	}
+	else{
+		$permissions = $permissions . "0";
+	}
+	
+	if($Institution == "on"){
+		$permissions = $permissions . "1";
+	}
+	else{
+		$permissions = $permissions . "0";
+	}
+	
+	if($Occupation == "on"){
+		$permissions = $permissions . "1";
+	}
+	else{
+		$permissions = $permissions . "0";
+	}
+	
+	if($Country == "on"){
+		$permissions = $permissions . "1";
+	}
+	else{
+		$permissions = $permissions . "0";
+	}
+	
+	if($PhoneNumber == "on"){
+		$permissions = $permissions . "1";
+	}
+	else{
+		$permissions = $permissions . "0";
+	}
+	
+	$sql = "UPDATE user SET permissions=$permissions WHERE userID=$userID";
+	if (mysqli_query($conn, $sql)) {
+		echo '
+		<script language="javascript">
+			alert("Privacy settings updated successfully")
+		</script>
+		';
+		echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
 
 if(isset($_POST['cancelbtn'])){
 	echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
