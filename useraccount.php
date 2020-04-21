@@ -13,9 +13,9 @@
 	<?php
 	//Connection details
 	$servername = "localhost";
-	$dbUsername 	= "hcyko1_admin";
+	$dbUsername 	= "hcyko1";
 	$dbPassword 	= "3QXBfTmKAccZ0BNO";
-	$dbname 	= "hcyko1_agritalk";
+	$dbname 	= "agritalk-wip";
 
 	// Create connection
 	$conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
@@ -54,12 +54,26 @@
 
 		<div class = "specifics">
 			<div id = "generalsetting">
-				<p>EXAMPLE GENERAL SETTING</p>
+				<p style="padding-left: 10px; font-size: 18px;">
+				Change Password <br/>
+				Old Password 	: <input type="password" name="oldpw"><br/>
+				New Password 	: <input type="password" name="newpw">
+				</p>
+				<p style="padding-left:10px; font-size: 18px;">
+				Change Profile Picture <br/>
+				<input type="file" name="profilepic" id="profilepic">
+				</p>
 			</div>
 
 
 			<div id = "privacysetting" style="display: none;">
-				<p>EXAMPLE PRIVACY SETTING</p>
+				<p style ="font-size: 25px; padding-left:10px;">
+					Show Age <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
+					Show Email <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
+					Show Institution <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
+					Show Occupation <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
+					Show Country <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> <br/><br/>
+					Show Phone Number <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label> </p>
 			</div>
 		</div>
 
