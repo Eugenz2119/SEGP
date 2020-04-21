@@ -45,6 +45,7 @@
 	$Occupation = $row['occupation'];
 	$Country = $row['country'];
 	$PhoneNumber = $row['phonenum'];
+	$currImageID = $row['imageID'];
 	
 	?>
 
@@ -70,7 +71,7 @@
 <?php
 echo '
 			<div id = "generalsetting">
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
 					<p style="padding-left: 10px; font-size: 18px;">
 					Change Profile Picture <br/>
 					<input type="file" name="profilepic" id="profilepic"><br/><br/>
@@ -179,22 +180,107 @@ if(isset($_POST['gensavebtn'])){
 	$PhoneNumber = $_POST['PhoneNumber'];
 	
 	if($completeField == 2){
-		$sql = "UPDATE user SET 
+		$UpdateQuery = "UPDATE user SET 
 		age=$Age, 
 		email='$Email', 
 		institution='$Institution', 
 		occupation='$Occupation', 
 		country='$Country', 
 		phonenum='$PhoneNumber' 
-		WHERE userID=$userID";
+		WHERE userID=$userID
+		";
 		
-		if (mysqli_query($conn, $sql)) {
+		//Profile Picture
+		if($_FILES["profilepic"]["name"] == ''){ //no file uploaded
+			$fileSelected = 0;
+			echo "notselected";
+		}
+		else{
+			//generate current time
+			$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+			$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+			
+			$imageDone = 0;
+			$fileSelected = 1;
+			$uploadOk = 1;;
+			$imageFileType = strtolower(pathinfo($_FILES["profilepic"]["name"],PATHINFO_EXTENSION));
+			
+			// Check if image file is a actual image or fake image
+			$check = getimagesize($_FILES["profilepic"]["tmp_name"]);
+			if($check !== false) {
+				echo "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+			// Check file size
+			if ($_FILES["profilepic"]["size"] > 500000) {
+				echo "Sorry, your file is too large.";
+				$uploadOk = 0;
+			}
+			// Allow certain file formats
+			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif" ) {
+				echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				$uploadOk = 0;
+			}
+			// Check if $uploadOk is set to 0 by an error
+			if ($uploadOk == 0) {
+				echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
+			} else {
+				//create record in image table
+				$ImageQuery = "INSERT INTO image (format, userID, uploadTime)
+							 VALUES ('$imageFileType', '$userID' , '$time')";
+				if(!mysqli_query($conn, $ImageQuery)){
+					$imageDone = 0;
+				}
+				$sql = "SELECT imageID FROM image WHERE userID='$userID' AND uploadTime='$time'";
+				$result = mysqli_query($conn, $sql);
+				$imageID = mysqli_fetch_assoc($result)['imageID'];
+				
+				//image storage location
+				$target_dir = "uploads/";
+				$target_file = $target_dir . $imageID . '.' . $imageFileType;
+				
+				if (move_uploaded_file($_FILES["profilepic"]["tmp_name"], $target_file)) {
+					$imageDone = 1;
+					echo "The file ". basename($_FILES["profilepic"]["name"]). " has been uploaded.";
+				} else {
+					echo "Sorry, there was an error uploading your file.";
+				}
+			}
+		}
+		if($fileSelected == 1 && $imageDone == 1){
+			$sql = "UPDATE user SET imageID=$imageID WHERE userID=$userID";
+			mysqli_query($conn, $sql);
+			
+			if($currImageID != NULL){
+				//Delete previous picture
+				$result = mysqli_query($conn, "SELECT * FROM image WHERE imageID=$currImageID");
+				$prevImg = mysqli_fetch_assoc($result);
+				$delete_dir = "uploads/";
+				$delete_file = $target_dir . ($prevImg['imageID']) . '.' . ($prevImg['format']);
+				unlink($delete_file);
+				
+				$DeleteQuery = "DELETE FROM image WHERE imageID=$currImageID";
+				if(!mysqli_query($conn, $DeleteQuery)){
+					echo "Error: " . $DeleteQuery . "<br>" . mysqli_error($conn);
+				}
+			}
+		}
+		
+		
+		if (mysqli_query($conn, $UpdateQuery)) {
 			echo '
 			<script language="javascript">
 				alert("Account details updated successfully")
 			</script>
 			';
 			echo '<meta http-equiv="Refresh" content="0; url=useraccount.php" />';
+		} else {
+			echo "Error: " . $UpdateQuery . "<br>" . mysqli_error($conn);
 		}
 	}
 }
