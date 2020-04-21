@@ -126,6 +126,7 @@ echo '
 <?php
 if(isset($_POST['gensavebtn'])){
 	$completeField = 0;
+	
 	$Age = $_POST['Age'];
 	if(strlen($Age) != 0){
 		$completeField += 1;
@@ -137,17 +138,34 @@ if(isset($_POST['gensavebtn'])){
 		</script>
 		';
 	}
+	
 	$Email = $_POST['Email'];
+	//check if email already exist
+	$sql = "SELECT userID, COUNT(userID) FROM user WHERE email='$Email'";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
 	if(strlen($Email) != 0){
-		$completeField += 1;
+		if($row['COUNT(userID)'] != 0 && $row['userID'] != $userID){
+			echo '
+			<script language="javascript">
+				alert("Email already in use")
+			</script>
+			';
+		}
+		else{
+			$completeField += 1;
+			echo 'email complete';
+			echo '<br>';
+		}
 	}
 	else{
 		echo '
 		<script language="javascript">
-			alert("Email cannot be empty")
+			alert("Email cannot be blank")
 		</script>
 		';
 	}
+	
 	$Institution = $_POST['Institution'];
 	$Occupation = $_POST['Occupation'];
 	$Country = $_POST['Country'];

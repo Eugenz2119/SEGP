@@ -110,20 +110,29 @@ if(isset($_POST['submit'])){
 	//Email
 	if(isset($_POST['Email'])){
 		$Email = $_POST['Email'];
-		//check if username already exist
+		//check if email already exist
 		$sql = "SELECT COUNT(userID) FROM user WHERE email='$Email'";
 		$result = mysqli_query($conn, $sql);
-		if(mysqli_fetch_assoc($result)['COUNT(userID)'] != 0){
-			echo '
-			<script language="javascript">
-				alert("Email already in use")
-			</script>
-			';
+		if(strlen($Email) != 0){
+			if(mysqli_fetch_assoc($result)['COUNT(userID)'] != 0){
+				echo '
+				<script language="javascript">
+					alert("Email already in use")
+				</script>
+				';
+			}
+			else{
+				$completeField += 1;
+				echo 'email complete';
+				echo '<br>';
+			}
 		}
 		else{
-			$completeField += 1;
-			echo 'email complete';
-			echo '<br>';
+			echo '
+			<script language="javascript">
+				alert("Email cannot be blank")
+			</script>
+			';
 		}
 	}
 
