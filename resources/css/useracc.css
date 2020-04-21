@@ -30,6 +30,15 @@
 	text-align: center;
 }
 
+#password{
+	height: 5%; 
+	cursor: pointer;
+}
+
+.pass{
+	text-align: center;
+}
+
 #privacy{
 	height: 5%; 
 	cursor: pointer;
