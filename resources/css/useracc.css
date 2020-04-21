@@ -20,10 +20,18 @@
 	height: 8%; 
 }
 
+#profilepic{
+	height: 5%; 
+	cursor: pointer;
+}
+
+.propic{
+	text-align: center;
+}
+
 #general{
 	height: 5%; 
 	cursor: pointer;
-	background-color: #E1E1E1;
 }
 
 .gen{
