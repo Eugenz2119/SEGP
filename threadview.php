@@ -98,7 +98,7 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 		$image_dir = "uploads/" . $profileimageID . '.' . $imageFormat;
 		
 		echo '
-			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 80px; height:80px; float: left;">
+			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 80px; height:auto; float: left;">
 		';
 	}
 	else{
@@ -120,7 +120,7 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 		if($imageID != NULL){
 			echo '
 				<!-- image display -->
-				<img src=' . $imagePath . ' alt="image" style="width:20%; height:20%;">
+				<img src=' . $imagePath . ' alt="image" style="width:30%; height:auto">
 			';
 		}
 		?>

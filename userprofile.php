@@ -55,7 +55,7 @@ if($imageID != NULL){
 	$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 
 	echo '
-	<img src = "' . $image_dir . '" alt="avatar" style="position: absolute; width: 250px; height:250px; right:-10px;top: 190px; border-style: solid;">
+	<img src = "' . $image_dir . '" alt="avatar" style="position: absolute; width: 250px; height:auto; right:-10px;top: 190px; border-style: solid;">
 	';
 }
 else{
