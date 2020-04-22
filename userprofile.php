@@ -65,7 +65,7 @@ else{
 }
 
 //user's posts
-$threadLim = 5;
+$threadLim = 10;
 
 //find first result thread number for current page
 if(!isset($_GET['page'])){

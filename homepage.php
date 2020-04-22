@@ -15,7 +15,7 @@
 <body style="background-color: #E1E1E1";>
 	
 <?php
-$threadLim = 5;
+$threadLim = 10;
 
 //Connection details
 $servername = "localhost";

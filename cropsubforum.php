@@ -15,7 +15,7 @@
 
 
 <?php
-$threadLim = 5;
+$threadLim = 10;
 
 //Connection details
 $servername = "localhost";
