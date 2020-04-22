@@ -11,6 +11,7 @@
 <body style="background-color: #E1E1E1";>
 
 <?php include 'header.php';?>
+<?php include 'popularpost.php';?>
 
 <?php
 $threadLim = 10;
