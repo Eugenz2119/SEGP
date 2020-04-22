@@ -56,16 +56,47 @@
 	}
 	if($replyType == "comment"){
 		$sql = "SELECT text FROM comment WHERE commentID=" . $commentID;
+		$imageID = NULL;
 	}
 	
 	$result = mysqli_query($conn, $sql);
 	$oriText = mysqli_fetch_assoc($result)['text'];
 	
+	//post image
+	if($replyType == "post"){
+		$sql = "SELECT imageID FROM post WHERE postID=" . $postID;
+		$result = mysqli_query($conn, $sql);
+		$imageID = mysqli_fetch_assoc($result)['imageID'];
+		$sql = "SELECT format from image WHERE imageID='$imageID'";
+		$imageFormat = mysqli_fetch_assoc(mysqli_query($conn, $sql))['format'];
+		$imagePath = "uploads/$imageID.$imageFormat";
+		
+		if(isset($_GET['deletepic'])){
+			$deletepic = $_GET['deletepic'];
+		}
+		else{
+			$deletepic = false;
+		}
+	}
+	
 	?>
 	
 	<!--editing window-->
 	<div>
-		<form method="post">
+<?php
+if($imageID != NULL){
+	if(!$deletepic){
+		echo '
+		<!-- image display -->
+		<img src=' . $imagePath . ' alt="image" style="width:20%; height:auto">
+		';
+	}
+}
+?>
+		<form method="post" enctype="multipart/form-data">
+			<input type="file" name="postpic" id="postpic"><br/>
+			<button name="deletepostpic" type="submit">Delete Picture</button><br/><br/>
+		
 			<?php
 			echo '
 			<!--text field-->
@@ -83,7 +114,107 @@
 
 <?php
 //creating new comment
-if(isset($_POST["submit"])){	
+if(isset($_POST["submit"])){
+	
+	//Post Picture
+	if($_FILES["postpic"]["name"] == ''){ //no file uploaded
+		$fileSelected = 0;
+		echo "notselected";
+		
+		if($imageID != NULL){
+			$sql = "UPDATE post SET imageID=NULL WHERE postID=$postID";
+			mysqli_query($conn, $sql);
+			
+			$result = mysqli_query($conn, "SELECT * FROM image WHERE imageID=$imageID");
+			$prevImg = mysqli_fetch_assoc($result);
+			$delete_dir = "uploads/";
+			$delete_file = $delete_dir . ($prevImg['imageID']) . '.' . ($prevImg['format']);
+			unlink($delete_file);
+			
+			$DeleteQuery = "DELETE FROM image WHERE imageID=$imageID";
+			if(!mysqli_query($conn, $DeleteQuery)){
+				echo "Error: " . $DeleteQuery . "<br>" . mysqli_error($conn);
+			}
+		}
+	}
+	else{
+		$currImageID = $imageID;
+		
+		//generate current time
+		$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
+		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
+		
+		$imageDone = 0;
+		$fileSelected = 1;
+		$uploadOk = 1;;
+		$imageFileType = strtolower(pathinfo($_FILES["postpic"]["name"],PATHINFO_EXTENSION));
+		
+		// Check if image file is a actual image or fake image
+		$check = getimagesize($_FILES["postpic"]["tmp_name"]);
+		if($check !== false) {
+			echo "File is an image - " . $check["mime"] . ".";
+			$uploadOk = 1;
+		} else {
+			echo "File is not an image.";
+			$uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["postpic"]["size"] > 500000) {
+			echo "Sorry, your file is too large.";
+			$uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			$uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+		} else {
+			//create record in image table
+			$ImageQuery = "INSERT INTO image (format, userID, uploadTime)
+						 VALUES ('$imageFileType', '$userID' , '$time')";
+			if(!mysqli_query($conn, $ImageQuery)){
+				$imageDone = 0;
+			}
+			$sql = "SELECT imageID FROM image WHERE userID='$userID' AND uploadTime='$time'";
+			$result = mysqli_query($conn, $sql);
+			$imageID = mysqli_fetch_assoc($result)['imageID'];
+			
+			//image storage location
+			$target_dir = "uploads/";
+			$target_file = $target_dir . $imageID . '.' . $imageFileType;
+			
+			if (move_uploaded_file($_FILES["postpic"]["tmp_name"], $target_file)) {
+				$imageDone = 1;
+				echo "The file ". basename($_FILES["postpic"]["name"]). " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+		}
+	}
+	if($fileSelected == 1 && $imageDone == 1){
+		$sql = "UPDATE post SET imageID=$imageID WHERE postID=$postID";
+		mysqli_query($conn, $sql);
+		
+		if($currImageID != NULL){
+			//Delete previous picture
+			$result = mysqli_query($conn, "SELECT * FROM image WHERE imageID=$currImageID");
+			$prevImg = mysqli_fetch_assoc($result);
+			$delete_dir = "uploads/";
+			$delete_file = $delete_dir . ($prevImg['imageID']) . '.' . ($prevImg['format']);
+			unlink($delete_file);
+			
+			$DeleteQuery = "DELETE FROM image WHERE imageID=$currImageID";
+			if(!mysqli_query($conn, $DeleteQuery)){
+				echo "Error: " . $DeleteQuery . "<br>" . mysqli_error($conn);
+			}
+		}
+	}
+	
 	//new text entered by user
 	$newText = $_POST["editText"];
 
@@ -135,6 +266,10 @@ if(isset($_POST["cancel"])){
 	}
 	
 	echo '<meta http-equiv="Refresh" content="0; url=threadview.php?postID=' . $postID . '" />';
+}
+
+if(isset($_POST['deletepostpic'])){
+	echo '<meta http-equiv="Refresh" content="0; url=editwindow.php?postID=' . $postID . '&deletepic=true" />';
 }
 
 mysqli_close($conn);
