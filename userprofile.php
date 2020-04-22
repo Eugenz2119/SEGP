@@ -64,25 +64,43 @@ else{
 	';
 }
 
-//user's posts
-$threadLim = 10;
+//display limit
+$threadLim = 2;
 
-//find first result thread number for current page
-if(!isset($_GET['page'])){
-	$page=1;
+//find page numbers
+if(!isset($_GET['postpage'])){
+	$postpage=1;
 }
 else{
-	$page = $_GET['page'];
+	$postpage = $_GET['postpage'];
 }
 
+if(!isset($_GET['commentpage'])){
+	$commentpage=1;
+}
+else{
+	$commentpage = $_GET['commentpage'];
+}
+
+//posts display
 //page number buttons
 $sql = "SELECT COUNT(postID) FROM post WHERE userID=" . $userID;//total number of threads
 $number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(postID)'];
 $number_of_pages = ceil($number_of_results/$threadLim);
 
-$prev = $page - 1;
-$next = $page + 1;
-$currentPage = $page;
+$prev = $postpage - 1;
+$next = $postpage + 1;
+$currentPage = $postpage;
+
+$this_page_first_result = ($currentPage-1)*$threadLim;
+
+$sql="SELECT * FROM post WHERE userID=" . $userID . " ORDER BY postTime DESC LIMIT " . $this_page_first_result . ',' . $threadLim;
+$result = mysqli_query($conn, $sql);
+
+echo '
+<div style="width:40%; float:left">
+<h2>Most recent posts</h2><br>
+';
 
 //////////PAGE NUMBER BUTTONS DISPLAY START//////////
 echo '
@@ -91,10 +109,10 @@ echo '
 
 //First and Previous buttons
 if($currentPage>=3){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . '1' . '">' ."<button><<</button>" .'</a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . '1' . '&commentpage=' . $commentpage . '">' ."<button><<</button>" .'</a>';
 }
 if($currentPage > 1){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $prev . '">' ."<button><</button>" .'</a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $prev . '&commentpage=' . $commentpage . '">' ."<button><</button>" .'</a>';
 }
 
 //Page number buttons	
@@ -103,10 +121,10 @@ if($currentPage<=3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}	
@@ -116,10 +134,10 @@ else if($currentPage > $number_of_pages - 3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}
@@ -129,10 +147,10 @@ else{
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button>' . $page . '</button></a>';
 			}
 		
 		}
@@ -141,10 +159,10 @@ else{
 
 //Next and Last buttons
 if($currentPage < $number_of_pages){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $next . '">' .'<button>></button></a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $next . '&commentpage=' . $commentpage . '">' .'<button>></button></a>';
 }
 if($currentPage <= $number_of_pages - 2){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $number_of_pages . '">' .'<button>>></button></a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $number_of_pages . '&commentpage=' . $commentpage . '">' .'<button>>></button></a>';
 }
 
 
@@ -152,11 +170,6 @@ echo '
 </div>
 ';
 //////////PAGE NUMBER BUTTONS DISPLAY END//////////
-
-$this_page_first_result = ($currentPage-1)*$threadLim;
-
-$sql="SELECT * FROM post WHERE userID=" . $userID . " ORDER BY postTime DESC LIMIT " . $this_page_first_result . ',' . $threadLim;
-$result = mysqli_query($conn, $sql);
 
 while($row = mysqli_fetch_assoc($result)) {
 	
@@ -173,7 +186,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="height:20%; background-color: white;" >
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<div style = "font-size : 13px;">
@@ -193,10 +206,10 @@ echo '
 
 //First and Previous buttons
 if($currentPage>=3){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . '1' . '">' ."<button><<</button>" .'</a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . '1' . '&commentpage=' . $commentpage . '">' ."<button><<</button>" .'</a>';
 }
 if($currentPage > 1){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $prev . '">' ."<button><</button>" .'</a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $prev . '&commentpage=' . $commentpage . '">' ."<button><</button>" .'</a>';
 }
 
 //Page number buttons	
@@ -205,10 +218,10 @@ if($currentPage<=3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}	
@@ -218,10 +231,10 @@ else if($currentPage > $number_of_pages - 3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}
@@ -231,10 +244,10 @@ else{
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $page . '&commentpage=' . $commentpage . '">' . '<button>' . $page . '</button></a>';
 			}
 		
 		}
@@ -243,10 +256,10 @@ else{
 
 //Next and Last buttons
 if($currentPage < $number_of_pages){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $next . '">' .'<button>></button></a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $next . '&commentpage=' . $commentpage . '">' .'<button>></button></a>';
 }
 if($currentPage <= $number_of_pages - 2){
-	echo '<a href="userprofile.php?userID=' . $userID . '&page=' . $number_of_pages . '">' .'<button>>></button></a>';
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $number_of_pages . '&commentpage=' . $commentpage . '">' .'<button>>></button></a>';
 }
 
 
@@ -254,6 +267,196 @@ echo '
 </div>
 ';
 //////////PAGE NUMBER BUTTONS DISPLAY END//////////
+
+echo '
+</div>
+';
+
+//comments display
+//page number buttons
+$sql = "SELECT COUNT(commentID) FROM comment WHERE userID=" . $userID;//total number of threads
+$number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(commentID)'];
+$number_of_pages = ceil($number_of_results/$threadLim);
+
+$prev = $commentpage - 1;
+$next = $commentpage + 1;
+$currentPage = $commentpage;
+
+$this_page_first_result = ($currentPage-1)*$threadLim;
+
+$sql="SELECT * FROM comment WHERE userID=" . $userID . " ORDER BY commentTime DESC LIMIT " . $this_page_first_result . ',' . $threadLim;
+$result = mysqli_query($conn, $sql);
+
+echo '
+<div style="width:40%; float:left">
+<h2>Most recent comments</h2><br>
+';
+
+//////////PAGE NUMBER BUTTONS DISPLAY START//////////
+echo '
+<div>
+';
+
+//First and Previous buttons
+if($currentPage>=3){
+	echo '<a href="userprofile.php?userID=' . $userID . '&commentpage=' . '1' . '">' ."<button><<</button>" .'</a>';
+}
+if($currentPage > 1){
+	echo '<a href="userprofile.php?userID=' . $userID . '&commentpage=' . $prev . '">' ."<button><</button>" .'</a>';
+}
+
+//Page number buttons	
+if($currentPage<=3){
+	for ($page=1;$page<=7;$page++) {
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}				
+		}
+	}	
+}
+else if($currentPage > $number_of_pages - 3){
+	for($page = $number_of_pages - 6; $page <= $number_of_pages; $page++){
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}				
+		}
+	}
+}
+else{	
+	for ($page=$currentPage-3;$page<=$currentPage+3;$page++) {
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}
+		
+		}
+	}
+}
+
+//Next and Last buttons
+if($currentPage < $number_of_pages){
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $next . '">' .'<button>></button></a>';
+}
+if($currentPage <= $number_of_pages - 2){
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $number_of_pages . '">' .'<button>>></button></a>';
+}
+
+
+echo '
+</div>
+';
+//////////PAGE NUMBER BUTTONS DISPLAY END//////////
+
+while($row = mysqli_fetch_assoc($result)) {
+	
+	$commentID = $row['postID'];
+	$postID = $row['postID'];
+	$query = "SELECT title FROM post WHERE postID=" . $postID;
+	$title = mysqli_fetch_assoc(mysqli_query($conn, $query))['title'];
+	$posterID = $row['userID'];
+	$commentTime = $row['commentTime'];
+	$query = "SELECT username FROM user WHERE userID=" . $posterID;
+	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
+	$content = $row['text'];
+	
+	echo '
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="height:20%; background-color: white;" >
+			<a>in : <a href ="threadview.php?postID=' . $postID . '">' . $title . '</a>
+			<div style = "font-size : 13px;">
+				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
+				<a>Comment Time: ' . $commentTime . '</a>
+			</div>
+			<p>' . $content . '</p>
+		</div>
+	';
+}
+
+//////////PAGE NUMBER BUTTONS DISPLAY START//////////
+echo '
+<div>
+';
+
+//First and Previous buttons
+if($currentPage>=3){
+	echo '<a href="userprofile.php?userID=' . $userID . '&commentpage=' . '1' . '">' ."<button><<</button>" .'</a>';
+}
+if($currentPage > 1){
+	echo '<a href="userprofile.php?userID=' . $userID . '&commentpage=' . $prev . '">' ."<button><</button>" .'</a>';
+}
+
+//Page number buttons	
+if($currentPage<=3){
+	for ($page=1;$page<=7;$page++) {
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}				
+		}
+	}	
+}
+else if($currentPage > $number_of_pages - 3){
+	for($page = $number_of_pages - 6; $page <= $number_of_pages; $page++){
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}				
+		}
+	}
+}
+else{	
+	for ($page=$currentPage-3;$page<=$currentPage+3;$page++) {
+		// if page==currentPage, change colour
+		if($page>=1){
+			if($page==$currentPage){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+			}
+			else if ($page > 0 && $page <= $number_of_pages){
+				echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $page . '">' . '<button>' . $page . '</button></a>';
+			}
+		
+		}
+	}
+}
+
+//Next and Last buttons
+if($currentPage < $number_of_pages){
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $next . '">' .'<button>></button></a>';
+}
+if($currentPage <= $number_of_pages - 2){
+	echo '<a href="userprofile.php?userID=' . $userID . '&postpage=' . $postpage . '&commentpage=' . $number_of_pages . '">' .'<button>>></button></a>';
+}
+
+
+echo '
+</div>
+';
+//////////PAGE NUMBER BUTTONS DISPLAY END//////////
+
+echo '
+</div>
+';
 
 ?>	
 
