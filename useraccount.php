@@ -130,7 +130,7 @@
 
 	echo '
 
-			<div id = "profilepicsetting">
+			<div id = "profilepicsetting" style="display: none;">
 				<form method="post" enctype="multipart/form-data">
 					<p style="padding-left: 10px; font-size: 18px;">
 					Change Profile Picture <br/>
@@ -165,7 +165,7 @@
 				</form>
 			</div>
 			
-			<div id = "generalsetting">
+			<div id = "generalsetting" style="display: none;">
 				<form method="post" enctype="multipart/form-data">
 					<p style="padding-left: 10px; font-size: 18px;">
 					Change Age(?) : <input type="integer" name="Age" value="' . $Age . '"><br/>
@@ -185,7 +185,7 @@
 	';
 ?>
 		
-			<div id = "passwordsetting"  style="display: none;">
+			<div id = "passwordsetting" style="display: none;">
 				<form method="post">
 					<p style="padding-left: 10px; font-size: 18px;">
 					
