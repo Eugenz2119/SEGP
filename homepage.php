@@ -13,6 +13,7 @@
 
 </head>
 <body style="background-color: #E1E1E1";>
+<h2>Most Recent</h2>
 	
 <?php
 $threadLim = 10;
@@ -122,7 +123,7 @@ echo '
 
 $this_page_first_result = ($currentPage-1)*$threadLim;
 
-$sql ='SELECT * FROM post ORDER BY postTime DESC LIMIT ' . $this_page_first_result . ',' . $threadLim;
+$sql ='SELECT * FROM post ORDER BY lastCommentTime DESC LIMIT ' . $this_page_first_result . ',' . $threadLim;
 $result=mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
