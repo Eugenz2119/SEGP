@@ -96,7 +96,7 @@ if(isset($_POST["submit"])){
 		$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
 		
 		if($replyType == "post"){
-			$UpdateQuery = "UPDATE post SET text='$newText'";
+			$UpdateQuery = "UPDATE post SET text='$newText' WHERE postID=$postID";
 		}
 		if($replyType == "comment"){
 			$UpdateQuery = "UPDATE comment SET text='$newText' WHERE commentID=$commentID";
