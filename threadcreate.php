@@ -64,6 +64,10 @@ if(isset($_POST['SUBMIT'])){
 	$title = $_POST['TITLE'];
 	$content = $_POST['CONTENT'];
 	
+	//remove errors from inverted comma(s)
+	$title = str_replace("'", "\'", $title);
+	$content = str_replace("'", "\'", $content);
+	
 	//generate current time
 	$result = mysqli_query($conn, "SELECT CURRENT_TIMESTAMP()");
 	$time = mysqli_fetch_assoc($result)['CURRENT_TIMESTAMP()'];
