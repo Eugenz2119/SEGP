@@ -141,6 +141,7 @@ while($row = mysqli_fetch_array($result)) {
 	$title = $row['title'];
 	$posterID = $row['userID'];
 	$commentCount = $row['commentCount'];
+	$lastCommentTime = $row['lastCommentTime'];
 	$query = "SELECT username FROM user WHERE userID=" . $posterID;
 	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
 	$content = $row['text'];
@@ -151,6 +152,7 @@ while($row = mysqli_fetch_array($result)) {
 			<div style = "font-size : 13px;">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
 				<a>' . $commentCount . ' comment(s)</a>
+				<a>Last Comment: ' . $lastCommentTime . '</a>
 			</div>
 			<p>' . $content . '</p>
 		</div>
