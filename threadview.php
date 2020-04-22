@@ -140,7 +140,7 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 			echo '
 			<form method="post">
 				<input name="postModifyID" type="hidden" value="' . $postID . '">
-				<button name="editbutton" type="submit">Edit</button>
+				<button name="postedit" type="submit">Edit</button>
 			</form>
 			';
 		}
@@ -208,7 +208,7 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 				echo '
 				<form method="post">
 					<input name="commentModifyID" type="hidden" value="' . $commentID . '">
-					<button name="editbutton" type="submit">Edit</button>
+					<button name="commentedit" type="submit">Edit</button>
 					<button name="deletebutton" type="submit" onclick="return confirm(\'Confirm delete?\')">Delete</button>
 				</form>
 				';
@@ -233,13 +233,18 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 
 
 <?php
-/*
-//edit comment
-if(isset($_POST["editbutton"])){
-	echo "commentID=" . $_POST["commentModifyID"];
-	echo "edit pressed";
+
+//edit post
+if(isset($_POST["postedit"])){
+	$postModifyID = $_POST["postModifyID"];
+	echo '<meta http-equiv="Refresh" content="0; url=editwindow.php?postID=' . $postModifyID . '" />';
 }
-*/
+
+//edit comment
+if(isset($_POST["commentedit"])){
+	$commentModifyID = $_POST["commentModifyID"];
+	echo '<meta http-equiv="Refresh" content="0; url=editwindow.php?commentID=' . $commentModifyID . '" />';
+}
 
 //delete comment
 if(isset($_POST["deletebutton"])){
