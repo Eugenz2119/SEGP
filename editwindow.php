@@ -40,13 +40,11 @@
 
 	//determine editing post or comment
 	if(isset($_GET['postID'])){
-		echo "edit post";
 		$replyType = "post";
 		$postID = $_GET['postID'];
 	}
 
 	if(isset($_GET['commentID'])){
-		echo "edit comment";
 		$replyType = "comment";
 		$commentID = $_GET['commentID'];
 	}
@@ -92,17 +90,20 @@ if($imageID != NULL){
 		';
 	}
 }
-?>
+
+echo '
 		<form method="post" enctype="multipart/form-data">
+';
+
+if($replyType == "post"){
+	echo '
 			<input type="file" name="postpic" id="postpic"><br/>
 			<button name="deletepostpic" type="submit">Delete Picture</button><br/><br/>
-		
-			<?php
-			echo '
+	';
+}
+echo '
 			<!--text field-->
 			<textarea name="editText" placeholder="Enter edited text here..." rows=6 cols=200>' . $oriText . '</textarea>
-			';
-			?>
 			
 			<!--submit button-->
 			<div style = "right : 30px;">
@@ -111,8 +112,8 @@ if($imageID != NULL){
 			</div>
 		</form>
 	</div>	
+';
 
-<?php
 //creating new comment
 if(isset($_POST["submit"])){
 	

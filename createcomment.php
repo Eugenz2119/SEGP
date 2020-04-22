@@ -42,12 +42,10 @@
 
 	//determine reply to thread or comment
 	if(isset($_GET['postReplyID'])){
-		echo "reply post";
 		$replyType = "post";
 	}
 
 	if(isset($_GET['commentReplyID'])){
-		echo "reply comment";
 		$replyType = "comment";
 		$commentID = $_GET['commentReplyID'];
 	}
@@ -74,10 +72,11 @@
 		$prefix = "[QUOTE]by : " . $quoteusername . "\n" . $quotedText . "[/QUOTE]\n";
 		
 		echo '
+		Quoted text<br>
 		<!--div for quoted comment-->
 		<div class="quote" style = "width: 60%; height: 20%; background-color: white;">
 			<a>' . $quotedText . '</a>
-		</div>
+		</div><br>
 		';
 	}
 	else{
