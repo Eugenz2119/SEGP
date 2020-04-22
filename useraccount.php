@@ -213,7 +213,7 @@
 	
 	//age
 	echo ' 			<input type="hidden" name="age" value="off">';
-	if(intdiv($permissions, 100000) == 1){
+	if(floor($permissions / 100000) == 1){
 		echo '
 					Show Age <label class="switch"><input type="checkbox" name="age" checked><span class="slider round"></span></label> <br/><br/>
 		';
@@ -227,7 +227,7 @@
 	
 	//email
 	echo '			<input type="hidden" name="email" value="off">';
-	if(intdiv($permissions, 10000) == 1){
+	if(floor($permissions / 10000) == 1){
 		echo '
 					Show Email <label class="switch"><input type="checkbox" name="email" checked><span class="slider round"></span></label> <br/><br/>
 		';
@@ -241,7 +241,7 @@
 	
 	//institution
 	echo '			<input type="hidden" name="institution" value="off">';
-	if(intdiv($permissions, 1000) == 1){
+	if(floor($permissions / 1000) == 1){
 		echo '
 					Show Institution <label class="switch"><input type="checkbox" name="institution" checked><span class="slider round"></span></label> <br/><br/>
 		';
@@ -255,7 +255,7 @@
 	
 	//occupation
 	echo '			<input type="hidden" name="occupation" value="off">';
-	if(intdiv($permissions, 100) == 1){
+	if(floor($permissions / 100) == 1){
 		echo '
 					Show Occupation <label class="switch"><input type="checkbox" name="occupation" checked><span class="slider round"></span></label> <br/><br/>
 		';
@@ -269,7 +269,7 @@
 	
 	//country
 	echo '			<input type="hidden" name="country" value="off">';
-	if(intdiv($permissions, 10) == 1){
+	if(floor($permissions / 10) == 1){
 		echo '
 					Show Country <label class="switch"><input type="checkbox" name="country" checked><span class="slider round"></span></label> <br/><br/>
 		';
@@ -283,7 +283,7 @@
 	
 	//phonenum
 	echo '			<input type="hidden" name="phonenum" value="off">';
-	if(intdiv($permissions, 1) == 1){
+	if(floor($permissions / 1) == 1){
 		echo '
 					Show Phone Number <label class="switch"><input type="checkbox" name="phonenum" checked><span class="slider round"></span></label>
 		';
