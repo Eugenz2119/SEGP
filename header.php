@@ -43,7 +43,7 @@ if(isset($_SESSION["userID"])){
 	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
 
 	<!-- homepage shortcut -->
-	<a href="homepage.php" style= "font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
+	<a href="homepage.php" style= "position:absolute; left: 10px; top:5px;font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
 
 	<?php
 	if(isset($_SESSION["userID"])){

@@ -98,7 +98,7 @@ $sql="SELECT * FROM post WHERE userID=" . $userID . " ORDER BY postTime DESC LIM
 $result = mysqli_query($conn, $sql);
 
 echo '
-<div style="width:40%; float:left">
+<div style="position:absolute; left:20px; width:30%;">
 <h2>Most recent posts</h2><br>
 ';
 
@@ -186,7 +186,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="height:20%; background-color: white;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style=" background-color: white;" >
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<div style = "font-size : 13px;">
@@ -288,7 +288,7 @@ $sql="SELECT * FROM comment WHERE userID=" . $userID . " ORDER BY commentTime DE
 $result = mysqli_query($conn, $sql);
 
 echo '
-<div style="width:40%; float:left">
+<div style="position:absolute; left: 1000px; width:30%;">
 <h2>Most recent comments</h2><br>
 ';
 
@@ -374,13 +374,13 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="height:20%; background-color: white;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="background-color: white;" >
 			<a>in : <a href ="threadview.php?postID=' . $postID . '">' . $title . '</a>
 			<div style = "font-size : 13px;">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
 				<a>Comment Time: ' . $commentTime . '</a>
 			</div>
-			<p>' . $content . '</p>
+			<p style = "padding-bottom: 74px;">' . $content . '</p>
 		</div>
 	';
 }

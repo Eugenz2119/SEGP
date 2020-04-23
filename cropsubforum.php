@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link href="./resources/css/index.css" type="text/css" rel ="stylesheet">
+	<link href="./resources/css/subforum.css" type="text/css" rel ="stylesheet">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AgriTalk</title>
@@ -42,7 +43,7 @@ else{
 }
 
 //thread create button
-echo '<a href="threadcreate.php?cropID=' . $cropID . '">' . '<button>Create Thread</button></a>';
+echo '<a style ="font-size:20px;text-decoration:none; position: absolute; top:60px; left:10px; background-color: white;"href="threadcreate.php?cropID=' . $cropID . '">' . '&nbspCreate Thread&nbsp</a>';
 
 //find first result thread number for current page
 if(!isset($_GET['page'])){
@@ -63,7 +64,7 @@ $currentPage = $page;
 
 //////////PAGE NUMBER BUTTONS DISPLAY START//////////
 echo '
-<div>
+<div style="position: absolute; top:100px;">
 ';
 
 //First and Previous buttons
@@ -130,6 +131,8 @@ echo '
 ';
 //////////PAGE NUMBER BUTTONS DISPLAY END//////////
 
+echo'</br></br></br></br>';
+
 $this_page_first_result = ($currentPage-1)*$threadLim;
 
 $sql ='SELECT * FROM post WHERE cropID=' . $cropID . ' ORDER BY postTime DESC LIMIT ' . $this_page_first_result . ',' . $threadLim;
@@ -147,15 +150,18 @@ while($row = mysqli_fetch_array($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white;" >
-			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
-			<div style = "font-size : 13px;">
-				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
-				<a>' . $commentCount . ' comment(s)</a>
-				<a>Last Comment: ' . $lastCommentTime . '</a>
-			</div>
-			<p>' . $content . '</p>
-		</div>
+		<table style="width:70%; border: 1px solid black;">
+  		<tr>
+    		<th style="width:1000px; text-align: left; font-size: 30px; padding:10px;"><a href="threadview.php?postID=' . $postID . '" >' . $title . '</a></th>
+   			<th style="text-align:right; font-weight: 400; border-right: 1px solid black;"></br>number of comments: ' . $commentCount . '</br>latest comment: '. $lastCommentTime .'</th> 
+  		</tr>
+  		<tr>
+    		<td colspan=2 style= "font-size:13px; border-right: 1px solid black;">by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</td>
+   		</tr>
+  		<tr>
+   			<td colspan =2 style="font-size: 16px; padding:16px; border: 1px solid black">' . $content . '</td>
+  		</tr>
+		</table></br>
 	';
 }
 
