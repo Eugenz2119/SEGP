@@ -260,7 +260,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style=" background-color: white;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style=" background-color: white; height:208px;" >
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<div style = "font-size : 13px;">
@@ -461,7 +461,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $txt3 . '</p>';
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="background-color: white;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="background-color: white; height: 208px;" >
 			<a>in : <a href ="threadview.php?postID=' . $postID . '">' . $title . '</a>
 			<div style = "font-size : 13px;">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
