@@ -37,10 +37,12 @@ if(isset($_SESSION["userID"])){
 <div id="topbar" style="background-color: #73E600; height:55px;">
 
 	<!-- search bar -->
+	<!--
 	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 2px; position: absolute;">
-
+	-->
+	
 	<!-- all subforums button -->
-	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Subforums</a>
+	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Crops</a>
 
 	<!-- homepage shortcut -->
 	<a href="homepage.php" style= "position:absolute; left: 10px; top:5px;font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
@@ -91,10 +93,12 @@ if(isset($_SESSION["userID"])){
 	?> 
 
 	<!-- notification -->
+	<!--
 	<button onclick="drop()" class="dropbtn" style= "background-color: #73E600;float:right;"><i class="fa fa-bell"></i></button>
 		<div id="notifs" class="dropdown-content">
 			<a href="threadview.php">placeholder notification</a>
 		</div>
+	-->
 </div>
 
 <script>
