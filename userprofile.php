@@ -33,15 +33,20 @@ else{
 
 $userID = $_GET['userID'];
 
+//user information 
+echo '
+<div style="position: absolute; top: 90px; right:-10px; width: 250px;">
+';
+
 //username
 $sql="SELECT username FROM user WHERE userID =" . $userID;
 $result = mysqli_query($conn, $sql);
 $username = mysqli_fetch_assoc($result)['username'];
 
 echo '
-<div id="username"class="w3-container w3-round-small" style="background-color : white;position: absolute; top: 90px; right:-10px; width: 250px; height: 100px ; border-style: solid;">
-	<h3>' . $username .'</h3>
-</div>
+	<div id="username"class="w3-container w3-round-small" style="background-color : white; width: 250px; height: 100px; border-style: solid;">
+		<h3>' . $username .'</h3>
+	</div>
 ';
 
 //profile picture
@@ -55,14 +60,83 @@ if($imageID != NULL){
 	$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 
 	echo '
-	<img src = "' . $image_dir . '" alt="avatar" style="position: absolute; width: 250px; height:auto; right:-10px;top: 190px; border-style: solid;">
+	<img src = "' . $image_dir . '" alt="avatar" style="width: 250px; height:auto; border-style: solid;">
 	';
 }
 else{
 	echo '
-	<img src = "resources/placeholderimage.jpg" alt="avatar" style="position: absolute; width: 250px; height:250px; right:-10px;top: 190px; border-style: solid;">
+	<img src = "resources/placeholderimage.jpg" alt="avatar" style="width: 250px; height:auto; border-style: solid;">
 	';
 }
+
+//user details
+$sql = "SELECT * FROM user WHERE userID=" . $userID;
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
+$permissions = $row['permissions'];
+
+echo '
+	<div class="w3-container w3-round-small" style="background-color : white; width: 250px; border-style: solid;">
+';
+
+	//age
+	if(floor($permissions / 100000) == 1){
+		$Age = $row['age'];
+		echo '
+		Age: ' . $Age . '<br>
+		';
+	}
+	$permissions = $permissions % 100000;
+
+	//email
+	if(floor($permissions / 10000) == 1){
+		$Email = $row['email'];
+		echo '
+		Email: ' . $Email . '<br>
+		';
+	}
+	$permissions = $permissions % 10000;
+
+	//institution
+	if(floor($permissions / 1000) == 1){
+		$Institution = $row['institution'];
+		echo '
+		Institution: ' . $Institution . '<br>
+		';
+	}
+	$permissions = $permissions % 1000;
+
+	//occupation
+	if(floor($permissions / 100) == 1){
+		$Occupation = $row['occupation'];
+		echo '
+		Occupation: ' . $Occupation . '<br>
+		';
+	}
+	$permissions = $permissions % 100;
+
+	//country
+	if(floor($permissions / 10) == 1){
+		$Country = $row['country'];
+		echo '
+		Country: ' . $Country . '<br>
+		';
+	}
+	$permissions = $permissions % 10;
+
+	//phonenum
+	if(floor($permissions / 1) == 1){
+		$PhoneNum = $row['phonenum'];
+		echo '
+		PhoneNum: ' . $PhoneNum . '<br>
+		';
+	}
+	
+echo '
+	</div>
+</div>
+';
 
 //display limit
 $threadLim = 2;
