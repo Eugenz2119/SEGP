@@ -139,7 +139,7 @@ echo '
 ';
 
 //display limit
-$threadLim = 2;
+$threadLim = 5;
 
 //find page numbers
 if(!isset($_GET['postpage'])){
@@ -445,7 +445,20 @@ while($row = mysqli_fetch_assoc($result)) {
 	$commentTime = $row['commentTime'];
 	$query = "SELECT username FROM user WHERE userID=" . $posterID;
 	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
-	$content = $row['text'];
+	//text processing for html format output
+	$txt = nl2br($row['text']);
+	//$txt = $row['text'];
+	$txt2 = str_replace("[QUOTE]",
+		'<!--div for quoted comment-->
+		<div class="quote" style = "background-color: #E1E1E1;">
+			<a>',
+		$txt);
+	$txt3 = str_replace("[/QUOTE]",
+		'	</a>
+		</div>
+		<p>',
+		$txt2);
+	$content = $txt3 . '</p>';
 	
 	echo '
 		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="background-color: white;" >
@@ -454,7 +467,11 @@ while($row = mysqli_fetch_assoc($result)) {
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
 				<a>Comment Time: ' . $commentTime . '</a>
 			</div>
-			<p style = "padding-bottom: 74px;">' . $content . '</p>
+	';
+	
+	echo $content;
+	
+	echo '
 		</div>
 	';
 }
