@@ -38,19 +38,23 @@ $cropname = $row['cropname'];
 $scname = $row['scname'];
 $description = $row['description'];
 
+//crop image
+$imgname = $row['imgname'];
+$image_dir = "cropimg/" . $imgname;
+
 echo '
+<div style="position: absolute; right:-10px; top: 90px;">
+	<img src = "' . $image_dir . '" alt= "crop image" style="width: 250px; height:auto; border-style: solid;">
 
-	<img src = "resources/placeholderimage.jpg" alt= "crop image" style="position: absolute; width: 250px; height:250px; right:-10px;top: 90px; border-style: solid;">
-
-	<div class="w3-container w3-padding-small w3-round-small"style ="position: absolute; top:340px; right:-10px; width: 250px; height: 150px ; border-style: solid;">
+	<div class="w3-container w3-padding-small w3-round-small" style ="width: 250px; border-style: solid;">
 		<h3>'. $cropname .'</h3>
 		<h5>'. $scname .'</h5>
 	</div>
 
-	<div class="w3-container w3-padding-small w3-round-small"style ="position: absolute; top:490px; right:-10px; width: 250px; border-style: solid;">
+	<div class="w3-container w3-padding-small w3-round-small" style ="width: 250px; border-style: solid;">
 		<p>'. $description .'</p>
 	</div>
-
+</div>
 ';
 
 ?>
