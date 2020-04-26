@@ -13,6 +13,30 @@
 <body style="background-color: #E1E1E1";>
 
 <?php
+
+function getQuote($str) {
+	$strcheck = " " . $str;
+	if(strpos($strcheck, "[QUOTE]")){
+		$start = strpos($strcheck, "[QUOTE]") - 1 + strlen("[QUOTE]");
+		if(strpos($strcheck, "[/QUOTE]")){
+			$end = strpos($strcheck, "[/QUOTE]") - 1;
+			$length = $end - $start;
+		}
+		else{
+			return FALSE;
+		}
+		return substr($str, $start, $length);
+	}
+	else{
+		return FALSE;
+	}
+}
+
+function getMain($str){
+	$start = strpos($str, "[/QUOTE]") + strlen("[/QUOTE]");
+	return substr($str, $start);
+}
+
 include 'header.php';
 include 'popularpost.php';
 //Connection details
@@ -83,13 +107,12 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 		<input name="postID" type="hidden" value="' . $postID . '">
 		<input name="postReplyID" type="hidden" value="' . $postID . '">
 		<button id ="replybutton" type="submit">Reply</button>
-		<button id="sharebutton">Share</button>
 	</form>
 	';
 	?>
 	</div>
 	
-	<div id="threadtitle">
+	<div id="threadtitle" style="overflow: hidden; overflow-wrap: break-word;">
 	<?php 
 	if($profileimageID != NULL){
 		$sql="SELECT format FROM image WHERE imageID =" . $profileimageID;
@@ -113,7 +136,7 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 	
 
 	<!--first post of the thread-->
-	<div name="firstPost" class="comments" style="background-color: white; width: 70%;">
+	<div name="firstPost" class="comments" style="background-color: white; width: 70%; overflow: hidden; overflow-wrap: break-word;">
 		<p><?php echo $content; ?></p>
 		
 		<?php
@@ -147,16 +170,6 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 		?>
 		
 	</div>
-
-
-	<!-- text field for editing comments
-	<div id = "editcontents">
-		<form method="post">
-		<input type = "text" id="threadedit" name ="threadedit" placeholder ="Edited Comment..." size = "50">	
-	</div>
-	-->
-
-
 	
 	<?php
 	//display existing comments
@@ -170,24 +183,34 @@ $cropname = mysqli_fetch_assoc($result)['cropname'];
 		
 		//text processing for html format output
 		$txt = nl2br($row['text']);
-		$txt2 = str_replace("[QUOTE]",
-			'<!--div for quoted comment-->
-			<div class="quote" style = "width: 60%; height: 20%; background-color: #E1E1E1;">
-				<a>',
-			$txt);
-		$txt3 = str_replace("[/QUOTE]",
-			'	</a>
-			</div>
-			<p>',
-			$txt2);
-		$content = $txt3 . '</p>';
 		
+		//separate components
+		$quote = getQuote($txt);
+		
+		if($quote != FALSE){
+			$main = getMain($txt);	
+		}
+		else{
+			$main = $txt;
+		}
+		
+		if($quote != FALSE){
+			$content = '
+			<!--div for quoted comment-->
+			<div class="quote" style = "background-color: #E1E1E1; overflow: hidden; overflow-wrap: break-word;">
+				<a>' . $quote . '</a>
+			</div>
+			<p>' . $main . '</p>';
+		}
+		else{
+			$content = $main;
+		}
 		
 		$sql = "SELECT username FROM user WHERE userID=" . $commenterID;
 		$commenterName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['username'];
 		
 		echo '
-		<div class="comments" style = "width: 70%; background-color: white;">
+		<div class="comments" style = "width: 70%; background-color: white; overflow: hidden; overflow-wrap: break-word;">
 			<a>by : <a href ="userprofile.php?userID=' . $commenterID . '">' . $commenterName . '</a><br>';
 
 			echo $content;

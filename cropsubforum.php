@@ -154,12 +154,22 @@ while($row = mysqli_fetch_array($result)) {
   		<tr>
     		<th style="width:70%; text-align: left; font-size: 30px; padding:10px;"><a href="threadview.php?postID=' . $postID . '" >' . $title . '</a></th>
    			<th style="text-align:right; font-weight: 400; border-right: 1px solid black;"></br>number of comments: ' . $commentCount . '</br>latest comment: '. $lastCommentTime .'</th> 
+    		<th style="max-width: 600px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: left; font-size: 30px; padding:10px;">
+				<a href="threadview.php?postID=' . $postID . '" >' . $title . '</a>
+			</th>
+   			<th style="text-align:right; font-weight: 400; border-right: 1px solid black;">
+				</br>number of comments: ' . $commentCount . '</br>latest comment: '. $lastCommentTime .'
+			</th> 
   		</tr>
   		<tr>
-    		<td colspan=2 style= "font-size:13px; border-right: 1px solid black;">by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</td>
+    		<td colspan=2 style= "font-size:13px; border-right: 1px solid black;">
+				by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '
+			</td>
    		</tr>
   		<tr>
-   			<td colspan =2 style="font-size: 16px; padding:16px; border: 1px solid black">' . $content . '</td>
+   			<td colspan =2 style="max-width: 600px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 16px; padding:16px; border: 1px solid black">
+				' . $content . '
+			</td>
   		</tr>
 		</table></br>
 	';
