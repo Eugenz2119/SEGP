@@ -1,15 +1,15 @@
 .settings{
 	background-color: white;
-	height: 700px; 
-	width : 1700px;
-	left : 100px; ; 
+	height: 75%; 
+	width : 85%;
+	left : 5%;
 	top: 150px; 
 	position: absolute;
 }
 
 .types{
 	width: 15%;
-	height:100% ; 
+	height:100%; 
 	border:solid; 
 	border-right: none;
 	float: left;
@@ -57,7 +57,7 @@
 
 
 .specifics{
-	left: 255px; 
+	left: 15%; 
 	position: absolute;
 	width:85%;
 	height:100%;

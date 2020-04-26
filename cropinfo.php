@@ -43,17 +43,13 @@ $imgname = $row['imgname'];
 $image_dir = "cropimg/" . $imgname;
 
 echo '
-<div style="position: absolute; right:-10px; top: 90px;">
-	<img src = "' . $image_dir . '" alt= "crop image" style="width: 250px; height:auto; border-style: solid;">
-
-	<div class="w3-container w3-padding-small w3-round-small" style ="width: 250px; border-style: solid;">
-		<h3>'. $cropname .'</h3>
-		<h5>'. $scname .'</h5>
-	</div>
-
-	<div class="w3-container w3-padding-small w3-round-small" style ="width: 250px; border-style: solid;">
-		<p>'. $description .'</p>
-	</div>
+<div class ="info;" style="position: absolute; left: 80%; top: 90px; width:20%;height:80%">
+	<img src = "' . $image_dir . '" alt= "crop image" style="border:solid; width: 100%; height:40%;">
+		<div style= "border:solid;">
+			<h3>'. $cropname .'</h3>
+			<h5>'. $scname .'</h5>
+			<p style="border-top:solid;">'. $description .'</p>
+		</div>
 </div>
 ';
 
