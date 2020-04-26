@@ -25,7 +25,7 @@
 		  <div> 
 		  	<label>CONTENT:</label>
 		  </div>
-		  <textarea  name="CONTENT" id = " CONTENT" rows = "3" cols = "80" placeholder="Your Thread Here"></textarea>
+		  <textarea style="width:70%" name="CONTENT" id = " CONTENT" rows = "3" cols = "80" placeholder="Your Thread Here"></textarea>
 		  <div>
 		  	<input type="file" name="fileToUpload" id="fileToUpload">
     	  	<input type="submit" value="Submit" name="SUBMIT">

@@ -6,6 +6,7 @@ session_start();
 <html>
 <head>
 <link href="./resources/css/index.css" type="text/css" rel ="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -42,7 +43,7 @@ if(isset($_SESSION["userID"])){
 	-->
 	
 	<!-- all subforums button -->
-	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 600px; font-size: 25px; color: white;">All Crops</a>
+	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 50%; font-size: 25px; color: white;">All Crops</a>
 
 	<!-- homepage shortcut -->
 	<a href="homepage.php" style= "position:absolute; left: 10px; top:5px;font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
