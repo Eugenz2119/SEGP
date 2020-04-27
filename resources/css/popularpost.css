@@ -6,6 +6,21 @@
 
 }
 
+.poppreview{
+		background-color: white; 
+		padding: 5px;
+		margin: 10px;
+		clear: both;
+	}
+.post-wrapper
+	{
+		height: 100%;
+		right: 20px; 
+		top: 100px;
+		position: fixed; 
+		width:20% ;
+	}
+	
 @media screen and (max-width:600px){
 	.poppreview{
 		visibility:hidden;
@@ -14,6 +29,7 @@
 		margin: 10px;
 		clear: both;
 	}
+
 	.post-wrapper
 	{
 		visibility: hidden;
