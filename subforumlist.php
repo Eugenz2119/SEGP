@@ -132,7 +132,7 @@ while($row = mysqli_fetch_array($result)) {
 	$scname = $row['scname'];
 	
 	echo '
-	<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; background-color: white;" >
+	<div class="w3-panel w3-border w3-round-small w3-padding-large previews">
 		<h1><a href ="cropsubforum.php?cropID='. $cropID . '">'. $cropname . '</a></h1>
 		<p>' . $scname . '</p>
 	</div>
