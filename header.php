@@ -35,7 +35,7 @@ if(isset($_SESSION["userID"])){
 ?>
 
 <body>
-<div id="topbar" style="background-color: #73E600; height:55px;">
+<div id="topbar" style="background-color: #73E600; height:55px; width:100%;">
 
 	<!-- search bar -->
 	<!--
@@ -43,7 +43,7 @@ if(isset($_SESSION["userID"])){
 	-->
 	
 	<!-- all subforums button -->
-	<a href= "subforumlist.php" style ="position: absolute; top: 10px; right: 50%; font-size: 25px; color: white;">All Crops</a>
+	<a href= "subforumlist.php" style ="position: absolute; top: 10px; left: 50%; font-size: 25px; color: white;">All Crops</a>
 
 	<!-- homepage shortcut -->
 	<a href="homepage.php" style= "position:absolute; left: 10px; top:5px;font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
@@ -56,7 +56,7 @@ if(isset($_SESSION["userID"])){
 		$username = mysqli_fetch_assoc($result)['username'];
 		echo '
 		<a href="useraccount.php" class="fa fa-cogs" style = "float: right; font-size: 35px;color: white;"></a>
-		<a href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 25px; color: white;">' . $username . '</a> 
+		<a class="user" href="userprofile.php?userID=' . $userID . '" style = "float: right; font-size: 25px; color: white;">' . $username . '</a> 
 		';
 		
 		//profile picture preview
@@ -72,7 +72,7 @@ if(isset($_SESSION["userID"])){
 			$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 			
 			echo '
-			<a href="userprofile.php?userID=' . $userID . '"><img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 55px; height:auto; float: right;"></a>
+			<a class="avatar" href="userprofile.php?userID=' . $userID . '"><img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 55px; height:auto; float: right;"></a>
 			';
 		}
 		else{
