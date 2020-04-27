@@ -1,14 +1,14 @@
 .settings{
 	background-color: white;
 	height: 75%; 
-	width : 85%;
-	left : 5%;
+	width : 90%;
+	left : 3%;
 	top: 150px; 
 	position: absolute;
 }
 
 .types{
-	width: 15%;
+	width: 20%;
 	height:100%; 
 	border:solid; 
 	border-right: none;
@@ -17,11 +17,11 @@
 
 .categories{
 	text-align: center; 
-	height: 8%; 
+	min-height: 8%; 
 }
 
 #profilepic{
-	height: 5%; 
+	min-height: 5%; 
 	cursor: pointer;
 }
 
@@ -30,7 +30,7 @@
 }
 
 #general{
-	height: 5%; 
+	min-height: 5%; 
 	cursor: pointer;
 }
 
@@ -39,7 +39,7 @@
 }
 
 #password{
-	height: 5%; 
+	min-height: 5%; 
 	cursor: pointer;
 }
 
@@ -48,7 +48,7 @@
 }
 
 #privacy{
-	height: 5%; 
+	min-height: 5%; 
 	cursor: pointer;
 }
 .priv{
@@ -57,7 +57,7 @@
 
 
 .specifics{
-	left: 15%; 
+	left: 20%; 
 	position: absolute;
 	width:85%;
 	height:100%;
@@ -94,7 +94,7 @@
 	background-color: #73E600;
 	color:white;
 	padding : 10px;
-	width:15%;
+	width:20%;
 	text-align: center;
 }
 

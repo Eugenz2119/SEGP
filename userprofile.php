@@ -35,7 +35,7 @@ $userID = $_GET['userID'];
 
 //user information 
 echo '
-<div style="position: absolute; top: 90px; right:-10px; width: 250px;">
+<div style="position: absolute; top: 10%; left:85%; width: 15%;height:100%">
 ';
 
 //username
@@ -44,7 +44,7 @@ $result = mysqli_query($conn, $sql);
 $username = mysqli_fetch_assoc($result)['username'];
 
 echo '
-	<div id="username"class="w3-container w3-round-small" style="background-color : white; width: 250px; height: 100px; border-style: solid;">
+	<div id="username"class="w3-container w3-round-small" style="background-color : white; height: 10%; border-style: solid;">
 		<h3>' . $username .'</h3>
 	</div>
 ';
@@ -60,12 +60,12 @@ if($imageID != NULL){
 	$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 
 	echo '
-	<img src = "' . $image_dir . '" alt="avatar" style="width: 250px; height:auto; border-style: solid;">
+	<img src = "' . $image_dir . '" alt="avatar" style="width:100%; height:auto; border-style: solid;">
 	';
 }
 else{
 	echo '
-	<img src = "resources/placeholderimage.jpg" alt="avatar" style="width: 250px; height:auto; border-style: solid;">
+	<img src = "resources/placeholderimage.jpg" alt="avatar" style="width:100%;height:auto; border-style: solid;">
 	';
 }
 
@@ -77,7 +77,8 @@ $row = mysqli_fetch_assoc($result);
 $permissions = $row['permissions'];
 
 echo '
-	<div class="w3-container w3-round-small" style="background-color : white; width: 250px; border-style: solid;">
+	<div style="background-color : white;border-style: solid; padding:5%;">
+	<p style="text-decoration:underline;">Additional Details</p>
 ';
 
 	//age
@@ -172,7 +173,7 @@ $sql="SELECT * FROM post WHERE userID=" . $userID . " ORDER BY postTime DESC LIM
 $result = mysqli_query($conn, $sql);
 
 echo '
-<div style="position:absolute; left:20px; width:30%;">
+<div style="position:absolute; left:2%; width:30%;">
 <h2>Most recent posts</h2><br>
 ';
 
@@ -260,7 +261,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style=" background-color: white; height:208px;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style=" background-color: white; min-height:208px;" >
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h1>
 			<div style = "font-size : 13px;">
@@ -362,7 +363,7 @@ $sql="SELECT * FROM comment WHERE userID=" . $userID . " ORDER BY commentTime DE
 $result = mysqli_query($conn, $sql);
 
 echo '
-<div style="position:absolute; left: 1000px; width:30%;">
+<div style="position:absolute; left: 50%; width:30%;">
 <h2>Most recent comments</h2><br>
 ';
 
@@ -461,7 +462,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	$content = $txt3 . '</p>';
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="background-color: white; height: 208px;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="background-color: white; min-height: 208px;" >
 			<a>in : <a href ="threadview.php?postID=' . $postID . '">' . $title . '</a>
 			<div style = "font-size : 13px;">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a><br>
