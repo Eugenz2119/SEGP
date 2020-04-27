@@ -72,7 +72,7 @@ if(isset($_SESSION["userID"])){
 			$image_dir = "uploads/" . $imageID . '.' . $imageFormat;
 			
 			echo '
-			<img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 55px; height:auto; float: right;">
+			<a href="userprofile.php?userID=' . $userID . '"><img src = "'. $image_dir .'" alt= "avatarpreview" style="width: 55px; height:auto; float: right;"></a>
 			';
 		}
 		else{
