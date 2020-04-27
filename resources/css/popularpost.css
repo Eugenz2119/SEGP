@@ -1,23 +1,26 @@
-.post-wrapper
-{
-	height: 100%;
-	right: 20px; 
-	top: 100px;
-	position: fixed; 
-	width:20% ;
-}
-
-.poppreview
-{
-	background-color: white; 
-	padding: 5px;
-	margin: 10px;
-	clear: both;
-}
 
 .postuser
 {
 	color : #CD853F;
 	font-size : 13px;
 
+}
+
+@media screen and (max-width:600px){
+	.poppreview{
+		visibility:hidden;
+		background-color: white; 
+		padding: 5px;
+		margin: 10px;
+		clear: both;
+	}
+	.post-wrapper
+	{
+		visibility: hidden;
+		height: 100%;
+		right: 20px; 
+		top: 100px;
+		position: fixed; 
+		width:20% ;
+	}
 }
