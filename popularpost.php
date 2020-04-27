@@ -47,9 +47,9 @@ while($row = mysqli_fetch_assoc($result)) {
 	$query = "SELECT username FROM user WHERE userID=" . $posterID;
 	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
 	echo '
-		<div class="poppreview">
+		<div class="poppreview" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
-			<h5><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h5>
+			<h5 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a href="threadview.php?postID=' . $postID . '">' . $title . '</a></h5>
 			<div class="postuser">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a>
 			</div>
