@@ -92,7 +92,7 @@
 			<?php
 			echo '
 			<!--text field-->
-			<textarea name="threadcomment" placeholder="New Comment..." rows=6 cols=200></textarea>
+			<textarea style="width:70%;"name="threadcomment" placeholder="New Comment..." rows=6 cols=200></textarea>
 			';
 			?>
 			
