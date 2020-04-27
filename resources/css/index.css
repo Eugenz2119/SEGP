@@ -37,7 +37,14 @@
   overflow-wrap: break-word;
   }
 
+  .user{
+    display:none;
   }
+
+  .avatar{
+    float:right;
+  }
+}
 
 
 .dropdown-content {
