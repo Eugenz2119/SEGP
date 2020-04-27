@@ -59,7 +59,7 @@ $userID = $_GET['userID'];
 
 //user information 
 echo '
-<div style="position: absolute; top: 10%; left:85%; width: 15%;height:100%">
+<div style="position: absolute; top: 10%; left:85%; width: 15%;height:100%;overflow: hidden; text-overflow: ellipsis">
 ';
 
 //username

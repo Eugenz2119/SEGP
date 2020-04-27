@@ -5,6 +5,7 @@
 	left : 3%;
 	top: 150px; 
 	position: absolute;
+	overflow: hidden;
 }
 
 .types{
@@ -59,7 +60,7 @@
 .specifics{
 	left: 20%; 
 	position: absolute;
-	width:85%;
+	width:80%;
 	height:100%;
 	background-color: #E1E1E1;
 	border:solid;

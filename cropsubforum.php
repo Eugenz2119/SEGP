@@ -152,14 +152,12 @@ while($row = mysqli_fetch_array($result)) {
 	echo '
 		<table style="width:70%; border: 1px solid black;">
   		<tr>
-    		<th style="width:70%; text-align: left; font-size: 30px; padding:10px;"><a href="threadview.php?postID=' . $postID . '" >' . $title . '</a></th>
-   			<th style="text-align:right; font-weight: 400; border-right: 1px solid black;"></br>number of comments: ' . $commentCount . '</br>latest comment: '. $lastCommentTime .'</th> 
+    		
     		<th style="max-width: 600px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: left; font-size: 30px; padding:10px;">
 				<a href="threadview.php?postID=' . $postID . '" >' . $title . '</a>
-			</th>
-   			<th style="text-align:right; font-weight: 400; border-right: 1px solid black;">
-				</br>number of comments: ' . $commentCount . '</br>latest comment: '. $lastCommentTime .'
-			</th> 
+				</th>
+   			<th style="text-align:right; font-weight: 400; border-right: 1px solid black;"></br>number of comments: ' . $commentCount . '</br>latest comment: '. $lastCommentTime .'</th> 
+
   		</tr>
   		<tr>
     		<td colspan=2 style= "font-size:13px; border-right: 1px solid black;">
