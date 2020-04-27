@@ -141,7 +141,7 @@ while($row = mysqli_fetch_array($result)) {
 	$content = $row['text'];
 	
 	echo '
-		<div class="w3-panel w3-border w3-round-small w3-padding-large" style="width:60%; height: 212px; background-color: white; overflow: hidden; overflow-wrap: break-word;" >
+		<div class="w3-panel w3-border w3-round-small w3-padding-large previews" >
 			<a>in : <a href ="cropsubforum.php?cropID=' . $cropID . '">' . $cropname . '</a>
 			<h1 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 				<a href="threadview.php?postID=' . $postID . '">' . $title . '</a>
