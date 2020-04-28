@@ -54,7 +54,7 @@ else{
 }
 
 //page number buttons
-$sql = "SELECT COUNT(postID) FROM post";//total number of threads
+$sql = "SELECT COUNT(postID) FROM post WHERE cropID=" . $cropID;//total number of threads
 $number_of_results = mysqli_fetch_assoc(mysqli_query($conn, $sql))['COUNT(postID)'];
 $number_of_pages = ceil($number_of_results/$threadLim);
 
