@@ -41,9 +41,6 @@ if(isset($_SESSION["userID"])){
 	<!--
 	<input type="text" id="mySearch" placeholder="Search Crop..." title="type in the crop" style= "width:200px; left: 300px; top: 2px; position: absolute;">
 	-->
-	
-	<!-- all subforums button -->
-	<a href= "subforumlist.php" style ="position: absolute; top: 10px; left: 50%; font-size: 25px; color: white;">All Crops</a>
 
 	<!-- homepage shortcut -->
 	<a href="homepage.php" style= "position:absolute; left: 10px; top:5px;font-size: 30px; text-decoration: none; color: white;">AgriTalk</a>
@@ -92,6 +89,9 @@ if(isset($_SESSION["userID"])){
 
 	mysqli_close($conn);
 	?> 
+	
+	<!-- all subforums button -->
+	<a href= "subforumlist.php" style ="float:right; font-size: 25px; color: white;">All Crops</a>
 
 	<!-- notification -->
 	<!--
