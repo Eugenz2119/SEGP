@@ -8,7 +8,7 @@
 <body>
 	<div class="post-wrapper">
 		<div>
-			<h3>Popular Posts</h3>
+			<h3>Popular Posts This Week</h3>
 		</div>
 <?php
 $postLim = 5;
@@ -44,6 +44,8 @@ while($row = mysqli_fetch_assoc($result)) {
 	$cropname = mysqli_fetch_assoc(mysqli_query($conn, $query))['cropname'];
 	$title = $row['title'];
 	$posterID = $row['userID'];
+	$commentCount = $row['commentCount'];
+	$lastCommentTime = $row['lastCommentTime'];
 	$query = "SELECT username FROM user WHERE userID=" . $posterID;
 	$postUsername = mysqli_fetch_assoc(mysqli_query($conn, $query))['username'];
 	echo '
@@ -53,6 +55,8 @@ while($row = mysqli_fetch_assoc($result)) {
 			<div class="postuser">
 				<a>by : <a href ="userprofile.php?userID=' . $posterID . '">' . $postUsername . '</a></a>
 			</div>
+			<a>' . $commentCount . ' comment(s)</a><br>
+			<a>Last Comment: ' . $lastCommentTime . '</a>
 		</div>
 	';
 }
