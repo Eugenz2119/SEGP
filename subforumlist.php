@@ -14,7 +14,7 @@
 <?php include 'popularpost.php';?>
 
 <?php
-$threadLim = 10;
+$threadLim = 5;
 
 //Connection details
 	$servername = "localhost";
