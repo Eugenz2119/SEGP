@@ -69,10 +69,10 @@ echo '
 
 //First and Previous buttons
 if($currentPage>=3){
-	echo '<a href="cropsubforum.php?page=' . '1' . '">' ."<button><<</button>" .'</a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . '1' . '">' ."<button><<</button>" .'</a>';
 }
 if($currentPage > 1){
-	echo '<a href="cropsubforum.php?page=' . $prev . '">' ."<button><</button>" .'</a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $prev . '">' ."<button><</button>" .'</a>';
 }
 
 //Page number buttons	
@@ -81,10 +81,10 @@ if($currentPage<=3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}	
@@ -94,10 +94,10 @@ else if($currentPage > $number_of_pages - 3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}
@@ -107,10 +107,10 @@ else{
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
 			}
 		
 		}
@@ -119,10 +119,10 @@ else{
 
 //Next and Last buttons
 if($currentPage < $number_of_pages){
-	echo '<a href="cropsubforum.php?page=' . $next . '">' .'<button>></button></a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $next . '">' .'<button>></button></a>';
 }
 if($currentPage <= $number_of_pages - 2){
-	echo '<a href="cropsubforum.php?page=' . $number_of_pages . '">' .'<button>>></button></a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $number_of_pages . '">' .'<button>>></button></a>';
 
 }
 
@@ -175,15 +175,15 @@ while($row = mysqli_fetch_array($result)) {
 
 //////////PAGE NUMBER BUTTONS DISPLAY START//////////
 echo '
-<div>
+<div style="position: absolute; top:100px;">
 ';
 
 //First and Previous buttons
 if($currentPage>=3){
-	echo '<a href="cropsubforum.php?page=' . '1' . '">' ."<button><<</button>" .'</a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . '1' . '">' ."<button><<</button>" .'</a>';
 }
 if($currentPage > 1){
-	echo '<a href="cropsubforum.php?page=' . $prev . '">' ."<button><</button>" .'</a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $prev . '">' ."<button><</button>" .'</a>';
 }
 
 //Page number buttons	
@@ -192,10 +192,10 @@ if($currentPage<=3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}	
@@ -205,10 +205,10 @@ else if($currentPage > $number_of_pages - 3){
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
 			}				
 		}
 	}
@@ -218,10 +218,10 @@ else{
 		// if page==currentPage, change colour
 		if($page>=1){
 			if($page==$currentPage){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button style="background-color:#4CAF50">' . $page . '</button></a>';
 			}
 			else if ($page > 0 && $page <= $number_of_pages){
-				echo '<a href="cropsubforum.php?page=' . $page . '">' . '<button>' . $page . '</button></a>';
+				echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $page . '">' . '<button>' . $page . '</button></a>';
 			}
 		
 		}
@@ -230,10 +230,10 @@ else{
 
 //Next and Last buttons
 if($currentPage < $number_of_pages){
-	echo '<a href="cropsubforum.php?page=' . $next . '">' .'<button>></button></a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $next . '">' .'<button>></button></a>';
 }
 if($currentPage <= $number_of_pages - 2){
-	echo '<a href="cropsubforum.php?page=' . $number_of_pages . '">' .'<button>>></button></a>';
+	echo '<a href="cropsubforum.php?cropID=' . $cropID . '&page=' . $number_of_pages . '">' .'<button>>></button></a>';
 
 }
 
